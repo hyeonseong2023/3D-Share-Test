@@ -179,8 +179,8 @@ class App {
             Kakao.Share.sendDefault({
                 objectType: 'feed',
                 content: {
-                    title: '3D 모델 공유',
-                    description: '회전하는 3D 모델을 확인해보세요!',
+                    title: '봄의 감성을 담은 분홍 꽃다발💐',
+                    description: '#핑크무드 #고백선물 #향기한줌 #설렘가득',
                     imageUrl: imageUrl,
                     link: {
                         mobileWebUrl: window.location.href,
@@ -189,7 +189,7 @@ class App {
                 },
                 buttons: [
                     {
-                        title: '웹으로 보기',
+                        title: '꽃다발 감상하기',
                         link: {
                             mobileWebUrl: window.location.href,
                             webUrl: window.location.href,
