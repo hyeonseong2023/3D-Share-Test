@@ -68,7 +68,9 @@
     "test-e2e-webgpu": "node test/e2e/puppeteer.js --webgpu",
     "test-treeshake": "rollup -c test/rollup.treeshake.config.js",
     "test-circular-deps": "dpdm --no-warning --no-tree --exit-code circular:1 src/nodes/Nodes.js",
-    "make-screenshot": "node test/e2e/puppeteer.js --make"
+    "make-screenshot": "node test/e2e/puppeteer.js --make",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [
     "three",
@@ -91,7 +93,7 @@
   "bugs": {
     "url": "https://github.com/mrdoob/three.js/issues"
   },
-  "homepage": "https://threejs.org/",
+  "homepage": "https://hyeonseong2023.github.io/3D-Share-Test",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.0",
@@ -104,6 +106,7 @@
     "eslint-plugin-html": "^8.0.0",
     "eslint-plugin-import": "^2.27.5",
     "failonlyreporter": "^1.0.0",
+    "gh-pages": "^6.3.0",
     "jimp": "^1.6.0",
     "jsdoc": "^4.0.4",
     "magic-string": "^0.30.0",
