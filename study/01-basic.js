@@ -172,8 +172,7 @@ class App {
 
     async shareToKakao() {
         try {
-            // GitHub Pages URL (나중에 실제 URL로 교체 필요)
-            const githubPagesUrl = 'https://hyeonseong2023.github.io/[repository-name]';
+            const githubPagesUrl = 'https://hyeonseong2023.github.io/3D-Share-Test';
             const imageUrl = `${githubPagesUrl}/study/images/model.png`;
 
             // 카카오톡 공유
