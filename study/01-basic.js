@@ -173,7 +173,7 @@ class App {
     async shareToKakao() {
         try {
             const githubPagesUrl = 'https://hyeonseong2023.github.io/3D-Share-Test';
-            const imageUrl = `${githubPagesUrl}/study/images/model.png`;
+            const imageUrl = `${githubPagesUrl}/study/images/flower.png`;
 
             // 카카오톡 공유
             Kakao.Share.sendDefault({
