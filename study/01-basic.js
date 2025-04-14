@@ -42,7 +42,7 @@ class App {
         const kakaoButton = document.getElementById('kakao-share');
         kakaoButton.addEventListener('click', () => this.shareToKakao());
 
-        Kakao.init(process.env.KAKAO_JAVASCRIPT_KEY);
+        Kakao.init('c089c8172def97eb00c07217cae17495');
     }
 
     _setupCamera() {
