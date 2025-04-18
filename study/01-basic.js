@@ -153,20 +153,30 @@ class App {
             // 현재 프레임을 렌더링
             this._renderer.render(this._scene, this._camera);
 
-            // 캔버스에서 이미지 데이터 URL 생성
-            const imageData = this._renderer.domElement.toDataURL('image/png');
+            // 캔버스에서 Blob 객체 생성
+            const canvas = this._renderer.domElement;
+            canvas.toBlob(async (blob) => {
+                try {
+                    // 클립보드 API가 존재하는지 확인
+                    if (!navigator.clipboard) {
+                        throw new Error('클립보드 API를 지원하지 않습니다.');
+                    }
 
-            // 클립보드 API가 존재하는지 확인
-            if (!navigator.clipboard) {
-                throw new Error('클립보드 API를 지원하지 않습니다.');
-            }
-
-            // 클립보드에 복사
-            await navigator.clipboard.writeText(imageData);
-            alert('클립보드에 복사되었습니다!');
+                    // 클립보드에 이미지 복사
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            'image/png': blob
+                        })
+                    ]);
+                    alert('클립보드에 복사되었습니다!');
+                } catch (error) {
+                    console.error('클립보드 복사 실패:', error);
+                    alert('클립보드 복사에 실패했습니다.');
+                }
+            }, 'image/png');
         } catch (error) {
-            console.error('클립보드 복사 실패:', error);
-            alert('클립보드 복사에 실패했습니다.');
+            console.error('이미지 생성 실패:', error);
+            alert('이미지 생성에 실패했습니다.');
         }
     }
 
