@@ -391,11 +391,11 @@ class MaterialParser {
 
 		switch ( attributes.side ) {
 
-			case 0:
-			case 1:
-				return BackSide;
-			case 2: return FrontSide;
-			case 3: return DoubleSide;
+		case 0:
+		case 1:
+			return BackSide;
+		case 2: return FrontSide;
+		case 3: return DoubleSide;
 
 		}
 
@@ -474,43 +474,43 @@ class MaterialParser {
 
 			switch ( name ) {
 
-				case 'Color':
-					maps.map = texture;
-					maps.map.colorSpace = SRGBColorSpace;
-					break;
-				case 'Roughness':
-					maps.roughnessMap = texture;
-					maps.roughness = 1;
-					break;
-				case 'Specular':
-					maps.specularMap = texture;
-					maps.specularMap.colorSpace = SRGBColorSpace;
-					maps.specular = 0xffffff;
-					break;
-				case 'Luminous':
-					maps.emissiveMap = texture;
-					maps.emissiveMap.colorSpace = SRGBColorSpace;
-					maps.emissive = 0x808080;
-					break;
-				case 'Luminous Color':
-					maps.emissive = 0x808080;
-					break;
-				case 'Metallic':
-					maps.metalnessMap = texture;
-					maps.metalness = 1;
-					break;
-				case 'Transparency':
-				case 'Alpha':
-					maps.alphaMap = texture;
-					maps.transparent = true;
-					break;
-				case 'Normal':
-					maps.normalMap = texture;
-					if ( node.amplitude !== undefined ) maps.normalScale = new Vector2( node.amplitude, node.amplitude );
-					break;
-				case 'Bump':
-					maps.bumpMap = texture;
-					break;
+			case 'Color':
+				maps.map = texture;
+				maps.map.colorSpace = SRGBColorSpace;
+				break;
+			case 'Roughness':
+				maps.roughnessMap = texture;
+				maps.roughness = 1;
+				break;
+			case 'Specular':
+				maps.specularMap = texture;
+				maps.specularMap.colorSpace = SRGBColorSpace;
+				maps.specular = 0xffffff;
+				break;
+			case 'Luminous':
+				maps.emissiveMap = texture;
+				maps.emissiveMap.colorSpace = SRGBColorSpace;
+				maps.emissive = 0x808080;
+				break;
+			case 'Luminous Color':
+				maps.emissive = 0x808080;
+				break;
+			case 'Metallic':
+				maps.metalnessMap = texture;
+				maps.metalness = 1;
+				break;
+			case 'Transparency':
+			case 'Alpha':
+				maps.alphaMap = texture;
+				maps.transparent = true;
+				break;
+			case 'Normal':
+				maps.normalMap = texture;
+				if ( node.amplitude !== undefined ) maps.normalScale = new Vector2( node.amplitude, node.amplitude );
+				break;
+			case 'Bump':
+				maps.bumpMap = texture;
+				break;
 
 			}
 
@@ -545,42 +545,42 @@ class MaterialParser {
 
 				switch ( name ) {
 
-					case 'Color':
-						maps.map = texture;
-						maps.map.colorSpace = SRGBColorSpace;
-						break;
-					case 'Diffuse':
-						maps.aoMap = texture;
-						break;
-					case 'Roughness':
-						maps.roughnessMap = texture;
-						maps.roughness = 1;
-						break;
-					case 'Specular':
-						maps.specularMap = texture;
-						maps.specularMap.colorSpace = SRGBColorSpace;
-						maps.specular = 0xffffff;
-						break;
-					case 'Luminosity':
-						maps.emissiveMap = texture;
-						maps.emissiveMap.colorSpace = SRGBColorSpace;
-						maps.emissive = 0x808080;
-						break;
-					case 'Metallic':
-						maps.metalnessMap = texture;
-						maps.metalness = 1;
-						break;
-					case 'Transparency':
-					case 'Alpha':
-						maps.alphaMap = texture;
-						maps.transparent = true;
-						break;
-					case 'Normal':
-						maps.normalMap = texture;
-						break;
-					case 'Bump':
-						maps.bumpMap = texture;
-						break;
+				case 'Color':
+					maps.map = texture;
+					maps.map.colorSpace = SRGBColorSpace;
+					break;
+				case 'Diffuse':
+					maps.aoMap = texture;
+					break;
+				case 'Roughness':
+					maps.roughnessMap = texture;
+					maps.roughness = 1;
+					break;
+				case 'Specular':
+					maps.specularMap = texture;
+					maps.specularMap.colorSpace = SRGBColorSpace;
+					maps.specular = 0xffffff;
+					break;
+				case 'Luminosity':
+					maps.emissiveMap = texture;
+					maps.emissiveMap.colorSpace = SRGBColorSpace;
+					maps.emissive = 0x808080;
+					break;
+				case 'Metallic':
+					maps.metalnessMap = texture;
+					maps.metalness = 1;
+					break;
+				case 'Transparency':
+				case 'Alpha':
+					maps.alphaMap = texture;
+					maps.transparent = true;
+					break;
+				case 'Normal':
+					maps.normalMap = texture;
+					break;
+				case 'Bump':
+					maps.bumpMap = texture;
+					break;
 
 				}
 
@@ -786,12 +786,12 @@ class MaterialParser {
 
 		switch ( num ) {
 
-			case 0:
-				console.warn( 'LWOLoader: "Reset" texture wrapping type is not supported in three.js' );
-				return ClampToEdgeWrapping;
-			case 1: return RepeatWrapping;
-			case 2: return MirroredRepeatWrapping;
-			case 3: return ClampToEdgeWrapping;
+		case 0:
+			console.warn( 'LWOLoader: "Reset" texture wrapping type is not supported in three.js' );
+			return ClampToEdgeWrapping;
+		case 1: return RepeatWrapping;
+		case 2: return MirroredRepeatWrapping;
+		case 3: return ClampToEdgeWrapping;
 
 		}
 

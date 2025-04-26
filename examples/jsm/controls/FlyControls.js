@@ -214,26 +214,26 @@ function onKeyDown( event ) {
 
 	switch ( event.code ) {
 
-		case 'ShiftLeft':
-		case 'ShiftRight': this.movementSpeedMultiplier = .1; break;
+	case 'ShiftLeft':
+	case 'ShiftRight': this.movementSpeedMultiplier = .1; break;
 
-		case 'KeyW': this._moveState.forward = 1; break;
-		case 'KeyS': this._moveState.back = 1; break;
+	case 'KeyW': this._moveState.forward = 1; break;
+	case 'KeyS': this._moveState.back = 1; break;
 
-		case 'KeyA': this._moveState.left = 1; break;
-		case 'KeyD': this._moveState.right = 1; break;
+	case 'KeyA': this._moveState.left = 1; break;
+	case 'KeyD': this._moveState.right = 1; break;
 
-		case 'KeyR': this._moveState.up = 1; break;
-		case 'KeyF': this._moveState.down = 1; break;
+	case 'KeyR': this._moveState.up = 1; break;
+	case 'KeyF': this._moveState.down = 1; break;
 
-		case 'ArrowUp': this._moveState.pitchUp = 1; break;
-		case 'ArrowDown': this._moveState.pitchDown = 1; break;
+	case 'ArrowUp': this._moveState.pitchUp = 1; break;
+	case 'ArrowDown': this._moveState.pitchDown = 1; break;
 
-		case 'ArrowLeft': this._moveState.yawLeft = 1; break;
-		case 'ArrowRight': this._moveState.yawRight = 1; break;
+	case 'ArrowLeft': this._moveState.yawLeft = 1; break;
+	case 'ArrowRight': this._moveState.yawRight = 1; break;
 
-		case 'KeyQ': this._moveState.rollLeft = 1; break;
-		case 'KeyE': this._moveState.rollRight = 1; break;
+	case 'KeyQ': this._moveState.rollLeft = 1; break;
+	case 'KeyE': this._moveState.rollRight = 1; break;
 
 	}
 
@@ -248,26 +248,26 @@ function onKeyUp( event ) {
 
 	switch ( event.code ) {
 
-		case 'ShiftLeft':
-		case 'ShiftRight': this.movementSpeedMultiplier = 1; break;
+	case 'ShiftLeft':
+	case 'ShiftRight': this.movementSpeedMultiplier = 1; break;
 
-		case 'KeyW': this._moveState.forward = 0; break;
-		case 'KeyS': this._moveState.back = 0; break;
+	case 'KeyW': this._moveState.forward = 0; break;
+	case 'KeyS': this._moveState.back = 0; break;
 
-		case 'KeyA': this._moveState.left = 0; break;
-		case 'KeyD': this._moveState.right = 0; break;
+	case 'KeyA': this._moveState.left = 0; break;
+	case 'KeyD': this._moveState.right = 0; break;
 
-		case 'KeyR': this._moveState.up = 0; break;
-		case 'KeyF': this._moveState.down = 0; break;
+	case 'KeyR': this._moveState.up = 0; break;
+	case 'KeyF': this._moveState.down = 0; break;
 
-		case 'ArrowUp': this._moveState.pitchUp = 0; break;
-		case 'ArrowDown': this._moveState.pitchDown = 0; break;
+	case 'ArrowUp': this._moveState.pitchUp = 0; break;
+	case 'ArrowDown': this._moveState.pitchDown = 0; break;
 
-		case 'ArrowLeft': this._moveState.yawLeft = 0; break;
-		case 'ArrowRight': this._moveState.yawRight = 0; break;
+	case 'ArrowLeft': this._moveState.yawLeft = 0; break;
+	case 'ArrowRight': this._moveState.yawRight = 0; break;
 
-		case 'KeyQ': this._moveState.rollLeft = 0; break;
-		case 'KeyE': this._moveState.rollRight = 0; break;
+	case 'KeyQ': this._moveState.rollLeft = 0; break;
+	case 'KeyE': this._moveState.rollRight = 0; break;
 
 	}
 
@@ -288,8 +288,8 @@ function onPointerDown( event ) {
 
 		switch ( event.button ) {
 
-			case 0: this._moveState.forward = 1; break;
-			case 2: this._moveState.back = 1; break;
+		case 0: this._moveState.forward = 1; break;
+		case 2: this._moveState.back = 1; break;
 
 		}
 
@@ -332,8 +332,8 @@ function onPointerUp( event ) {
 
 		switch ( event.button ) {
 
-			case 0: this._moveState.forward = 0; break;
-			case 2: this._moveState.back = 0; break;
+		case 0: this._moveState.forward = 0; break;
+		case 2: this._moveState.back = 0; break;
 
 		}
 

@@ -1084,97 +1084,97 @@ class OrbitControls extends Controls {
 
 		switch ( event.code ) {
 
-			case this.keys.UP:
+		case this.keys.UP:
 
-				if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
+			if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
 
-					if ( this.enableRotate ) {
+				if ( this.enableRotate ) {
 
-						this._rotateUp( _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
-
-					}
-
-				} else {
-
-					if ( this.enablePan ) {
-
-						this._pan( 0, this.keyPanSpeed );
-
-					}
+					this._rotateUp( _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
 
 				}
 
-				needsUpdate = true;
-				break;
+			} else {
 
-			case this.keys.BOTTOM:
+				if ( this.enablePan ) {
 
-				if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
-
-					if ( this.enableRotate ) {
-
-						this._rotateUp( - _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
-
-					}
-
-				} else {
-
-					if ( this.enablePan ) {
-
-						this._pan( 0, - this.keyPanSpeed );
-
-					}
+					this._pan( 0, this.keyPanSpeed );
 
 				}
 
-				needsUpdate = true;
-				break;
+			}
 
-			case this.keys.LEFT:
+			needsUpdate = true;
+			break;
 
-				if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
+		case this.keys.BOTTOM:
 
-					if ( this.enableRotate ) {
+			if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
 
-						this._rotateLeft( _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
+				if ( this.enableRotate ) {
 
-					}
-
-				} else {
-
-					if ( this.enablePan ) {
-
-						this._pan( this.keyPanSpeed, 0 );
-
-					}
+					this._rotateUp( - _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
 
 				}
 
-				needsUpdate = true;
-				break;
+			} else {
 
-			case this.keys.RIGHT:
+				if ( this.enablePan ) {
 
-				if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
-
-					if ( this.enableRotate ) {
-
-						this._rotateLeft( - _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
-
-					}
-
-				} else {
-
-					if ( this.enablePan ) {
-
-						this._pan( - this.keyPanSpeed, 0 );
-
-					}
+					this._pan( 0, - this.keyPanSpeed );
 
 				}
 
-				needsUpdate = true;
-				break;
+			}
+
+			needsUpdate = true;
+			break;
+
+		case this.keys.LEFT:
+
+			if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
+
+				if ( this.enableRotate ) {
+
+					this._rotateLeft( _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
+
+				}
+
+			} else {
+
+				if ( this.enablePan ) {
+
+					this._pan( this.keyPanSpeed, 0 );
+
+				}
+
+			}
+
+			needsUpdate = true;
+			break;
+
+		case this.keys.RIGHT:
+
+			if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
+
+				if ( this.enableRotate ) {
+
+					this._rotateLeft( - _twoPI * this.keyRotateSpeed / this.domElement.clientHeight );
+
+				}
+
+			} else {
+
+				if ( this.enablePan ) {
+
+					this._pan( - this.keyPanSpeed, 0 );
+
+				}
+
+			}
+
+			needsUpdate = true;
+			break;
 
 		}
 
@@ -1426,13 +1426,13 @@ class OrbitControls extends Controls {
 
 		switch ( mode ) {
 
-			case 1: // LINE_MODE
-				newEvent.deltaY *= 16;
-				break;
+		case 1: // LINE_MODE
+			newEvent.deltaY *= 16;
+			break;
 
-			case 2: // PAGE_MODE
-				newEvent.deltaY *= 100;
-				break;
+		case 2: // PAGE_MODE
+			newEvent.deltaY *= 100;
+			break;
 
 		}
 
@@ -1504,28 +1504,28 @@ function onPointerUp( event ) {
 
 	switch ( this._pointers.length ) {
 
-		case 0:
+	case 0:
 
-			this.domElement.releasePointerCapture( event.pointerId );
+		this.domElement.releasePointerCapture( event.pointerId );
 
-			this.domElement.removeEventListener( 'pointermove', this._onPointerMove );
-			this.domElement.removeEventListener( 'pointerup', this._onPointerUp );
+		this.domElement.removeEventListener( 'pointermove', this._onPointerMove );
+		this.domElement.removeEventListener( 'pointerup', this._onPointerUp );
 
-			this.dispatchEvent( _endEvent );
+		this.dispatchEvent( _endEvent );
 
-			this.state = _STATE.NONE;
+		this.state = _STATE.NONE;
 
-			break;
+		break;
 
-		case 1:
+	case 1:
 
-			const pointerId = this._pointers[ 0 ];
-			const position = this._pointerPositions[ pointerId ];
+		const pointerId = this._pointers[ 0 ];
+		const position = this._pointerPositions[ pointerId ];
 
-			// minimal placeholder event - allows state correction on pointer-up
-			this._onTouchStart( { pointerId: pointerId, pageX: position.x, pageY: position.y } );
+		// minimal placeholder event - allows state correction on pointer-up
+		this._onTouchStart( { pointerId: pointerId, pageX: position.x, pageY: position.y } );
 
-			break;
+		break;
 
 	}
 
@@ -1537,86 +1537,86 @@ function onMouseDown( event ) {
 
 	switch ( event.button ) {
 
-		case 0:
+	case 0:
 
-			mouseAction = this.mouseButtons.LEFT;
-			break;
+		mouseAction = this.mouseButtons.LEFT;
+		break;
 
-		case 1:
+	case 1:
 
-			mouseAction = this.mouseButtons.MIDDLE;
-			break;
+		mouseAction = this.mouseButtons.MIDDLE;
+		break;
 
-		case 2:
+	case 2:
 
-			mouseAction = this.mouseButtons.RIGHT;
-			break;
+		mouseAction = this.mouseButtons.RIGHT;
+		break;
 
-		default:
+	default:
 
-			mouseAction = - 1;
+		mouseAction = - 1;
 
 	}
 
 	switch ( mouseAction ) {
 
-		case MOUSE.DOLLY:
+	case MOUSE.DOLLY:
 
-			if ( this.enableZoom === false ) return;
+		if ( this.enableZoom === false ) return;
 
-			this._handleMouseDownDolly( event );
+		this._handleMouseDownDolly( event );
 
-			this.state = _STATE.DOLLY;
+		this.state = _STATE.DOLLY;
 
-			break;
+		break;
 
-		case MOUSE.ROTATE:
+	case MOUSE.ROTATE:
 
-			if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
+		if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
 
-				if ( this.enablePan === false ) return;
+			if ( this.enablePan === false ) return;
 
-				this._handleMouseDownPan( event );
+			this._handleMouseDownPan( event );
 
-				this.state = _STATE.PAN;
+			this.state = _STATE.PAN;
 
-			} else {
+		} else {
 
-				if ( this.enableRotate === false ) return;
+			if ( this.enableRotate === false ) return;
 
-				this._handleMouseDownRotate( event );
+			this._handleMouseDownRotate( event );
 
-				this.state = _STATE.ROTATE;
+			this.state = _STATE.ROTATE;
 
-			}
+		}
 
-			break;
+		break;
 
-		case MOUSE.PAN:
+	case MOUSE.PAN:
 
-			if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
+		if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
 
-				if ( this.enableRotate === false ) return;
+			if ( this.enableRotate === false ) return;
 
-				this._handleMouseDownRotate( event );
+			this._handleMouseDownRotate( event );
 
-				this.state = _STATE.ROTATE;
+			this.state = _STATE.ROTATE;
 
-			} else {
+		} else {
 
-				if ( this.enablePan === false ) return;
+			if ( this.enablePan === false ) return;
 
-				this._handleMouseDownPan( event );
+			this._handleMouseDownPan( event );
 
-				this.state = _STATE.PAN;
+			this.state = _STATE.PAN;
 
-			}
+		}
 
-			break;
+		break;
 
-		default:
+	default:
 
-			this.state = _STATE.NONE;
+		this.state = _STATE.NONE;
 
 	}
 
@@ -1632,29 +1632,29 @@ function onMouseMove( event ) {
 
 	switch ( this.state ) {
 
-		case _STATE.ROTATE:
+	case _STATE.ROTATE:
 
-			if ( this.enableRotate === false ) return;
+		if ( this.enableRotate === false ) return;
 
-			this._handleMouseMoveRotate( event );
+		this._handleMouseMoveRotate( event );
 
-			break;
+		break;
 
-		case _STATE.DOLLY:
+	case _STATE.DOLLY:
 
-			if ( this.enableZoom === false ) return;
+		if ( this.enableZoom === false ) return;
 
-			this._handleMouseMoveDolly( event );
+		this._handleMouseMoveDolly( event );
 
-			break;
+		break;
 
-		case _STATE.PAN:
+	case _STATE.PAN:
 
-			if ( this.enablePan === false ) return;
+		if ( this.enablePan === false ) return;
 
-			this._handleMouseMovePan( event );
+		this._handleMouseMovePan( event );
 
-			break;
+		break;
 
 	}
 
@@ -1688,73 +1688,73 @@ function onTouchStart( event ) {
 
 	switch ( this._pointers.length ) {
 
-		case 1:
+	case 1:
 
-			switch ( this.touches.ONE ) {
+		switch ( this.touches.ONE ) {
 
-				case TOUCH.ROTATE:
+		case TOUCH.ROTATE:
 
-					if ( this.enableRotate === false ) return;
+			if ( this.enableRotate === false ) return;
 
-					this._handleTouchStartRotate( event );
+			this._handleTouchStartRotate( event );
 
-					this.state = _STATE.TOUCH_ROTATE;
-
-					break;
-
-				case TOUCH.PAN:
-
-					if ( this.enablePan === false ) return;
-
-					this._handleTouchStartPan( event );
-
-					this.state = _STATE.TOUCH_PAN;
-
-					break;
-
-				default:
-
-					this.state = _STATE.NONE;
-
-			}
+			this.state = _STATE.TOUCH_ROTATE;
 
 			break;
 
-		case 2:
+		case TOUCH.PAN:
 
-			switch ( this.touches.TWO ) {
+			if ( this.enablePan === false ) return;
 
-				case TOUCH.DOLLY_PAN:
+			this._handleTouchStartPan( event );
 
-					if ( this.enableZoom === false && this.enablePan === false ) return;
-
-					this._handleTouchStartDollyPan( event );
-
-					this.state = _STATE.TOUCH_DOLLY_PAN;
-
-					break;
-
-				case TOUCH.DOLLY_ROTATE:
-
-					if ( this.enableZoom === false && this.enableRotate === false ) return;
-
-					this._handleTouchStartDollyRotate( event );
-
-					this.state = _STATE.TOUCH_DOLLY_ROTATE;
-
-					break;
-
-				default:
-
-					this.state = _STATE.NONE;
-
-			}
+			this.state = _STATE.TOUCH_PAN;
 
 			break;
 
 		default:
 
 			this.state = _STATE.NONE;
+
+		}
+
+		break;
+
+	case 2:
+
+		switch ( this.touches.TWO ) {
+
+		case TOUCH.DOLLY_PAN:
+
+			if ( this.enableZoom === false && this.enablePan === false ) return;
+
+			this._handleTouchStartDollyPan( event );
+
+			this.state = _STATE.TOUCH_DOLLY_PAN;
+
+			break;
+
+		case TOUCH.DOLLY_ROTATE:
+
+			if ( this.enableZoom === false && this.enableRotate === false ) return;
+
+			this._handleTouchStartDollyRotate( event );
+
+			this.state = _STATE.TOUCH_DOLLY_ROTATE;
+
+			break;
+
+		default:
+
+			this.state = _STATE.NONE;
+
+		}
+
+		break;
+
+	default:
+
+		this.state = _STATE.NONE;
 
 	}
 
@@ -1772,49 +1772,49 @@ function onTouchMove( event ) {
 
 	switch ( this.state ) {
 
-		case _STATE.TOUCH_ROTATE:
+	case _STATE.TOUCH_ROTATE:
 
-			if ( this.enableRotate === false ) return;
+		if ( this.enableRotate === false ) return;
 
-			this._handleTouchMoveRotate( event );
+		this._handleTouchMoveRotate( event );
 
-			this.update();
+		this.update();
 
-			break;
+		break;
 
-		case _STATE.TOUCH_PAN:
+	case _STATE.TOUCH_PAN:
 
-			if ( this.enablePan === false ) return;
+		if ( this.enablePan === false ) return;
 
-			this._handleTouchMovePan( event );
+		this._handleTouchMovePan( event );
 
-			this.update();
+		this.update();
 
-			break;
+		break;
 
-		case _STATE.TOUCH_DOLLY_PAN:
+	case _STATE.TOUCH_DOLLY_PAN:
 
-			if ( this.enableZoom === false && this.enablePan === false ) return;
+		if ( this.enableZoom === false && this.enablePan === false ) return;
 
-			this._handleTouchMoveDollyPan( event );
+		this._handleTouchMoveDollyPan( event );
 
-			this.update();
+		this.update();
 
-			break;
+		break;
 
-		case _STATE.TOUCH_DOLLY_ROTATE:
+	case _STATE.TOUCH_DOLLY_ROTATE:
 
-			if ( this.enableZoom === false && this.enableRotate === false ) return;
+		if ( this.enableZoom === false && this.enableRotate === false ) return;
 
-			this._handleTouchMoveDollyRotate( event );
+		this._handleTouchMoveDollyRotate( event );
 
-			this.update();
+		this.update();
 
-			break;
+		break;
 
-		default:
+	default:
 
-			this.state = _STATE.NONE;
+		this.state = _STATE.NONE;
 
 	}
 

@@ -61,6 +61,7 @@
     "lint-utils": "eslint utils --ignore-pattern prettify --ignore-pattern fuse",
     "lint": "npm run lint-core",
     "lint-fix": "npm run lint-core -- --fix && npm run lint-addons -- --fix && npm run lint-examples -- --fix && npm run lint-docs -- --fix && npm run lint-editor -- --fix && npm run lint-playground -- --fix && npm run lint-manual -- --fix && npm run lint-test -- --fix && npm run lint-utils -- --fix",
+    "lint-project": "eslint study --ext .js --fix",
     "test-unit": "qunit -r failonlyreporter -f !-webonly test/unit/three.source.unit.js",
     "test-unit-addons": "qunit -r failonlyreporter -f !-webonly test/unit/three.addons.unit.js",
     "test-e2e": "node test/e2e/puppeteer.js",
@@ -131,5 +132,8 @@
       "build/three.module.js"
     ],
     "directories": {}
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4"
   }
 }

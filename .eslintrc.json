@@ -45,6 +45,7 @@
     "VideoDecoder": "readonly"
   },
   "rules": {
+    "indent": ["error", "tab"],
     "no-throw-literal": [
       "error"
     ],

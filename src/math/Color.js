@@ -309,64 +309,64 @@ class Color {
 
 			switch ( name ) {
 
-				case 'rgb':
-				case 'rgba':
+			case 'rgb':
+			case 'rgba':
 
-					if ( color = /^\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
+				if ( color = /^\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
 
-						// rgb(255,0,0) rgba(255,0,0,0.5)
+					// rgb(255,0,0) rgba(255,0,0,0.5)
 
-						handleAlpha( color[ 4 ] );
+					handleAlpha( color[ 4 ] );
 
-						return this.setRGB(
-							Math.min( 255, parseInt( color[ 1 ], 10 ) ) / 255,
-							Math.min( 255, parseInt( color[ 2 ], 10 ) ) / 255,
-							Math.min( 255, parseInt( color[ 3 ], 10 ) ) / 255,
-							colorSpace
-						);
+					return this.setRGB(
+						Math.min( 255, parseInt( color[ 1 ], 10 ) ) / 255,
+						Math.min( 255, parseInt( color[ 2 ], 10 ) ) / 255,
+						Math.min( 255, parseInt( color[ 3 ], 10 ) ) / 255,
+						colorSpace
+					);
 
-					}
+				}
 
-					if ( color = /^\s*(\d+)\%\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
+				if ( color = /^\s*(\d+)\%\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
 
-						// rgb(100%,0%,0%) rgba(100%,0%,0%,0.5)
+					// rgb(100%,0%,0%) rgba(100%,0%,0%,0.5)
 
-						handleAlpha( color[ 4 ] );
+					handleAlpha( color[ 4 ] );
 
-						return this.setRGB(
-							Math.min( 100, parseInt( color[ 1 ], 10 ) ) / 100,
-							Math.min( 100, parseInt( color[ 2 ], 10 ) ) / 100,
-							Math.min( 100, parseInt( color[ 3 ], 10 ) ) / 100,
-							colorSpace
-						);
+					return this.setRGB(
+						Math.min( 100, parseInt( color[ 1 ], 10 ) ) / 100,
+						Math.min( 100, parseInt( color[ 2 ], 10 ) ) / 100,
+						Math.min( 100, parseInt( color[ 3 ], 10 ) ) / 100,
+						colorSpace
+					);
 
-					}
+				}
 
-					break;
+				break;
 
-				case 'hsl':
-				case 'hsla':
+			case 'hsl':
+			case 'hsla':
 
-					if ( color = /^\s*(\d*\.?\d+)\s*,\s*(\d*\.?\d+)\%\s*,\s*(\d*\.?\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
+				if ( color = /^\s*(\d*\.?\d+)\s*,\s*(\d*\.?\d+)\%\s*,\s*(\d*\.?\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
 
-						// hsl(120,50%,50%) hsla(120,50%,50%,0.5)
+					// hsl(120,50%,50%) hsla(120,50%,50%,0.5)
 
-						handleAlpha( color[ 4 ] );
+					handleAlpha( color[ 4 ] );
 
-						return this.setHSL(
-							parseFloat( color[ 1 ] ) / 360,
-							parseFloat( color[ 2 ] ) / 100,
-							parseFloat( color[ 3 ] ) / 100,
-							colorSpace
-						);
+					return this.setHSL(
+						parseFloat( color[ 1 ] ) / 360,
+						parseFloat( color[ 2 ] ) / 100,
+						parseFloat( color[ 3 ] ) / 100,
+						colorSpace
+					);
 
-					}
+				}
 
-					break;
+				break;
 
-				default:
+			default:
 
-					console.warn( 'THREE.Color: Unknown color model ' + style );
+				console.warn( 'THREE.Color: Unknown color model ' + style );
 
 			}
 
@@ -590,9 +590,9 @@ class Color {
 
 			switch ( max ) {
 
-				case r: hue = ( g - b ) / delta + ( g < b ? 6 : 0 ); break;
-				case g: hue = ( b - r ) / delta + 2; break;
-				case b: hue = ( r - g ) / delta + 4; break;
+			case r: hue = ( g - b ) / delta + ( g < b ? 6 : 0 ); break;
+			case g: hue = ( b - r ) / delta + 2; break;
+			case b: hue = ( r - g ) / delta + 4; break;
 
 			}
 

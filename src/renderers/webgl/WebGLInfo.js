@@ -19,29 +19,29 @@ function WebGLInfo( gl ) {
 
 		switch ( mode ) {
 
-			case gl.TRIANGLES:
-				render.triangles += instanceCount * ( count / 3 );
-				break;
+		case gl.TRIANGLES:
+			render.triangles += instanceCount * ( count / 3 );
+			break;
 
-			case gl.LINES:
-				render.lines += instanceCount * ( count / 2 );
-				break;
+		case gl.LINES:
+			render.lines += instanceCount * ( count / 2 );
+			break;
 
-			case gl.LINE_STRIP:
-				render.lines += instanceCount * ( count - 1 );
-				break;
+		case gl.LINE_STRIP:
+			render.lines += instanceCount * ( count - 1 );
+			break;
 
-			case gl.LINE_LOOP:
-				render.lines += instanceCount * count;
-				break;
+		case gl.LINE_LOOP:
+			render.lines += instanceCount * count;
+			break;
 
-			case gl.POINTS:
-				render.points += instanceCount * count;
-				break;
+		case gl.POINTS:
+			render.points += instanceCount * count;
+			break;
 
-			default:
-				console.error( 'THREE.WebGLInfo: Unknown draw mode:', mode );
-				break;
+		default:
+			console.error( 'THREE.WebGLInfo: Unknown draw mode:', mode );
+			break;
 
 		}
 

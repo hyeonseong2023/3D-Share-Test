@@ -51,27 +51,27 @@ class CubicInterpolant extends Interpolant {
 
 			switch ( this.getSettings_().endingStart ) {
 
-				case ZeroSlopeEnding:
+			case ZeroSlopeEnding:
 
-					// f'(t0) = 0
-					iPrev = i1;
-					tPrev = 2 * t0 - t1;
+				// f'(t0) = 0
+				iPrev = i1;
+				tPrev = 2 * t0 - t1;
 
-					break;
+				break;
 
-				case WrapAroundEnding:
+			case WrapAroundEnding:
 
-					// use the other end of the curve
-					iPrev = pp.length - 2;
-					tPrev = t0 + pp[ iPrev ] - pp[ iPrev + 1 ];
+				// use the other end of the curve
+				iPrev = pp.length - 2;
+				tPrev = t0 + pp[ iPrev ] - pp[ iPrev + 1 ];
 
-					break;
+				break;
 
-				default: // ZeroCurvatureEnding
+			default: // ZeroCurvatureEnding
 
-					// f''(t0) = 0 a.k.a. Natural Spline
-					iPrev = i1;
-					tPrev = t1;
+				// f''(t0) = 0 a.k.a. Natural Spline
+				iPrev = i1;
+				tPrev = t1;
 
 			}
 
@@ -81,27 +81,27 @@ class CubicInterpolant extends Interpolant {
 
 			switch ( this.getSettings_().endingEnd ) {
 
-				case ZeroSlopeEnding:
+			case ZeroSlopeEnding:
 
-					// f'(tN) = 0
-					iNext = i1;
-					tNext = 2 * t1 - t0;
+				// f'(tN) = 0
+				iNext = i1;
+				tNext = 2 * t1 - t0;
 
-					break;
+				break;
 
-				case WrapAroundEnding:
+			case WrapAroundEnding:
 
-					// use the other end of the curve
-					iNext = 1;
-					tNext = t1 + pp[ 1 ] - pp[ 0 ];
+				// use the other end of the curve
+				iNext = 1;
+				tNext = t1 + pp[ 1 ] - pp[ 0 ];
 
-					break;
+				break;
 
-				default: // ZeroCurvatureEnding
+			default: // ZeroCurvatureEnding
 
-					// f''(tN) = 0, a.k.a. Natural Spline
-					iNext = i1 - 1;
-					tNext = t0;
+				// f''(tN) = 0, a.k.a. Natural Spline
+				iNext = i1 - 1;
+				tNext = t0;
 
 			}
 

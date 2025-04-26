@@ -650,130 +650,130 @@ class VRMLLoader extends Loader {
 
 			switch ( nodeName ) {
 
-				case 'Anchor':
-				case 'Group':
-				case 'Transform':
-				case 'Collision':
-					build = buildGroupingNode( node );
-					break;
+			case 'Anchor':
+			case 'Group':
+			case 'Transform':
+			case 'Collision':
+				build = buildGroupingNode( node );
+				break;
 
-				case 'Background':
-					build = buildBackgroundNode( node );
-					break;
+			case 'Background':
+				build = buildBackgroundNode( node );
+				break;
 
-				case 'Shape':
-					build = buildShapeNode( node );
-					break;
+			case 'Shape':
+				build = buildShapeNode( node );
+				break;
 
-				case 'Appearance':
-					build = buildAppearanceNode( node );
-					break;
+			case 'Appearance':
+				build = buildAppearanceNode( node );
+				break;
 
-				case 'Material':
-					build = buildMaterialNode( node );
-					break;
+			case 'Material':
+				build = buildMaterialNode( node );
+				break;
 
-				case 'ImageTexture':
-					build = buildImageTextureNode( node );
-					break;
+			case 'ImageTexture':
+				build = buildImageTextureNode( node );
+				break;
 
-				case 'PixelTexture':
-					build = buildPixelTextureNode( node );
-					break;
+			case 'PixelTexture':
+				build = buildPixelTextureNode( node );
+				break;
 
-				case 'TextureTransform':
-					build = buildTextureTransformNode( node );
-					break;
+			case 'TextureTransform':
+				build = buildTextureTransformNode( node );
+				break;
 
-				case 'IndexedFaceSet':
-					build = buildIndexedFaceSetNode( node );
-					break;
+			case 'IndexedFaceSet':
+				build = buildIndexedFaceSetNode( node );
+				break;
 
-				case 'IndexedLineSet':
-					build = buildIndexedLineSetNode( node );
-					break;
+			case 'IndexedLineSet':
+				build = buildIndexedLineSetNode( node );
+				break;
 
-				case 'PointSet':
-					build = buildPointSetNode( node );
-					break;
+			case 'PointSet':
+				build = buildPointSetNode( node );
+				break;
 
-				case 'Box':
-					build = buildBoxNode( node );
-					break;
+			case 'Box':
+				build = buildBoxNode( node );
+				break;
 
-				case 'Cone':
-					build = buildConeNode( node );
-					break;
+			case 'Cone':
+				build = buildConeNode( node );
+				break;
 
-				case 'Cylinder':
-					build = buildCylinderNode( node );
-					break;
+			case 'Cylinder':
+				build = buildCylinderNode( node );
+				break;
 
-				case 'Sphere':
-					build = buildSphereNode( node );
-					break;
+			case 'Sphere':
+				build = buildSphereNode( node );
+				break;
 
-				case 'ElevationGrid':
-					build = buildElevationGridNode( node );
-					break;
+			case 'ElevationGrid':
+				build = buildElevationGridNode( node );
+				break;
 
-				case 'Extrusion':
-					build = buildExtrusionNode( node );
-					break;
+			case 'Extrusion':
+				build = buildExtrusionNode( node );
+				break;
 
-				case 'Color':
-				case 'Coordinate':
-				case 'Normal':
-				case 'TextureCoordinate':
-					build = buildGeometricNode( node );
-					break;
+			case 'Color':
+			case 'Coordinate':
+			case 'Normal':
+			case 'TextureCoordinate':
+				build = buildGeometricNode( node );
+				break;
 
-				case 'WorldInfo':
-					build = buildWorldInfoNode( node );
-					break;
+			case 'WorldInfo':
+				build = buildWorldInfoNode( node );
+				break;
 
-				case 'Billboard':
+			case 'Billboard':
 
-				case 'Inline':
-				case 'LOD':
-				case 'Switch':
+			case 'Inline':
+			case 'LOD':
+			case 'Switch':
 
-				case 'AudioClip':
-				case 'DirectionalLight':
-				case 'PointLight':
-				case 'Script':
-				case 'Sound':
-				case 'SpotLight':
+			case 'AudioClip':
+			case 'DirectionalLight':
+			case 'PointLight':
+			case 'Script':
+			case 'Sound':
+			case 'SpotLight':
 
-				case 'CylinderSensor':
-				case 'PlaneSensor':
-				case 'ProximitySensor':
-				case 'SphereSensor':
-				case 'TimeSensor':
-				case 'TouchSensor':
-				case 'VisibilitySensor':
+			case 'CylinderSensor':
+			case 'PlaneSensor':
+			case 'ProximitySensor':
+			case 'SphereSensor':
+			case 'TimeSensor':
+			case 'TouchSensor':
+			case 'VisibilitySensor':
 
-				case 'Text':
+			case 'Text':
 
-				case 'FontStyle':
-				case 'MovieTexture':
+			case 'FontStyle':
+			case 'MovieTexture':
 
-				case 'ColorInterpolator':
-				case 'CoordinateInterpolator':
-				case 'NormalInterpolator':
-				case 'OrientationInterpolator':
-				case 'PositionInterpolator':
-				case 'ScalarInterpolator':
+			case 'ColorInterpolator':
+			case 'CoordinateInterpolator':
+			case 'NormalInterpolator':
+			case 'OrientationInterpolator':
+			case 'PositionInterpolator':
+			case 'ScalarInterpolator':
 
-				case 'Fog':
-				case 'NavigationInfo':
-				case 'Viewpoint':
-					// node not supported yet
-					break;
+			case 'Fog':
+			case 'NavigationInfo':
+			case 'Viewpoint':
+				// node not supported yet
+				break;
 
-				default:
-					console.warn( 'THREE.VRMLLoader: Unknown node:', nodeName );
-					break;
+			default:
+				console.warn( 'THREE.VRMLLoader: Unknown node:', nodeName );
+				break;
 
 			}
 
@@ -803,63 +803,63 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'bboxCenter':
-						// field not supported
-						break;
+				case 'bboxCenter':
+					// field not supported
+					break;
 
-					case 'bboxSize':
-						// field not supported
-						break;
+				case 'bboxSize':
+					// field not supported
+					break;
 
-					case 'center':
-						// field not supported
-						break;
+				case 'center':
+					// field not supported
+					break;
 
-					case 'children':
-						parseFieldChildren( fieldValues, object );
-						break;
+				case 'children':
+					parseFieldChildren( fieldValues, object );
+					break;
 
-					case 'description':
-						// field not supported
-						break;
+				case 'description':
+					// field not supported
+					break;
 
-					case 'collide':
-						// field not supported
-						break;
+				case 'collide':
+					// field not supported
+					break;
 
-					case 'parameter':
-						// field not supported
-						break;
+				case 'parameter':
+					// field not supported
+					break;
 
-					case 'rotation':
-						const axis = new Vector3( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ] ).normalize();
-						const angle = fieldValues[ 3 ];
-						object.quaternion.setFromAxisAngle( axis, angle );
-						break;
+				case 'rotation':
+					const axis = new Vector3( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ] ).normalize();
+					const angle = fieldValues[ 3 ];
+					object.quaternion.setFromAxisAngle( axis, angle );
+					break;
 
-					case 'scale':
-						object.scale.set( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ] );
-						break;
+				case 'scale':
+					object.scale.set( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ] );
+					break;
 
-					case 'scaleOrientation':
-						// field not supported
-						break;
+				case 'scaleOrientation':
+					// field not supported
+					break;
 
-					case 'translation':
-						object.position.set( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ] );
-						break;
+				case 'translation':
+					object.position.set( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ] );
+					break;
 
-					case 'proxy':
-						// field not supported
-						break;
+				case 'proxy':
+					// field not supported
+					break;
 
-					case 'url':
-						// field not supported
-						break;
+				case 'url':
+					// field not supported
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -886,49 +886,49 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'groundAngle':
-						groundAngle = fieldValues;
-						break;
+				case 'groundAngle':
+					groundAngle = fieldValues;
+					break;
 
-					case 'groundColor':
-						groundColor = fieldValues;
-						break;
+				case 'groundColor':
+					groundColor = fieldValues;
+					break;
 
-					case 'backUrl':
-						// field not supported
-						break;
+				case 'backUrl':
+					// field not supported
+					break;
 
-					case 'bottomUrl':
-						// field not supported
-						break;
+				case 'bottomUrl':
+					// field not supported
+					break;
 
-					case 'frontUrl':
-						// field not supported
-						break;
+				case 'frontUrl':
+					// field not supported
+					break;
 
-					case 'leftUrl':
-						// field not supported
-						break;
+				case 'leftUrl':
+					// field not supported
+					break;
 
-					case 'rightUrl':
-						// field not supported
-						break;
+				case 'rightUrl':
+					// field not supported
+					break;
 
-					case 'topUrl':
-						// field not supported
-						break;
+				case 'topUrl':
+					// field not supported
+					break;
 
-					case 'skyAngle':
-						skyAngle = fieldValues;
-						break;
+				case 'skyAngle':
+					skyAngle = fieldValues;
+					break;
 
-					case 'skyColor':
-						skyColor = fieldValues;
-						break;
+				case 'skyColor':
+					skyColor = fieldValues;
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1005,27 +1005,27 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'appearance':
-						if ( fieldValues[ 0 ] !== null ) {
+				case 'appearance':
+					if ( fieldValues[ 0 ] !== null ) {
 
-							material = getNode( fieldValues[ 0 ] );
+						material = getNode( fieldValues[ 0 ] );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'geometry':
-						if ( fieldValues[ 0 ] !== null ) {
+				case 'geometry':
+					if ( fieldValues[ 0 ] !== null ) {
 
-							geometry = getNode( fieldValues[ 0 ] );
+						geometry = getNode( fieldValues[ 0 ] );
 
-						}
+					}
 
-						break;
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1144,61 +1144,61 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'material':
-						if ( fieldValues[ 0 ] !== null ) {
+				case 'material':
+					if ( fieldValues[ 0 ] !== null ) {
 
-							const materialData = getNode( fieldValues[ 0 ] );
+						const materialData = getNode( fieldValues[ 0 ] );
 
-							if ( materialData.diffuseColor ) material.color.copy( materialData.diffuseColor );
-							if ( materialData.emissiveColor ) material.emissive.copy( materialData.emissiveColor );
-							if ( materialData.shininess ) material.shininess = materialData.shininess;
-							if ( materialData.specularColor ) material.specular.copy( materialData.specularColor );
-							if ( materialData.transparency ) material.opacity = 1 - materialData.transparency;
-							if ( materialData.transparency > 0 ) material.transparent = true;
+						if ( materialData.diffuseColor ) material.color.copy( materialData.diffuseColor );
+						if ( materialData.emissiveColor ) material.emissive.copy( materialData.emissiveColor );
+						if ( materialData.shininess ) material.shininess = materialData.shininess;
+						if ( materialData.specularColor ) material.specular.copy( materialData.specularColor );
+						if ( materialData.transparency ) material.opacity = 1 - materialData.transparency;
+						if ( materialData.transparency > 0 ) material.transparent = true;
+
+					} else {
+
+						// if the material field is NULL or unspecified, lighting is off and the unlit object color is (0, 0, 0)
+
+						material = new MeshBasicMaterial( {
+							name: Loader.DEFAULT_MATERIAL_NAME,
+							color: 0x000000
+						} );
+
+					}
+
+					break;
+
+				case 'texture':
+					const textureNode = fieldValues[ 0 ];
+					if ( textureNode !== null ) {
+
+						if ( textureNode.name === 'ImageTexture' || textureNode.name === 'PixelTexture' ) {
+
+							material.map = getNode( textureNode );
 
 						} else {
 
-							// if the material field is NULL or unspecified, lighting is off and the unlit object color is (0, 0, 0)
-
-							material = new MeshBasicMaterial( {
-								name: Loader.DEFAULT_MATERIAL_NAME,
-								color: 0x000000
-							} );
+							// MovieTexture not supported yet
 
 						}
 
-						break;
+					}
 
-					case 'texture':
-						const textureNode = fieldValues[ 0 ];
-						if ( textureNode !== null ) {
+					break;
 
-							if ( textureNode.name === 'ImageTexture' || textureNode.name === 'PixelTexture' ) {
+				case 'textureTransform':
+					if ( fieldValues[ 0 ] !== null ) {
 
-								material.map = getNode( textureNode );
+						transformData = getNode( fieldValues[ 0 ] );
 
-							} else {
+					}
 
-								// MovieTexture not supported yet
+					break;
 
-							}
-
-						}
-
-						break;
-
-					case 'textureTransform':
-						if ( fieldValues[ 0 ] !== null ) {
-
-							transformData = getNode( fieldValues[ 0 ] );
-
-						}
-
-						break;
-
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1214,20 +1214,20 @@ class VRMLLoader extends Loader {
 
 					switch ( material.map.__type ) {
 
-						case TEXTURE_TYPE.INTENSITY_ALPHA:
-							material.opacity = 1; // ignore transparency
-							break;
+					case TEXTURE_TYPE.INTENSITY_ALPHA:
+						material.opacity = 1; // ignore transparency
+						break;
 
-						case TEXTURE_TYPE.RGB:
-							material.color.set( 0xffffff ); // ignore material color
-							break;
+					case TEXTURE_TYPE.RGB:
+						material.color.set( 0xffffff ); // ignore material color
+						break;
 
-						case TEXTURE_TYPE.RGBA:
-							material.color.set( 0xffffff ); // ignore material color
-							material.opacity = 1; // ignore transparency
-							break;
+					case TEXTURE_TYPE.RGBA:
+						material.color.set( 0xffffff ); // ignore material color
+						material.opacity = 1; // ignore transparency
+						break;
 
-						default:
+					default:
 
 					}
 
@@ -1266,33 +1266,33 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'ambientIntensity':
-						// field not supported
-						break;
+				case 'ambientIntensity':
+					// field not supported
+					break;
 
-					case 'diffuseColor':
-						materialData.diffuseColor = new Color().setRGB( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ], SRGBColorSpace );
-						break;
+				case 'diffuseColor':
+					materialData.diffuseColor = new Color().setRGB( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ], SRGBColorSpace );
+					break;
 
-					case 'emissiveColor':
-						materialData.emissiveColor = new Color().setRGB( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ], SRGBColorSpace );
-						break;
+				case 'emissiveColor':
+					materialData.emissiveColor = new Color().setRGB( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ], SRGBColorSpace );
+					break;
 
-					case 'shininess':
-						materialData.shininess = fieldValues[ 0 ];
-						break;
+				case 'shininess':
+					materialData.shininess = fieldValues[ 0 ];
+					break;
 
-					case 'specularColor':
-						materialData.specularColor = new Color().setRGB( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ], SRGBColorSpace );
-						break;
+				case 'specularColor':
+					materialData.specularColor = new Color().setRGB( fieldValues[ 0 ], fieldValues[ 1 ], fieldValues[ 2 ], SRGBColorSpace );
+					break;
 
-					case 'transparency':
-						materialData.transparency = fieldValues[ 0 ];
-						break;
+				case 'transparency':
+					materialData.transparency = fieldValues[ 0 ];
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1308,41 +1308,41 @@ class VRMLLoader extends Loader {
 
 			switch ( textureType ) {
 
-				case TEXTURE_TYPE.INTENSITY:
-					// Intensity texture: A one-component image specifies one-byte hexadecimal or integer values representing the intensity of the image
-					value = parseInt( hex );
-					color.r = value;
-					color.g = value;
-					color.b = value;
-					color.a = 1;
-					break;
+			case TEXTURE_TYPE.INTENSITY:
+				// Intensity texture: A one-component image specifies one-byte hexadecimal or integer values representing the intensity of the image
+				value = parseInt( hex );
+				color.r = value;
+				color.g = value;
+				color.b = value;
+				color.a = 1;
+				break;
 
-				case TEXTURE_TYPE.INTENSITY_ALPHA:
-					// Intensity+Alpha texture: A two-component image specifies the intensity in the first (high) byte and the alpha opacity in the second (low) byte.
-					value = parseInt( '0x' + hex.substring( 2, 4 ) );
-					color.r = value;
-					color.g = value;
-					color.b = value;
-					color.a = parseInt( '0x' + hex.substring( 4, 6 ) );
-					break;
+			case TEXTURE_TYPE.INTENSITY_ALPHA:
+				// Intensity+Alpha texture: A two-component image specifies the intensity in the first (high) byte and the alpha opacity in the second (low) byte.
+				value = parseInt( '0x' + hex.substring( 2, 4 ) );
+				color.r = value;
+				color.g = value;
+				color.b = value;
+				color.a = parseInt( '0x' + hex.substring( 4, 6 ) );
+				break;
 
-				case TEXTURE_TYPE.RGB:
-					// RGB texture: Pixels in a three-component image specify the red component in the first (high) byte, followed by the green and blue components
-					color.r = parseInt( '0x' + hex.substring( 2, 4 ) );
-					color.g = parseInt( '0x' + hex.substring( 4, 6 ) );
-					color.b = parseInt( '0x' + hex.substring( 6, 8 ) );
-					color.a = 1;
-					break;
+			case TEXTURE_TYPE.RGB:
+				// RGB texture: Pixels in a three-component image specify the red component in the first (high) byte, followed by the green and blue components
+				color.r = parseInt( '0x' + hex.substring( 2, 4 ) );
+				color.g = parseInt( '0x' + hex.substring( 4, 6 ) );
+				color.b = parseInt( '0x' + hex.substring( 6, 8 ) );
+				color.a = 1;
+				break;
 
-				case TEXTURE_TYPE.RGBA:
-					// RGBA texture: Four-component images specify the alpha opacity byte after red/green/blue
-					color.r = parseInt( '0x' + hex.substring( 2, 4 ) );
-					color.g = parseInt( '0x' + hex.substring( 4, 6 ) );
-					color.b = parseInt( '0x' + hex.substring( 6, 8 ) );
-					color.a = parseInt( '0x' + hex.substring( 8, 10 ) );
-					break;
+			case TEXTURE_TYPE.RGBA:
+				// RGBA texture: Four-component images specify the alpha opacity byte after red/green/blue
+				color.r = parseInt( '0x' + hex.substring( 2, 4 ) );
+				color.g = parseInt( '0x' + hex.substring( 4, 6 ) );
+				color.b = parseInt( '0x' + hex.substring( 6, 8 ) );
+				color.a = parseInt( '0x' + hex.substring( 8, 10 ) );
+				break;
 
-				default:
+			default:
 
 			}
 
@@ -1354,23 +1354,23 @@ class VRMLLoader extends Loader {
 
 			switch ( num_components ) {
 
-				case 1:
-					type = TEXTURE_TYPE.INTENSITY;
-					break;
+			case 1:
+				type = TEXTURE_TYPE.INTENSITY;
+				break;
 
-				case 2:
-					type = TEXTURE_TYPE.INTENSITY_ALPHA;
-					break;
+			case 2:
+				type = TEXTURE_TYPE.INTENSITY_ALPHA;
+				break;
 
-				case 3:
-					type = TEXTURE_TYPE.RGB;
-					break;
+			case 3:
+				type = TEXTURE_TYPE.RGB;
+				break;
 
-				case 4:
-					type = TEXTURE_TYPE.RGBA;
-					break;
+			case 4:
+				type = TEXTURE_TYPE.RGBA;
+				break;
 
-				default:
+			default:
 
 			}
 
@@ -1394,47 +1394,47 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'image':
-						const width = fieldValues[ 0 ];
-						const height = fieldValues[ 1 ];
-						const num_components = fieldValues[ 2 ];
+				case 'image':
+					const width = fieldValues[ 0 ];
+					const height = fieldValues[ 1 ];
+					const num_components = fieldValues[ 2 ];
 
-						const textureType = getTextureType( num_components );
+					const textureType = getTextureType( num_components );
 
-						const data = new Uint8Array( 4 * width * height );
+					const data = new Uint8Array( 4 * width * height );
 
-						const color = { r: 0, g: 0, b: 0, a: 0 };
+					const color = { r: 0, g: 0, b: 0, a: 0 };
 
-						for ( let j = 3, k = 0, jl = fieldValues.length; j < jl; j ++, k ++ ) {
+					for ( let j = 3, k = 0, jl = fieldValues.length; j < jl; j ++, k ++ ) {
 
-							parseHexColor( fieldValues[ j ], textureType, color );
+						parseHexColor( fieldValues[ j ], textureType, color );
 
-							const stride = k * 4;
+						const stride = k * 4;
 
-							data[ stride + 0 ] = color.r;
-							data[ stride + 1 ] = color.g;
-							data[ stride + 2 ] = color.b;
-							data[ stride + 3 ] = color.a;
+						data[ stride + 0 ] = color.r;
+						data[ stride + 1 ] = color.g;
+						data[ stride + 2 ] = color.b;
+						data[ stride + 3 ] = color.a;
 
-						}
+					}
 
-						texture = new DataTexture( data, width, height );
-						texture.colorSpace = SRGBColorSpace;
-						texture.needsUpdate = true;
-						texture.__type = textureType; // needed for material modifications
-						break;
+					texture = new DataTexture( data, width, height );
+					texture.colorSpace = SRGBColorSpace;
+					texture.needsUpdate = true;
+					texture.__type = textureType; // needed for material modifications
+					break;
 
-					case 'repeatS':
-						if ( fieldValues[ 0 ] === false ) wrapS = ClampToEdgeWrapping;
-						break;
+				case 'repeatS':
+					if ( fieldValues[ 0 ] === false ) wrapS = ClampToEdgeWrapping;
+					break;
 
-					case 'repeatT':
-						if ( fieldValues[ 0 ] === false ) wrapT = ClampToEdgeWrapping;
-						break;
+				case 'repeatT':
+					if ( fieldValues[ 0 ] === false ) wrapT = ClampToEdgeWrapping;
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1467,22 +1467,22 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'url':
-						const url = fieldValues[ 0 ];
-						if ( url ) texture = textureLoader.load( url );
-						break;
+				case 'url':
+					const url = fieldValues[ 0 ];
+					if ( url ) texture = textureLoader.load( url );
+					break;
 
-					case 'repeatS':
-						if ( fieldValues[ 0 ] === false ) wrapS = ClampToEdgeWrapping;
-						break;
+				case 'repeatS':
+					if ( fieldValues[ 0 ] === false ) wrapS = ClampToEdgeWrapping;
+					break;
 
-					case 'repeatT':
-						if ( fieldValues[ 0 ] === false ) wrapT = ClampToEdgeWrapping;
-						break;
+				case 'repeatT':
+					if ( fieldValues[ 0 ] === false ) wrapT = ClampToEdgeWrapping;
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1519,25 +1519,25 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'center':
-						transformData.center.set( fieldValues[ 0 ], fieldValues[ 1 ] );
-						break;
+				case 'center':
+					transformData.center.set( fieldValues[ 0 ], fieldValues[ 1 ] );
+					break;
 
-					case 'rotation':
-						transformData.rotation = fieldValues[ 0 ];
-						break;
+				case 'rotation':
+					transformData.rotation = fieldValues[ 0 ];
+					break;
 
-					case 'scale':
-						transformData.scale.set( fieldValues[ 0 ], fieldValues[ 1 ] );
-						break;
+				case 'scale':
+					transformData.scale.set( fieldValues[ 0 ], fieldValues[ 1 ] );
+					break;
 
-					case 'translation':
-						transformData.translation.set( fieldValues[ 0 ], fieldValues[ 1 ] );
-						break;
+				case 'translation':
+					transformData.translation.set( fieldValues[ 0 ], fieldValues[ 1 ] );
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1567,17 +1567,17 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'title':
-						worldInfo.title = fieldValues[ 0 ];
-						break;
+				case 'title':
+					worldInfo.title = fieldValues[ 0 ];
+					break;
 
-					case 'info':
-						worldInfo.info = fieldValues;
-						break;
+				case 'info':
+					worldInfo.info = fieldValues;
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1604,93 +1604,93 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'color':
-						const colorNode = fieldValues[ 0 ];
+				case 'color':
+					const colorNode = fieldValues[ 0 ];
 
-						if ( colorNode !== null ) {
+					if ( colorNode !== null ) {
 
-							color = getNode( colorNode );
+						color = getNode( colorNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'coord':
-						const coordNode = fieldValues[ 0 ];
+				case 'coord':
+					const coordNode = fieldValues[ 0 ];
 
-						if ( coordNode !== null ) {
+					if ( coordNode !== null ) {
 
-							coord = getNode( coordNode );
+						coord = getNode( coordNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'normal':
-						const normalNode = fieldValues[ 0 ];
+				case 'normal':
+					const normalNode = fieldValues[ 0 ];
 
-						if ( normalNode !== null ) {
+					if ( normalNode !== null ) {
 
-							normal = getNode( normalNode );
+						normal = getNode( normalNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'texCoord':
-						const texCoordNode = fieldValues[ 0 ];
+				case 'texCoord':
+					const texCoordNode = fieldValues[ 0 ];
 
-						if ( texCoordNode !== null ) {
+					if ( texCoordNode !== null ) {
 
-							texCoord = getNode( texCoordNode );
+						texCoord = getNode( texCoordNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'ccw':
-						ccw = fieldValues[ 0 ];
-						break;
+				case 'ccw':
+					ccw = fieldValues[ 0 ];
+					break;
 
-					case 'colorIndex':
-						colorIndex = fieldValues;
-						break;
+				case 'colorIndex':
+					colorIndex = fieldValues;
+					break;
 
-					case 'colorPerVertex':
-						colorPerVertex = fieldValues[ 0 ];
-						break;
+				case 'colorPerVertex':
+					colorPerVertex = fieldValues[ 0 ];
+					break;
 
-					case 'convex':
-						// field not supported
-						break;
+				case 'convex':
+					// field not supported
+					break;
 
-					case 'coordIndex':
-						coordIndex = fieldValues;
-						break;
+				case 'coordIndex':
+					coordIndex = fieldValues;
+					break;
 
-					case 'creaseAngle':
-						creaseAngle = fieldValues[ 0 ];
-						break;
+				case 'creaseAngle':
+					creaseAngle = fieldValues[ 0 ];
+					break;
 
-					case 'normalIndex':
-						normalIndex = fieldValues;
-						break;
+				case 'normalIndex':
+					normalIndex = fieldValues;
+					break;
 
-					case 'normalPerVertex':
-						normalPerVertex = fieldValues[ 0 ];
-						break;
+				case 'normalPerVertex':
+					normalPerVertex = fieldValues[ 0 ];
+					break;
 
-					case 'solid':
-						solid = fieldValues[ 0 ];
-						break;
+				case 'solid':
+					solid = fieldValues[ 0 ];
+					break;
 
-					case 'texCoordIndex':
-						texCoordIndex = fieldValues;
-						break;
+				case 'texCoordIndex':
+					texCoordIndex = fieldValues;
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1865,43 +1865,43 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'color':
-						const colorNode = fieldValues[ 0 ];
+				case 'color':
+					const colorNode = fieldValues[ 0 ];
 
-						if ( colorNode !== null ) {
+					if ( colorNode !== null ) {
 
-							color = getNode( colorNode );
+						color = getNode( colorNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'coord':
-						const coordNode = fieldValues[ 0 ];
+				case 'coord':
+					const coordNode = fieldValues[ 0 ];
 
-						if ( coordNode !== null ) {
+					if ( coordNode !== null ) {
 
-							coord = getNode( coordNode );
+						coord = getNode( coordNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'colorIndex':
-						colorIndex = fieldValues;
-						break;
+				case 'colorIndex':
+					colorIndex = fieldValues;
+					break;
 
-					case 'colorPerVertex':
-						colorPerVertex = fieldValues[ 0 ];
-						break;
+				case 'colorPerVertex':
+					colorPerVertex = fieldValues[ 0 ];
+					break;
 
-					case 'coordIndex':
-						coordIndex = fieldValues;
-						break;
+				case 'coordIndex':
+					coordIndex = fieldValues;
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -1987,32 +1987,32 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'color':
-						const colorNode = fieldValues[ 0 ];
+				case 'color':
+					const colorNode = fieldValues[ 0 ];
 
-						if ( colorNode !== null ) {
+					if ( colorNode !== null ) {
 
-							color = getNode( colorNode );
+						color = getNode( colorNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'coord':
-						const coordNode = fieldValues[ 0 ];
+				case 'coord':
+					const coordNode = fieldValues[ 0 ];
 
-						if ( coordNode !== null ) {
+					if ( coordNode !== null ) {
 
-							coord = getNode( coordNode );
+						coord = getNode( coordNode );
 
-						}
+					}
 
-						break;
+					break;
 
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -2051,15 +2051,15 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'size':
-						size.x = fieldValues[ 0 ];
-						size.y = fieldValues[ 1 ];
-						size.z = fieldValues[ 2 ];
-						break;
+				case 'size':
+					size.x = fieldValues[ 0 ];
+					size.y = fieldValues[ 1 ];
+					size.z = fieldValues[ 2 ];
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -2085,25 +2085,25 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'bottom':
-						openEnded = ! fieldValues[ 0 ];
-						break;
+				case 'bottom':
+					openEnded = ! fieldValues[ 0 ];
+					break;
 
-					case 'bottomRadius':
-						radius = fieldValues[ 0 ];
-						break;
+				case 'bottomRadius':
+					radius = fieldValues[ 0 ];
+					break;
 
-					case 'height':
-						height = fieldValues[ 0 ];
-						break;
+				case 'height':
+					height = fieldValues[ 0 ];
+					break;
 
-					case 'side':
-						// field not supported
-						break;
+				case 'side':
+					// field not supported
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -2129,29 +2129,29 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'bottom':
-						// field not supported
-						break;
+				case 'bottom':
+					// field not supported
+					break;
 
-					case 'radius':
-						radius = fieldValues[ 0 ];
-						break;
+				case 'radius':
+					radius = fieldValues[ 0 ];
+					break;
 
-					case 'height':
-						height = fieldValues[ 0 ];
-						break;
+				case 'height':
+					height = fieldValues[ 0 ];
+					break;
 
-					case 'side':
-						// field not supported
-						break;
+				case 'side':
+					// field not supported
+					break;
 
-					case 'top':
-						// field not supported
-						break;
+				case 'top':
+					// field not supported
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -2177,13 +2177,13 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'radius':
-						radius = fieldValues[ 0 ];
-						break;
+				case 'radius':
+					radius = fieldValues[ 0 ];
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -2222,82 +2222,82 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'color':
-						const colorNode = fieldValues[ 0 ];
+				case 'color':
+					const colorNode = fieldValues[ 0 ];
 
-						if ( colorNode !== null ) {
+					if ( colorNode !== null ) {
 
-							color = getNode( colorNode );
+						color = getNode( colorNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'normal':
-						const normalNode = fieldValues[ 0 ];
+				case 'normal':
+					const normalNode = fieldValues[ 0 ];
 
-						if ( normalNode !== null ) {
+					if ( normalNode !== null ) {
 
-							normal = getNode( normalNode );
+						normal = getNode( normalNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'texCoord':
-						const texCoordNode = fieldValues[ 0 ];
+				case 'texCoord':
+					const texCoordNode = fieldValues[ 0 ];
 
-						if ( texCoordNode !== null ) {
+					if ( texCoordNode !== null ) {
 
-							texCoord = getNode( texCoordNode );
+						texCoord = getNode( texCoordNode );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'height':
-						height = fieldValues;
-						break;
+				case 'height':
+					height = fieldValues;
+					break;
 
-					case 'ccw':
-						ccw = fieldValues[ 0 ];
-						break;
+				case 'ccw':
+					ccw = fieldValues[ 0 ];
+					break;
 
-					case 'colorPerVertex':
-						colorPerVertex = fieldValues[ 0 ];
-						break;
+				case 'colorPerVertex':
+					colorPerVertex = fieldValues[ 0 ];
+					break;
 
-					case 'creaseAngle':
-						creaseAngle = fieldValues[ 0 ];
-						break;
+				case 'creaseAngle':
+					creaseAngle = fieldValues[ 0 ];
+					break;
 
-					case 'normalPerVertex':
-						normalPerVertex = fieldValues[ 0 ];
-						break;
+				case 'normalPerVertex':
+					normalPerVertex = fieldValues[ 0 ];
+					break;
 
-					case 'solid':
-						solid = fieldValues[ 0 ];
-						break;
+				case 'solid':
+					solid = fieldValues[ 0 ];
+					break;
 
-					case 'xDimension':
-						xDimension = fieldValues[ 0 ];
-						break;
+				case 'xDimension':
+					xDimension = fieldValues[ 0 ];
+					break;
 
-					case 'xSpacing':
-						xSpacing = fieldValues[ 0 ];
-						break;
+				case 'xSpacing':
+					xSpacing = fieldValues[ 0 ];
+					break;
 
-					case 'zDimension':
-						zDimension = fieldValues[ 0 ];
-						break;
+				case 'zDimension':
+					zDimension = fieldValues[ 0 ];
+					break;
 
-					case 'zSpacing':
-						zSpacing = fieldValues[ 0 ];
-						break;
+				case 'zSpacing':
+					zSpacing = fieldValues[ 0 ];
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 
@@ -2527,49 +2527,49 @@ class VRMLLoader extends Loader {
 
 				switch ( fieldName ) {
 
-					case 'beginCap':
-						beginCap = fieldValues[ 0 ];
-						break;
+				case 'beginCap':
+					beginCap = fieldValues[ 0 ];
+					break;
 
-					case 'ccw':
-						ccw = fieldValues[ 0 ];
-						break;
+				case 'ccw':
+					ccw = fieldValues[ 0 ];
+					break;
 
-					case 'convex':
-						// field not supported
-						break;
+				case 'convex':
+					// field not supported
+					break;
 
-					case 'creaseAngle':
-						creaseAngle = fieldValues[ 0 ];
-						break;
+				case 'creaseAngle':
+					creaseAngle = fieldValues[ 0 ];
+					break;
 
-					case 'crossSection':
-						crossSection = fieldValues;
-						break;
+				case 'crossSection':
+					crossSection = fieldValues;
+					break;
 
-					case 'endCap':
-						endCap = fieldValues[ 0 ];
-						break;
+				case 'endCap':
+					endCap = fieldValues[ 0 ];
+					break;
 
-					case 'orientation':
-						orientation = fieldValues;
-						break;
+				case 'orientation':
+					orientation = fieldValues;
+					break;
 
-					case 'scale':
-						scale = fieldValues;
-						break;
+				case 'scale':
+					scale = fieldValues;
+					break;
 
-					case 'solid':
-						solid = fieldValues[ 0 ];
-						break;
+				case 'solid':
+					solid = fieldValues[ 0 ];
+					break;
 
-					case 'spine':
-						spine = fieldValues; // only extrusion along the Y-axis are supported so far
-						break;
+				case 'spine':
+					spine = fieldValues; // only extrusion along the Y-axis are supported so far
+					break;
 
-					default:
-						console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
-						break;
+				default:
+					console.warn( 'THREE.VRMLLoader: Unknown field:', fieldName );
+					break;
 
 				}
 

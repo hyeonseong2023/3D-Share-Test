@@ -345,32 +345,32 @@ function setQuaternionFromProperEuler( q, a, b, c, order ) {
 
 	switch ( order ) {
 
-		case 'XYX':
-			q.set( c2 * s13, s2 * c1_3, s2 * s1_3, c2 * c13 );
-			break;
+	case 'XYX':
+		q.set( c2 * s13, s2 * c1_3, s2 * s1_3, c2 * c13 );
+		break;
 
-		case 'YZY':
-			q.set( s2 * s1_3, c2 * s13, s2 * c1_3, c2 * c13 );
-			break;
+	case 'YZY':
+		q.set( s2 * s1_3, c2 * s13, s2 * c1_3, c2 * c13 );
+		break;
 
-		case 'ZXZ':
-			q.set( s2 * c1_3, s2 * s1_3, c2 * s13, c2 * c13 );
-			break;
+	case 'ZXZ':
+		q.set( s2 * c1_3, s2 * s1_3, c2 * s13, c2 * c13 );
+		break;
 
-		case 'XZX':
-			q.set( c2 * s13, s2 * s3_1, s2 * c3_1, c2 * c13 );
-			break;
+	case 'XZX':
+		q.set( c2 * s13, s2 * s3_1, s2 * c3_1, c2 * c13 );
+		break;
 
-		case 'YXY':
-			q.set( s2 * c3_1, c2 * s13, s2 * s3_1, c2 * c13 );
-			break;
+	case 'YXY':
+		q.set( s2 * c3_1, c2 * s13, s2 * s3_1, c2 * c13 );
+		break;
 
-		case 'ZYZ':
-			q.set( s2 * s3_1, s2 * c3_1, c2 * s13, c2 * c13 );
-			break;
+	case 'ZYZ':
+		q.set( s2 * s3_1, s2 * c3_1, c2 * s13, c2 * c13 );
+		break;
 
-		default:
-			console.warn( 'THREE.MathUtils: .setQuaternionFromProperEuler() encountered an unknown order: ' + order );
+	default:
+		console.warn( 'THREE.MathUtils: .setQuaternionFromProperEuler() encountered an unknown order: ' + order );
 
 	}
 
@@ -387,37 +387,37 @@ function denormalize( value, array ) {
 
 	switch ( array.constructor ) {
 
-		case Float32Array:
+	case Float32Array:
 
-			return value;
+		return value;
 
-		case Uint32Array:
+	case Uint32Array:
 
-			return value / 4294967295.0;
+		return value / 4294967295.0;
 
-		case Uint16Array:
+	case Uint16Array:
 
-			return value / 65535.0;
+		return value / 65535.0;
 
-		case Uint8Array:
+	case Uint8Array:
 
-			return value / 255.0;
+		return value / 255.0;
 
-		case Int32Array:
+	case Int32Array:
 
-			return Math.max( value / 2147483647.0, - 1.0 );
+		return Math.max( value / 2147483647.0, - 1.0 );
 
-		case Int16Array:
+	case Int16Array:
 
-			return Math.max( value / 32767.0, - 1.0 );
+		return Math.max( value / 32767.0, - 1.0 );
 
-		case Int8Array:
+	case Int8Array:
 
-			return Math.max( value / 127.0, - 1.0 );
+		return Math.max( value / 127.0, - 1.0 );
 
-		default:
+	default:
 
-			throw new Error( 'Invalid component type.' );
+		throw new Error( 'Invalid component type.' );
 
 	}
 
@@ -434,37 +434,37 @@ function normalize( value, array ) {
 
 	switch ( array.constructor ) {
 
-		case Float32Array:
+	case Float32Array:
 
-			return value;
+		return value;
 
-		case Uint32Array:
+	case Uint32Array:
 
-			return Math.round( value * 4294967295.0 );
+		return Math.round( value * 4294967295.0 );
 
-		case Uint16Array:
+	case Uint16Array:
 
-			return Math.round( value * 65535.0 );
+		return Math.round( value * 65535.0 );
 
-		case Uint8Array:
+	case Uint8Array:
 
-			return Math.round( value * 255.0 );
+		return Math.round( value * 255.0 );
 
-		case Int32Array:
+	case Int32Array:
 
-			return Math.round( value * 2147483647.0 );
+		return Math.round( value * 2147483647.0 );
 
-		case Int16Array:
+	case Int16Array:
 
-			return Math.round( value * 32767.0 );
+		return Math.round( value * 32767.0 );
 
-		case Int8Array:
+	case Int8Array:
 
-			return Math.round( value * 127.0 );
+		return Math.round( value * 127.0 );
 
-		default:
+	default:
 
-			throw new Error( 'Invalid component type.' );
+		throw new Error( 'Invalid component type.' );
 
 	}
 

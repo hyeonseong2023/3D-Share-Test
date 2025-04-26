@@ -117,53 +117,53 @@ class RoundedBoxGeometry extends BoxGeometry {
 
 			switch ( side ) {
 
-				case 0: // right
+			case 0: // right
 
-					// generate UVs along Z then Y
-					faceDirVector.set( 1, 0, 0 );
-					uvs[ j + 0 ] = getUv( faceDirVector, normal, 'z', 'y', radius, depth );
-					uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'z', radius, height );
-					break;
+				// generate UVs along Z then Y
+				faceDirVector.set( 1, 0, 0 );
+				uvs[ j + 0 ] = getUv( faceDirVector, normal, 'z', 'y', radius, depth );
+				uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'z', radius, height );
+				break;
 
-				case 1: // left
+			case 1: // left
 
-					// generate UVs along Z then Y
-					faceDirVector.set( - 1, 0, 0 );
-					uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'z', 'y', radius, depth );
-					uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'z', radius, height );
-					break;
+				// generate UVs along Z then Y
+				faceDirVector.set( - 1, 0, 0 );
+				uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'z', 'y', radius, depth );
+				uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'z', radius, height );
+				break;
 
-				case 2: // top
+			case 2: // top
 
-					// generate UVs along X then Z
-					faceDirVector.set( 0, 1, 0 );
-					uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'x', 'z', radius, width );
-					uvs[ j + 1 ] = getUv( faceDirVector, normal, 'z', 'x', radius, depth );
-					break;
+				// generate UVs along X then Z
+				faceDirVector.set( 0, 1, 0 );
+				uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'x', 'z', radius, width );
+				uvs[ j + 1 ] = getUv( faceDirVector, normal, 'z', 'x', radius, depth );
+				break;
 
-				case 3: // bottom
+			case 3: // bottom
 
-					// generate UVs along X then Z
-					faceDirVector.set( 0, - 1, 0 );
-					uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'x', 'z', radius, width );
-					uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'z', 'x', radius, depth );
-					break;
+				// generate UVs along X then Z
+				faceDirVector.set( 0, - 1, 0 );
+				uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'x', 'z', radius, width );
+				uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'z', 'x', radius, depth );
+				break;
 
-				case 4: // front
+			case 4: // front
 
-					// generate UVs along X then Y
-					faceDirVector.set( 0, 0, 1 );
-					uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'x', 'y', radius, width );
-					uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'x', radius, height );
-					break;
+				// generate UVs along X then Y
+				faceDirVector.set( 0, 0, 1 );
+				uvs[ j + 0 ] = 1.0 - getUv( faceDirVector, normal, 'x', 'y', radius, width );
+				uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'x', radius, height );
+				break;
 
-				case 5: // back
+			case 5: // back
 
-					// generate UVs along X then Y
-					faceDirVector.set( 0, 0, - 1 );
-					uvs[ j + 0 ] = getUv( faceDirVector, normal, 'x', 'y', radius, width );
-					uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'x', radius, height );
-					break;
+				// generate UVs along X then Y
+				faceDirVector.set( 0, 0, - 1 );
+				uvs[ j + 0 ] = getUv( faceDirVector, normal, 'x', 'y', radius, width );
+				uvs[ j + 1 ] = 1.0 - getUv( faceDirVector, normal, 'y', 'x', radius, height );
+				break;
 
 			}
 

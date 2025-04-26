@@ -41,41 +41,41 @@ class TGALoader extends DataTextureLoader {
 
 			switch ( header.image_type ) {
 
-				// check indexed type
+			// check indexed type
 
-				case TGA_TYPE_INDEXED:
-				case TGA_TYPE_RLE_INDEXED:
-					if ( header.colormap_length > 256 || header.colormap_size !== 24 || header.colormap_type !== 1 ) {
+			case TGA_TYPE_INDEXED:
+			case TGA_TYPE_RLE_INDEXED:
+				if ( header.colormap_length > 256 || header.colormap_size !== 24 || header.colormap_type !== 1 ) {
 
-						throw new Error( 'THREE.TGALoader: Invalid type colormap data for indexed type.' );
+					throw new Error( 'THREE.TGALoader: Invalid type colormap data for indexed type.' );
 
-					}
+				}
 
-					break;
+				break;
 
-					// check colormap type
+				// check colormap type
 
-				case TGA_TYPE_RGB:
-				case TGA_TYPE_GREY:
-				case TGA_TYPE_RLE_RGB:
-				case TGA_TYPE_RLE_GREY:
-					if ( header.colormap_type ) {
+			case TGA_TYPE_RGB:
+			case TGA_TYPE_GREY:
+			case TGA_TYPE_RLE_RGB:
+			case TGA_TYPE_RLE_GREY:
+				if ( header.colormap_type ) {
 
-						throw new Error( 'THREE.TGALoader: Invalid type colormap data for colormap type.' );
+					throw new Error( 'THREE.TGALoader: Invalid type colormap data for colormap type.' );
 
-					}
+				}
 
-					break;
+				break;
 
-					// What the need of a file without data ?
+				// What the need of a file without data ?
 
-				case TGA_TYPE_NO_DATA:
-					throw new Error( 'THREE.TGALoader: No data.' );
+			case TGA_TYPE_NO_DATA:
+				throw new Error( 'THREE.TGALoader: No data.' );
 
-					// Invalid type ?
+				// Invalid type ?
 
-				default:
-					throw new Error( 'THREE.TGALoader: Invalid type ' + header.image_type );
+			default:
+				throw new Error( 'THREE.TGALoader: Invalid type ' + header.image_type );
 
 			}
 
@@ -335,42 +335,42 @@ class TGALoader extends DataTextureLoader {
 
 			switch ( ( header.flags & TGA_ORIGIN_MASK ) >> TGA_ORIGIN_SHIFT ) {
 
-				default:
-				case TGA_ORIGIN_UL:
-					x_start = 0;
-					x_step = 1;
-					x_end = width;
-					y_start = 0;
-					y_step = 1;
-					y_end = height;
-					break;
+			default:
+			case TGA_ORIGIN_UL:
+				x_start = 0;
+				x_step = 1;
+				x_end = width;
+				y_start = 0;
+				y_step = 1;
+				y_end = height;
+				break;
 
-				case TGA_ORIGIN_BL:
-					x_start = 0;
-					x_step = 1;
-					x_end = width;
-					y_start = height - 1;
-					y_step = - 1;
-					y_end = - 1;
-					break;
+			case TGA_ORIGIN_BL:
+				x_start = 0;
+				x_step = 1;
+				x_end = width;
+				y_start = height - 1;
+				y_step = - 1;
+				y_end = - 1;
+				break;
 
-				case TGA_ORIGIN_UR:
-					x_start = width - 1;
-					x_step = - 1;
-					x_end = - 1;
-					y_start = 0;
-					y_step = 1;
-					y_end = height;
-					break;
+			case TGA_ORIGIN_UR:
+				x_start = width - 1;
+				x_step = - 1;
+				x_end = - 1;
+				y_start = 0;
+				y_step = 1;
+				y_end = height;
+				break;
 
-				case TGA_ORIGIN_BR:
-					x_start = width - 1;
-					x_step = - 1;
-					x_end = - 1;
-					y_start = height - 1;
-					y_step = - 1;
-					y_end = - 1;
-					break;
+			case TGA_ORIGIN_BR:
+				x_start = width - 1;
+				x_step = - 1;
+				x_end = - 1;
+				y_start = height - 1;
+				y_step = - 1;
+				y_end = - 1;
+				break;
 
 			}
 
@@ -378,17 +378,17 @@ class TGALoader extends DataTextureLoader {
 
 				switch ( header.pixel_size ) {
 
-					case 8:
-						tgaGetImageDataGrey8bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
-						break;
+				case 8:
+					tgaGetImageDataGrey8bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
+					break;
 
-					case 16:
-						tgaGetImageDataGrey16bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
-						break;
+				case 16:
+					tgaGetImageDataGrey16bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
+					break;
 
-					default:
-						throw new Error( 'THREE.TGALoader: Format not supported.' );
-						break;
+				default:
+					throw new Error( 'THREE.TGALoader: Format not supported.' );
+					break;
 
 				}
 
@@ -396,25 +396,25 @@ class TGALoader extends DataTextureLoader {
 
 				switch ( header.pixel_size ) {
 
-					case 8:
-						tgaGetImageData8bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image, palette );
-						break;
+				case 8:
+					tgaGetImageData8bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image, palette );
+					break;
 
-					case 16:
-						tgaGetImageData16bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
-						break;
+				case 16:
+					tgaGetImageData16bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
+					break;
 
-					case 24:
-						tgaGetImageData24bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
-						break;
+				case 24:
+					tgaGetImageData24bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
+					break;
 
-					case 32:
-						tgaGetImageData32bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
-						break;
+				case 32:
+					tgaGetImageData32bits( data, y_start, y_step, y_end, x_start, x_step, x_end, image );
+					break;
 
-					default:
-						throw new Error( 'THREE.TGALoader: Format not supported.' );
-						break;
+				default:
+					throw new Error( 'THREE.TGALoader: Format not supported.' );
+					break;
 
 				}
 
@@ -488,30 +488,30 @@ class TGALoader extends DataTextureLoader {
 
 		switch ( header.image_type ) {
 
-			case TGA_TYPE_RLE_INDEXED:
-				use_rle = true;
-				use_pal = true;
-				break;
+		case TGA_TYPE_RLE_INDEXED:
+			use_rle = true;
+			use_pal = true;
+			break;
 
-			case TGA_TYPE_INDEXED:
-				use_pal = true;
-				break;
+		case TGA_TYPE_INDEXED:
+			use_pal = true;
+			break;
 
-			case TGA_TYPE_RLE_RGB:
-				use_rle = true;
-				break;
+		case TGA_TYPE_RLE_RGB:
+			use_rle = true;
+			break;
 
-			case TGA_TYPE_RGB:
-				break;
+		case TGA_TYPE_RGB:
+			break;
 
-			case TGA_TYPE_RLE_GREY:
-				use_rle = true;
-				use_grey = true;
-				break;
+		case TGA_TYPE_RLE_GREY:
+			use_rle = true;
+			use_grey = true;
+			break;
 
-			case TGA_TYPE_GREY:
-				use_grey = true;
-				break;
+		case TGA_TYPE_GREY:
+			use_grey = true;
+			break;
 
 		}
 

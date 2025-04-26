@@ -112,42 +112,42 @@ class NRRDLoader extends Loader {
 
 			switch ( type ) {
 
-				// 1 byte data types
-				case 'uchar':
-					break;
-				case 'schar':
-					_array_type = Int8Array;
-					break;
+			// 1 byte data types
+			case 'uchar':
+				break;
+			case 'schar':
+				_array_type = Int8Array;
+				break;
 				// 2 byte data types
-				case 'ushort':
-					_array_type = Uint16Array;
-					_chunkSize = 2;
-					break;
-				case 'sshort':
-					_array_type = Int16Array;
-					_chunkSize = 2;
-					break;
+			case 'ushort':
+				_array_type = Uint16Array;
+				_chunkSize = 2;
+				break;
+			case 'sshort':
+				_array_type = Int16Array;
+				_chunkSize = 2;
+				break;
 				// 4 byte data types
-				case 'uint':
-					_array_type = Uint32Array;
-					_chunkSize = 4;
-					break;
-				case 'sint':
-					_array_type = Int32Array;
-					_chunkSize = 4;
-					break;
-				case 'float':
-					_array_type = Float32Array;
-					_chunkSize = 4;
-					break;
-				case 'complex':
-					_array_type = Float64Array;
-					_chunkSize = 8;
-					break;
-				case 'double':
-					_array_type = Float64Array;
-					_chunkSize = 8;
-					break;
+			case 'uint':
+				_array_type = Uint32Array;
+				_chunkSize = 4;
+				break;
+			case 'sint':
+				_array_type = Int32Array;
+				_chunkSize = 4;
+				break;
+			case 'float':
+				_array_type = Float32Array;
+				_chunkSize = 4;
+				break;
+			case 'complex':
+				_array_type = Float64Array;
+				_chunkSize = 8;
+				break;
+			case 'double':
+				_array_type = Float64Array;
+				_chunkSize = 8;
+				break;
 
 			}
 
@@ -552,52 +552,52 @@ const _fieldFunctions = {
 
 		switch ( data ) {
 
-			case 'uchar':
-			case 'unsigned char':
-			case 'uint8':
-			case 'uint8_t':
-				this.__array = Uint8Array;
-				break;
-			case 'signed char':
-			case 'int8':
-			case 'int8_t':
-				this.__array = Int8Array;
-				break;
-			case 'short':
-			case 'short int':
-			case 'signed short':
-			case 'signed short int':
-			case 'int16':
-			case 'int16_t':
-				this.__array = Int16Array;
-				break;
-			case 'ushort':
-			case 'unsigned short':
-			case 'unsigned short int':
-			case 'uint16':
-			case 'uint16_t':
-				this.__array = Uint16Array;
-				break;
-			case 'int':
-			case 'signed int':
-			case 'int32':
-			case 'int32_t':
-				this.__array = Int32Array;
-				break;
-			case 'uint':
-			case 'unsigned int':
-			case 'uint32':
-			case 'uint32_t':
-				this.__array = Uint32Array;
-				break;
-			case 'float':
-				this.__array = Float32Array;
-				break;
-			case 'double':
-				this.__array = Float64Array;
-				break;
-			default:
-				throw new Error( 'Unsupported NRRD data type: ' + data );
+		case 'uchar':
+		case 'unsigned char':
+		case 'uint8':
+		case 'uint8_t':
+			this.__array = Uint8Array;
+			break;
+		case 'signed char':
+		case 'int8':
+		case 'int8_t':
+			this.__array = Int8Array;
+			break;
+		case 'short':
+		case 'short int':
+		case 'signed short':
+		case 'signed short int':
+		case 'int16':
+		case 'int16_t':
+			this.__array = Int16Array;
+			break;
+		case 'ushort':
+		case 'unsigned short':
+		case 'unsigned short int':
+		case 'uint16':
+		case 'uint16_t':
+			this.__array = Uint16Array;
+			break;
+		case 'int':
+		case 'signed int':
+		case 'int32':
+		case 'int32_t':
+			this.__array = Int32Array;
+			break;
+		case 'uint':
+		case 'unsigned int':
+		case 'uint32':
+		case 'uint32_t':
+			this.__array = Uint32Array;
+			break;
+		case 'float':
+			this.__array = Float32Array;
+			break;
+		case 'double':
+			this.__array = Float64Array;
+			break;
+		default:
+			throw new Error( 'Unsupported NRRD data type: ' + data );
 
 		}
 

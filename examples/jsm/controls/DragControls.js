@@ -184,24 +184,24 @@ class DragControls extends Controls {
 
 			switch ( event.button ) {
 
-				case 0:
+			case 0:
 
-					action = this.mouseButtons.LEFT;
-					break;
+				action = this.mouseButtons.LEFT;
+				break;
 
-				case 1:
+			case 1:
 
-					action = this.mouseButtons.MIDDLE;
-					break;
+				action = this.mouseButtons.MIDDLE;
+				break;
 
-				case 2:
+			case 2:
 
-					action = this.mouseButtons.RIGHT;
-					break;
+				action = this.mouseButtons.RIGHT;
+				break;
 
-				default:
+			default:
 
-					action = null;
+				action = null;
 
 			}
 
@@ -211,23 +211,23 @@ class DragControls extends Controls {
 
 		switch ( action ) {
 
-			case MOUSE.PAN:
-			case TOUCH.PAN:
+		case MOUSE.PAN:
+		case TOUCH.PAN:
 
-				this.state = STATE.PAN;
+			this.state = STATE.PAN;
 
-				break;
+			break;
 
-			case MOUSE.ROTATE:
-			case TOUCH.ROTATE:
+		case MOUSE.ROTATE:
+		case TOUCH.ROTATE:
 
-				this.state = STATE.ROTATE;
+			this.state = STATE.ROTATE;
 
-				break;
+			break;
 
-			default:
+		default:
 
-				this.state = STATE.NONE;
+			this.state = STATE.NONE;
 
 		}
 

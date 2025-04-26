@@ -406,16 +406,16 @@ class DRACOLoader extends Loader {
 
 					switch ( message.type ) {
 
-						case 'decode':
-							worker._callbacks[ message.id ].resolve( message );
-							break;
+					case 'decode':
+						worker._callbacks[ message.id ].resolve( message );
+						break;
 
-						case 'error':
-							worker._callbacks[ message.id ].reject( message );
-							break;
+					case 'error':
+						worker._callbacks[ message.id ].reject( message );
+						break;
 
-						default:
-							console.error( 'THREE.DRACOLoader: Unexpected message, "' + message.type + '"' );
+					default:
+						console.error( 'THREE.DRACOLoader: Unexpected message, "' + message.type + '"' );
 
 					}
 
@@ -491,54 +491,54 @@ function DRACOWorker() {
 
 		switch ( message.type ) {
 
-			case 'init':
-				decoderConfig = message.decoderConfig;
-				decoderPending = new Promise( function ( resolve/*, reject*/ ) {
+		case 'init':
+			decoderConfig = message.decoderConfig;
+			decoderPending = new Promise( function ( resolve/*, reject*/ ) {
 
-					decoderConfig.onModuleLoaded = function ( draco ) {
+				decoderConfig.onModuleLoaded = function ( draco ) {
 
-						// Module is Promise-like. Wrap before resolving to avoid loop.
-						resolve( { draco: draco } );
+					// Module is Promise-like. Wrap before resolving to avoid loop.
+					resolve( { draco: draco } );
 
-					};
+				};
 
-					DracoDecoderModule( decoderConfig ); // eslint-disable-line no-undef
+				DracoDecoderModule( decoderConfig ); // eslint-disable-line no-undef
 
-				} );
-				break;
+			} );
+			break;
 
-			case 'decode':
-				const buffer = message.buffer;
-				const taskConfig = message.taskConfig;
-				decoderPending.then( ( module ) => {
+		case 'decode':
+			const buffer = message.buffer;
+			const taskConfig = message.taskConfig;
+			decoderPending.then( ( module ) => {
 
-					const draco = module.draco;
-					const decoder = new draco.Decoder();
+				const draco = module.draco;
+				const decoder = new draco.Decoder();
 
-					try {
+				try {
 
-						const geometry = decodeGeometry( draco, decoder, new Int8Array( buffer ), taskConfig );
+					const geometry = decodeGeometry( draco, decoder, new Int8Array( buffer ), taskConfig );
 
-						const buffers = geometry.attributes.map( ( attr ) => attr.array.buffer );
+					const buffers = geometry.attributes.map( ( attr ) => attr.array.buffer );
 
-						if ( geometry.index ) buffers.push( geometry.index.array.buffer );
+					if ( geometry.index ) buffers.push( geometry.index.array.buffer );
 
-						self.postMessage( { type: 'decode', id: message.id, geometry }, buffers );
+					self.postMessage( { type: 'decode', id: message.id, geometry }, buffers );
 
-					} catch ( error ) {
+				} catch ( error ) {
 
-						console.error( error );
+					console.error( error );
 
-						self.postMessage( { type: 'error', id: message.id, error: error.message } );
+					self.postMessage( { type: 'error', id: message.id, error: error.message } );
 
-					} finally {
+				} finally {
 
-						draco.destroy( decoder );
+					draco.destroy( decoder );
 
-					}
+				}
 
-				} );
-				break;
+			} );
+			break;
 
 		}
 
@@ -670,13 +670,13 @@ function DRACOWorker() {
 
 		switch ( attributeType ) {
 
-			case Float32Array: return draco.DT_FLOAT32;
-			case Int8Array: return draco.DT_INT8;
-			case Int16Array: return draco.DT_INT16;
-			case Int32Array: return draco.DT_INT32;
-			case Uint8Array: return draco.DT_UINT8;
-			case Uint16Array: return draco.DT_UINT16;
-			case Uint32Array: return draco.DT_UINT32;
+		case Float32Array: return draco.DT_FLOAT32;
+		case Int8Array: return draco.DT_INT8;
+		case Int16Array: return draco.DT_INT16;
+		case Int32Array: return draco.DT_INT32;
+		case Uint8Array: return draco.DT_UINT8;
+		case Uint16Array: return draco.DT_UINT16;
+		case Uint32Array: return draco.DT_UINT32;
 
 		}
 

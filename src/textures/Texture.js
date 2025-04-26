@@ -543,29 +543,29 @@ class Texture extends EventDispatcher {
 
 			switch ( this.wrapS ) {
 
-				case RepeatWrapping:
+			case RepeatWrapping:
+
+				uv.x = uv.x - Math.floor( uv.x );
+				break;
+
+			case ClampToEdgeWrapping:
+
+				uv.x = uv.x < 0 ? 0 : 1;
+				break;
+
+			case MirroredRepeatWrapping:
+
+				if ( Math.abs( Math.floor( uv.x ) % 2 ) === 1 ) {
+
+					uv.x = Math.ceil( uv.x ) - uv.x;
+
+				} else {
 
 					uv.x = uv.x - Math.floor( uv.x );
-					break;
 
-				case ClampToEdgeWrapping:
+				}
 
-					uv.x = uv.x < 0 ? 0 : 1;
-					break;
-
-				case MirroredRepeatWrapping:
-
-					if ( Math.abs( Math.floor( uv.x ) % 2 ) === 1 ) {
-
-						uv.x = Math.ceil( uv.x ) - uv.x;
-
-					} else {
-
-						uv.x = uv.x - Math.floor( uv.x );
-
-					}
-
-					break;
+				break;
 
 			}
 
@@ -575,29 +575,29 @@ class Texture extends EventDispatcher {
 
 			switch ( this.wrapT ) {
 
-				case RepeatWrapping:
+			case RepeatWrapping:
+
+				uv.y = uv.y - Math.floor( uv.y );
+				break;
+
+			case ClampToEdgeWrapping:
+
+				uv.y = uv.y < 0 ? 0 : 1;
+				break;
+
+			case MirroredRepeatWrapping:
+
+				if ( Math.abs( Math.floor( uv.y ) % 2 ) === 1 ) {
+
+					uv.y = Math.ceil( uv.y ) - uv.y;
+
+				} else {
 
 					uv.y = uv.y - Math.floor( uv.y );
-					break;
 
-				case ClampToEdgeWrapping:
+				}
 
-					uv.y = uv.y < 0 ? 0 : 1;
-					break;
-
-				case MirroredRepeatWrapping:
-
-					if ( Math.abs( Math.floor( uv.y ) % 2 ) === 1 ) {
-
-						uv.y = Math.ceil( uv.y ) - uv.y;
-
-					} else {
-
-						uv.y = uv.y - Math.floor( uv.y );
-
-					}
-
-					break;
+				break;
 
 			}
 

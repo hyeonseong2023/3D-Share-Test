@@ -517,30 +517,30 @@ KTX2Loader.BasisWorker = function () {
 
 		switch ( message.type ) {
 
-			case 'init':
-				config = message.config;
-				init( message.transcoderBinary );
-				break;
+		case 'init':
+			config = message.config;
+			init( message.transcoderBinary );
+			break;
 
-			case 'transcode':
-				transcoderPending.then( () => {
+		case 'transcode':
+			transcoderPending.then( () => {
 
-					try {
+				try {
 
-						const { faces, buffers, width, height, hasAlpha, format, type, dfdFlags } = transcode( message.buffer );
+					const { faces, buffers, width, height, hasAlpha, format, type, dfdFlags } = transcode( message.buffer );
 
-						self.postMessage( { type: 'transcode', id: message.id, data: { faces, width, height, hasAlpha, format, type, dfdFlags } }, buffers );
+					self.postMessage( { type: 'transcode', id: message.id, data: { faces, width, height, hasAlpha, format, type, dfdFlags } }, buffers );
 
-					} catch ( error ) {
+				} catch ( error ) {
 
-						console.error( error );
+					console.error( error );
 
-						self.postMessage( { type: 'error', id: message.id, error: error.message } );
+					self.postMessage( { type: 'error', id: message.id, error: error.message } );
 
-					}
+				}
 
-				} );
-				break;
+			} );
+			break;
 
 		}
 

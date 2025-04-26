@@ -320,23 +320,23 @@ function getChannelCount( texture ) {
 
 	switch ( texture.format ) {
 
-		case RGBAFormat:
+	case RGBAFormat:
 
-			return 4;
+		return 4;
 
-		case RGFormat:
-		case RGIntegerFormat:
+	case RGFormat:
+	case RGIntegerFormat:
 
-			return 2;
+		return 2;
 
-		case RedFormat:
-		case RedIntegerFormat:
+	case RedFormat:
+	case RedIntegerFormat:
 
-			return 1;
+		return 1;
 
-		default:
+	default:
 
-			throw new Error( ERROR_FORMAT );
+		throw new Error( ERROR_FORMAT );
 
 	}
 

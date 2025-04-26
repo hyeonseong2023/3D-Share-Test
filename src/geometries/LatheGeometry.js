@@ -83,49 +83,49 @@ class LatheGeometry extends BufferGeometry {
 
 			switch ( j ) {
 
-				case 0:				// special handling for 1st vertex on path
+			case 0:				// special handling for 1st vertex on path
 
-					dx = points[ j + 1 ].x - points[ j ].x;
-					dy = points[ j + 1 ].y - points[ j ].y;
+				dx = points[ j + 1 ].x - points[ j ].x;
+				dy = points[ j + 1 ].y - points[ j ].y;
 
-					normal.x = dy * 1.0;
-					normal.y = - dx;
-					normal.z = dy * 0.0;
+				normal.x = dy * 1.0;
+				normal.y = - dx;
+				normal.z = dy * 0.0;
 
-					prevNormal.copy( normal );
+				prevNormal.copy( normal );
 
-					normal.normalize();
+				normal.normalize();
 
-					initNormals.push( normal.x, normal.y, normal.z );
+				initNormals.push( normal.x, normal.y, normal.z );
 
-					break;
+				break;
 
-				case ( points.length - 1 ):	// special handling for last Vertex on path
+			case ( points.length - 1 ):	// special handling for last Vertex on path
 
-					initNormals.push( prevNormal.x, prevNormal.y, prevNormal.z );
+				initNormals.push( prevNormal.x, prevNormal.y, prevNormal.z );
 
-					break;
+				break;
 
-				default:			// default handling for all vertices in between
+			default:			// default handling for all vertices in between
 
-					dx = points[ j + 1 ].x - points[ j ].x;
-					dy = points[ j + 1 ].y - points[ j ].y;
+				dx = points[ j + 1 ].x - points[ j ].x;
+				dy = points[ j + 1 ].y - points[ j ].y;
 
-					normal.x = dy * 1.0;
-					normal.y = - dx;
-					normal.z = dy * 0.0;
+				normal.x = dy * 1.0;
+				normal.y = - dx;
+				normal.z = dy * 0.0;
 
-					curNormal.copy( normal );
+				curNormal.copy( normal );
 
-					normal.x += prevNormal.x;
-					normal.y += prevNormal.y;
-					normal.z += prevNormal.z;
+				normal.x += prevNormal.x;
+				normal.y += prevNormal.y;
+				normal.z += prevNormal.z;
 
-					normal.normalize();
+				normal.normalize();
 
-					initNormals.push( normal.x, normal.y, normal.z );
+				initNormals.push( normal.x, normal.y, normal.z );
 
-					prevNormal.copy( curNormal );
+				prevNormal.copy( curNormal );
 
 			}
 

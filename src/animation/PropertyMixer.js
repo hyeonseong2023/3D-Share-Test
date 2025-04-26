@@ -50,34 +50,34 @@ class PropertyMixer {
 
 		switch ( typeName ) {
 
-			case 'quaternion':
-				mixFunction = this._slerp;
-				mixFunctionAdditive = this._slerpAdditive;
-				setIdentity = this._setAdditiveIdentityQuaternion;
+		case 'quaternion':
+			mixFunction = this._slerp;
+			mixFunctionAdditive = this._slerpAdditive;
+			setIdentity = this._setAdditiveIdentityQuaternion;
 
-				this.buffer = new Float64Array( valueSize * 6 );
-				this._workIndex = 5;
-				break;
+			this.buffer = new Float64Array( valueSize * 6 );
+			this._workIndex = 5;
+			break;
 
-			case 'string':
-			case 'bool':
-				mixFunction = this._select;
+		case 'string':
+		case 'bool':
+			mixFunction = this._select;
 
-				// Use the regular mix function and for additive on these types,
-				// additive is not relevant for non-numeric types
-				mixFunctionAdditive = this._select;
+			// Use the regular mix function and for additive on these types,
+			// additive is not relevant for non-numeric types
+			mixFunctionAdditive = this._select;
 
-				setIdentity = this._setAdditiveIdentityOther;
+			setIdentity = this._setAdditiveIdentityOther;
 
-				this.buffer = new Array( valueSize * 5 );
-				break;
+			this.buffer = new Array( valueSize * 5 );
+			break;
 
-			default:
-				mixFunction = this._lerp;
-				mixFunctionAdditive = this._lerpAdditive;
-				setIdentity = this._setAdditiveIdentityNumeric;
+		default:
+			mixFunction = this._lerp;
+			mixFunctionAdditive = this._lerpAdditive;
+			setIdentity = this._setAdditiveIdentityNumeric;
 
-				this.buffer = new Float64Array( valueSize * 5 );
+			this.buffer = new Float64Array( valueSize * 5 );
 
 		}
 

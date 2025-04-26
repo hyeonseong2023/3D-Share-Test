@@ -524,63 +524,63 @@ class GTAOPass extends Pass {
 
 		switch ( this.output ) {
 
-			case GTAOPass.OUTPUT.Off:
-				break;
+		case GTAOPass.OUTPUT.Off:
+			break;
 
-			case GTAOPass.OUTPUT.Diffuse:
+		case GTAOPass.OUTPUT.Diffuse:
 
-				this.copyMaterial.uniforms.tDiffuse.value = readBuffer.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+			this.copyMaterial.uniforms.tDiffuse.value = readBuffer.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
+			break;
 
-			case GTAOPass.OUTPUT.AO:
+		case GTAOPass.OUTPUT.AO:
 
-				this.copyMaterial.uniforms.tDiffuse.value = this.gtaoRenderTarget.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+			this.copyMaterial.uniforms.tDiffuse.value = this.gtaoRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
+			break;
 
-			case GTAOPass.OUTPUT.Denoise:
+		case GTAOPass.OUTPUT.Denoise:
 
-				this.copyMaterial.uniforms.tDiffuse.value = this.pdRenderTarget.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+			this.copyMaterial.uniforms.tDiffuse.value = this.pdRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
+			break;
 
-			case GTAOPass.OUTPUT.Depth:
+		case GTAOPass.OUTPUT.Depth:
 
-				this.depthRenderMaterial.uniforms.cameraNear.value = this.camera.near;
-				this.depthRenderMaterial.uniforms.cameraFar.value = this.camera.far;
-				this._renderPass( renderer, this.depthRenderMaterial, this.renderToScreen ? null : writeBuffer );
+			this.depthRenderMaterial.uniforms.cameraNear.value = this.camera.near;
+			this.depthRenderMaterial.uniforms.cameraFar.value = this.camera.far;
+			this._renderPass( renderer, this.depthRenderMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
+			break;
 
-			case GTAOPass.OUTPUT.Normal:
+		case GTAOPass.OUTPUT.Normal:
 
-				this.copyMaterial.uniforms.tDiffuse.value = this.normalRenderTarget.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+			this.copyMaterial.uniforms.tDiffuse.value = this.normalRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
+			break;
 
-			case GTAOPass.OUTPUT.Default:
+		case GTAOPass.OUTPUT.Default:
 
-				this.copyMaterial.uniforms.tDiffuse.value = readBuffer.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+			this.copyMaterial.uniforms.tDiffuse.value = readBuffer.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				this.blendMaterial.uniforms.intensity.value = this.blendIntensity;
-				this.blendMaterial.uniforms.tDiffuse.value = this.pdRenderTarget.texture;
-				this._renderPass( renderer, this.blendMaterial, this.renderToScreen ? null : writeBuffer );
+			this.blendMaterial.uniforms.intensity.value = this.blendIntensity;
+			this.blendMaterial.uniforms.tDiffuse.value = this.pdRenderTarget.texture;
+			this._renderPass( renderer, this.blendMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
+			break;
 
-			default:
-				console.warn( 'THREE.GTAOPass: Unknown output type.' );
+		default:
+			console.warn( 'THREE.GTAOPass: Unknown output type.' );
 
 		}
 

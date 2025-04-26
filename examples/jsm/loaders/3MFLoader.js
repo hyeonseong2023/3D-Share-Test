@@ -925,66 +925,66 @@ class ThreeMFLoader extends Loader {
 
 				switch ( texture2d.tilestyleu ) {
 
-					case 'wrap':
-						texture.wrapS = RepeatWrapping;
-						break;
+				case 'wrap':
+					texture.wrapS = RepeatWrapping;
+					break;
 
-					case 'mirror':
-						texture.wrapS = MirroredRepeatWrapping;
-						break;
+				case 'mirror':
+					texture.wrapS = MirroredRepeatWrapping;
+					break;
 
-					case 'none':
-					case 'clamp':
-						texture.wrapS = ClampToEdgeWrapping;
-						break;
+				case 'none':
+				case 'clamp':
+					texture.wrapS = ClampToEdgeWrapping;
+					break;
 
-					default:
-						texture.wrapS = RepeatWrapping;
+				default:
+					texture.wrapS = RepeatWrapping;
 
 				}
 
 				switch ( texture2d.tilestylev ) {
 
-					case 'wrap':
-						texture.wrapT = RepeatWrapping;
-						break;
+				case 'wrap':
+					texture.wrapT = RepeatWrapping;
+					break;
 
-					case 'mirror':
-						texture.wrapT = MirroredRepeatWrapping;
-						break;
+				case 'mirror':
+					texture.wrapT = MirroredRepeatWrapping;
+					break;
 
-					case 'none':
-					case 'clamp':
-						texture.wrapT = ClampToEdgeWrapping;
-						break;
+				case 'none':
+				case 'clamp':
+					texture.wrapT = ClampToEdgeWrapping;
+					break;
 
-					default:
-						texture.wrapT = RepeatWrapping;
+				default:
+					texture.wrapT = RepeatWrapping;
 
 				}
 
 				switch ( texture2d.filter ) {
 
-					case 'auto':
-						texture.magFilter = LinearFilter;
-						texture.minFilter = LinearMipmapLinearFilter;
-						break;
+				case 'auto':
+					texture.magFilter = LinearFilter;
+					texture.minFilter = LinearMipmapLinearFilter;
+					break;
 
-					case 'linear':
-						texture.magFilter = LinearFilter;
-						texture.minFilter = LinearFilter;
-						texture.generateMipmaps = false;
-						break;
+				case 'linear':
+					texture.magFilter = LinearFilter;
+					texture.minFilter = LinearFilter;
+					texture.generateMipmaps = false;
+					break;
 
-					case 'nearest':
-						texture.magFilter = NearestFilter;
-						texture.minFilter = NearestFilter;
-						texture.generateMipmaps = false;
-						break;
+				case 'nearest':
+					texture.magFilter = NearestFilter;
+					texture.minFilter = NearestFilter;
+					texture.generateMipmaps = false;
+					break;
 
-					default:
-						texture.magFilter = LinearFilter;
-						texture.minFilter = LinearMipmapLinearFilter;
+				default:
+					texture.magFilter = LinearFilter;
+					texture.minFilter = LinearMipmapLinearFilter;
 
 				}
 
@@ -1223,34 +1223,34 @@ class ThreeMFLoader extends Loader {
 
 				switch ( resourceType ) {
 
-					case 'material':
-						const basematerials = modelData.resources.basematerials[ resourceId ];
-						const newMeshes = buildBasematerialsMeshes( basematerials, triangleProperties, meshData, objects, modelData, textureData, objectData );
+				case 'material':
+					const basematerials = modelData.resources.basematerials[ resourceId ];
+					const newMeshes = buildBasematerialsMeshes( basematerials, triangleProperties, meshData, objects, modelData, textureData, objectData );
 
-						for ( let j = 0, jl = newMeshes.length; j < jl; j ++ ) {
+					for ( let j = 0, jl = newMeshes.length; j < jl; j ++ ) {
 
-							meshes.push( newMeshes[ j ] );
+						meshes.push( newMeshes[ j ] );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'texture':
-						const texture2dgroup = modelData.resources.texture2dgroup[ resourceId ];
-						meshes.push( buildTexturedMesh( texture2dgroup, triangleProperties, meshData, objects, modelData, textureData, objectData ) );
-						break;
+				case 'texture':
+					const texture2dgroup = modelData.resources.texture2dgroup[ resourceId ];
+					meshes.push( buildTexturedMesh( texture2dgroup, triangleProperties, meshData, objects, modelData, textureData, objectData ) );
+					break;
 
-					case 'vertexColors':
-						const colorgroup = modelData.resources.colorgroup[ resourceId ];
-						meshes.push( buildVertexColorMesh( colorgroup, triangleProperties, meshData, objectData ) );
-						break;
+				case 'vertexColors':
+					const colorgroup = modelData.resources.colorgroup[ resourceId ];
+					meshes.push( buildVertexColorMesh( colorgroup, triangleProperties, meshData, objectData ) );
+					break;
 
-					case 'default':
-						meshes.push( buildDefaultMesh( meshData ) );
-						break;
+				case 'default':
+					meshes.push( buildDefaultMesh( meshData ) );
+					break;
 
-					default:
-						console.error( 'THREE.3MFLoader: Unsupported resource type.' );
+				default:
+					console.error( 'THREE.3MFLoader: Unsupported resource type.' );
 
 				}
 

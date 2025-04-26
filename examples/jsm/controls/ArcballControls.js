@@ -487,116 +487,116 @@ class ArcballControls extends Controls {
 
 			switch ( operation ) {
 
-				case 'PAN':
+			case 'PAN':
 
-					if ( ! this.enablePan ) {
+				if ( ! this.enablePan ) {
 
-						return;
+					return;
 
-					}
+				}
 
-					if ( this._animationId != - 1 ) {
+				if ( this._animationId != - 1 ) {
 
-						cancelAnimationFrame( this._animationId );
-						this._animationId = - 1;
-						this._timeStart = - 1;
+					cancelAnimationFrame( this._animationId );
+					this._animationId = - 1;
+					this._timeStart = - 1;
 
-						this.activateGizmos( false );
-						this.dispatchEvent( _changeEvent );
-
-					}
-
-					this.updateTbState( STATE.PAN, true );
-					this._startCursorPosition.copy( this.unprojectOnTbPlane( this.object, _center.x, _center.y, this.domElement ) );
-					if ( this.enableGrid ) {
-
-						this.drawGrid();
-						this.dispatchEvent( _changeEvent );
-
-					}
-
-					break;
-
-				case 'ROTATE':
-
-					if ( ! this.enableRotate ) {
-
-						return;
-
-					}
-
-					if ( this._animationId != - 1 ) {
-
-						cancelAnimationFrame( this._animationId );
-						this._animationId = - 1;
-						this._timeStart = - 1;
-
-					}
-
-					this.updateTbState( STATE.ROTATE, true );
-					this._startCursorPosition.copy( this.unprojectOnTbSurface( this.object, _center.x, _center.y, this.domElement, this._tbRadius ) );
-					this.activateGizmos( true );
-					if ( this.enableAnimations ) {
-
-						this._timePrev = this._timeCurrent = performance.now();
-						this._angleCurrent = this._anglePrev = 0;
-						this._cursorPosPrev.copy( this._startCursorPosition );
-						this._cursorPosCurr.copy( this._cursorPosPrev );
-						this._wCurr = 0;
-						this._wPrev = this._wCurr;
-
-					}
-
+					this.activateGizmos( false );
 					this.dispatchEvent( _changeEvent );
-					break;
 
-				case 'FOV':
+				}
 
-					if ( ! this.object.isPerspectiveCamera || ! this.enableZoom ) {
+				this.updateTbState( STATE.PAN, true );
+				this._startCursorPosition.copy( this.unprojectOnTbPlane( this.object, _center.x, _center.y, this.domElement ) );
+				if ( this.enableGrid ) {
 
-						return;
+					this.drawGrid();
+					this.dispatchEvent( _changeEvent );
 
-					}
+				}
 
-					if ( this._animationId != - 1 ) {
+				break;
 
-						cancelAnimationFrame( this._animationId );
-						this._animationId = - 1;
-						this._timeStart = - 1;
+			case 'ROTATE':
 
-						this.activateGizmos( false );
-						this.dispatchEvent( _changeEvent );
+				if ( ! this.enableRotate ) {
 
-					}
+					return;
 
-					this.updateTbState( STATE.FOV, true );
-					this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
-					this._currentCursorPosition.copy( this._startCursorPosition );
-					break;
+				}
 
-				case 'ZOOM':
+				if ( this._animationId != - 1 ) {
 
-					if ( ! this.enableZoom ) {
+					cancelAnimationFrame( this._animationId );
+					this._animationId = - 1;
+					this._timeStart = - 1;
 
-						return;
+				}
 
-					}
+				this.updateTbState( STATE.ROTATE, true );
+				this._startCursorPosition.copy( this.unprojectOnTbSurface( this.object, _center.x, _center.y, this.domElement, this._tbRadius ) );
+				this.activateGizmos( true );
+				if ( this.enableAnimations ) {
 
-					if ( this._animationId != - 1 ) {
+					this._timePrev = this._timeCurrent = performance.now();
+					this._angleCurrent = this._anglePrev = 0;
+					this._cursorPosPrev.copy( this._startCursorPosition );
+					this._cursorPosCurr.copy( this._cursorPosPrev );
+					this._wCurr = 0;
+					this._wPrev = this._wCurr;
 
-						cancelAnimationFrame( this._animationId );
-						this._animationId = - 1;
-						this._timeStart = - 1;
+				}
 
-						this.activateGizmos( false );
-						this.dispatchEvent( _changeEvent );
+				this.dispatchEvent( _changeEvent );
+				break;
 
-					}
+			case 'FOV':
 
-					this.updateTbState( STATE.SCALE, true );
-					this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
-					this._currentCursorPosition.copy( this._startCursorPosition );
-					break;
+				if ( ! this.object.isPerspectiveCamera || ! this.enableZoom ) {
+
+					return;
+
+				}
+
+				if ( this._animationId != - 1 ) {
+
+					cancelAnimationFrame( this._animationId );
+					this._animationId = - 1;
+					this._timeStart = - 1;
+
+					this.activateGizmos( false );
+					this.dispatchEvent( _changeEvent );
+
+				}
+
+				this.updateTbState( STATE.FOV, true );
+				this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
+				this._currentCursorPosition.copy( this._startCursorPosition );
+				break;
+
+			case 'ZOOM':
+
+				if ( ! this.enableZoom ) {
+
+					return;
+
+				}
+
+				if ( this._animationId != - 1 ) {
+
+					cancelAnimationFrame( this._animationId );
+					this._animationId = - 1;
+					this._timeStart = - 1;
+
+					this.activateGizmos( false );
+					this.dispatchEvent( _changeEvent );
+
+				}
+
+				this.updateTbState( STATE.SCALE, true );
+				this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
+				this._currentCursorPosition.copy( this._startCursorPosition );
+				break;
 
 			}
 
@@ -613,218 +613,218 @@ class ArcballControls extends Controls {
 
 			switch ( opState ) {
 
-				case STATE.PAN:
+			case STATE.PAN:
 
-					if ( this.enablePan ) {
+				if ( this.enablePan ) {
 
-						if ( restart ) {
+					if ( restart ) {
 
-							//switch to pan operation
+						//switch to pan operation
 
-							this.dispatchEvent( _endEvent );
-							this.dispatchEvent( _startEvent );
+						this.dispatchEvent( _endEvent );
+						this.dispatchEvent( _startEvent );
 
-							this.updateTbState( opState, true );
-							this._startCursorPosition.copy( this.unprojectOnTbPlane( this.object, _center.x, _center.y, this.domElement ) );
-							if ( this.enableGrid ) {
+						this.updateTbState( opState, true );
+						this._startCursorPosition.copy( this.unprojectOnTbPlane( this.object, _center.x, _center.y, this.domElement ) );
+						if ( this.enableGrid ) {
 
-								this.drawGrid();
+							this.drawGrid();
 
-							}
+						}
 
-							this.activateGizmos( false );
+						this.activateGizmos( false );
 
-						} else {
+					} else {
 
-							//continue with pan operation
-							this._currentCursorPosition.copy( this.unprojectOnTbPlane( this.object, _center.x, _center.y, this.domElement ) );
-							this.applyTransformMatrix( this.pan( this._startCursorPosition, this._currentCursorPosition ) );
+						//continue with pan operation
+						this._currentCursorPosition.copy( this.unprojectOnTbPlane( this.object, _center.x, _center.y, this.domElement ) );
+						this.applyTransformMatrix( this.pan( this._startCursorPosition, this._currentCursorPosition ) );
+
+					}
+
+				}
+
+				break;
+
+			case STATE.ROTATE:
+
+				if ( this.enableRotate ) {
+
+					if ( restart ) {
+
+						//switch to rotate operation
+
+						this.dispatchEvent( _endEvent );
+						this.dispatchEvent( _startEvent );
+
+						this.updateTbState( opState, true );
+						this._startCursorPosition.copy( this.unprojectOnTbSurface( this.object, _center.x, _center.y, this.domElement, this._tbRadius ) );
+
+						if ( this.enableGrid ) {
+
+							this.disposeGrid();
+
+						}
+
+						this.activateGizmos( true );
+
+					} else {
+
+						//continue with rotate operation
+						this._currentCursorPosition.copy( this.unprojectOnTbSurface( this.object, _center.x, _center.y, this.domElement, this._tbRadius ) );
+
+						const distance = this._startCursorPosition.distanceTo( this._currentCursorPosition );
+						const angle = this._startCursorPosition.angleTo( this._currentCursorPosition );
+						const amount = Math.max( distance / this._tbRadius, angle ) * this.rotateSpeed; //effective rotation angle
+
+						this.applyTransformMatrix( this.rotate( this.calculateRotationAxis( this._startCursorPosition, this._currentCursorPosition ), amount ) );
+
+						if ( this.enableAnimations ) {
+
+							this._timePrev = this._timeCurrent;
+							this._timeCurrent = performance.now();
+							this._anglePrev = this._angleCurrent;
+							this._angleCurrent = amount;
+							this._cursorPosPrev.copy( this._cursorPosCurr );
+							this._cursorPosCurr.copy( this._currentCursorPosition );
+							this._wPrev = this._wCurr;
+							this._wCurr = this.calculateAngularSpeed( this._anglePrev, this._angleCurrent, this._timePrev, this._timeCurrent );
 
 						}
 
 					}
 
-					break;
+				}
 
-				case STATE.ROTATE:
+				break;
 
-					if ( this.enableRotate ) {
+			case STATE.SCALE:
 
-						if ( restart ) {
+				if ( this.enableZoom ) {
 
-							//switch to rotate operation
+					if ( restart ) {
 
-							this.dispatchEvent( _endEvent );
-							this.dispatchEvent( _startEvent );
+						//switch to zoom operation
 
-							this.updateTbState( opState, true );
-							this._startCursorPosition.copy( this.unprojectOnTbSurface( this.object, _center.x, _center.y, this.domElement, this._tbRadius ) );
+						this.dispatchEvent( _endEvent );
+						this.dispatchEvent( _startEvent );
 
-							if ( this.enableGrid ) {
+						this.updateTbState( opState, true );
+						this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
+						this._currentCursorPosition.copy( this._startCursorPosition );
 
-								this.disposeGrid();
+						if ( this.enableGrid ) {
 
-							}
-
-							this.activateGizmos( true );
-
-						} else {
-
-							//continue with rotate operation
-							this._currentCursorPosition.copy( this.unprojectOnTbSurface( this.object, _center.x, _center.y, this.domElement, this._tbRadius ) );
-
-							const distance = this._startCursorPosition.distanceTo( this._currentCursorPosition );
-							const angle = this._startCursorPosition.angleTo( this._currentCursorPosition );
-							const amount = Math.max( distance / this._tbRadius, angle ) * this.rotateSpeed; //effective rotation angle
-
-							this.applyTransformMatrix( this.rotate( this.calculateRotationAxis( this._startCursorPosition, this._currentCursorPosition ), amount ) );
-
-							if ( this.enableAnimations ) {
-
-								this._timePrev = this._timeCurrent;
-								this._timeCurrent = performance.now();
-								this._anglePrev = this._angleCurrent;
-								this._angleCurrent = amount;
-								this._cursorPosPrev.copy( this._cursorPosCurr );
-								this._cursorPosCurr.copy( this._currentCursorPosition );
-								this._wPrev = this._wCurr;
-								this._wCurr = this.calculateAngularSpeed( this._anglePrev, this._angleCurrent, this._timePrev, this._timeCurrent );
-
-							}
+							this.disposeGrid();
 
 						}
 
-					}
+						this.activateGizmos( false );
 
-					break;
+					} else {
 
-				case STATE.SCALE:
+						//continue with zoom operation
+						const screenNotches = 8;	//how many wheel notches corresponds to a full screen pan
+						this._currentCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
 
-					if ( this.enableZoom ) {
+						const movement = this._currentCursorPosition.y - this._startCursorPosition.y;
 
-						if ( restart ) {
+						let size = 1;
 
-							//switch to zoom operation
+						if ( movement < 0 ) {
 
-							this.dispatchEvent( _endEvent );
-							this.dispatchEvent( _startEvent );
+							size = 1 / ( Math.pow( this.scaleFactor, - movement * screenNotches ) );
 
-							this.updateTbState( opState, true );
-							this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
-							this._currentCursorPosition.copy( this._startCursorPosition );
+						} else if ( movement > 0 ) {
 
-							if ( this.enableGrid ) {
-
-								this.disposeGrid();
-
-							}
-
-							this.activateGizmos( false );
-
-						} else {
-
-							//continue with zoom operation
-							const screenNotches = 8;	//how many wheel notches corresponds to a full screen pan
-							this._currentCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
-
-							const movement = this._currentCursorPosition.y - this._startCursorPosition.y;
-
-							let size = 1;
-
-							if ( movement < 0 ) {
-
-								size = 1 / ( Math.pow( this.scaleFactor, - movement * screenNotches ) );
-
-							} else if ( movement > 0 ) {
-
-								size = Math.pow( this.scaleFactor, movement * screenNotches );
-
-							}
-
-							this._v3_1.setFromMatrixPosition( this._gizmoMatrixState );
-
-							this.applyTransformMatrix( this.scale( size, this._v3_1 ) );
+							size = Math.pow( this.scaleFactor, movement * screenNotches );
 
 						}
 
+						this._v3_1.setFromMatrixPosition( this._gizmoMatrixState );
+
+						this.applyTransformMatrix( this.scale( size, this._v3_1 ) );
+
 					}
 
-					break;
+				}
 
-				case STATE.FOV:
+				break;
 
-					if ( this.enableZoom && this.object.isPerspectiveCamera ) {
+			case STATE.FOV:
 
-						if ( restart ) {
+				if ( this.enableZoom && this.object.isPerspectiveCamera ) {
 
-							//switch to fov operation
+					if ( restart ) {
 
-							this.dispatchEvent( _endEvent );
-							this.dispatchEvent( _startEvent );
+						//switch to fov operation
 
-							this.updateTbState( opState, true );
-							this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
-							this._currentCursorPosition.copy( this._startCursorPosition );
+						this.dispatchEvent( _endEvent );
+						this.dispatchEvent( _startEvent );
 
-							if ( this.enableGrid ) {
+						this.updateTbState( opState, true );
+						this._startCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
+						this._currentCursorPosition.copy( this._startCursorPosition );
 
-								this.disposeGrid();
+						if ( this.enableGrid ) {
 
-							}
-
-							this.activateGizmos( false );
-
-						} else {
-
-							//continue with fov operation
-							const screenNotches = 8;	//how many wheel notches corresponds to a full screen pan
-							this._currentCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
-
-							const movement = this._currentCursorPosition.y - this._startCursorPosition.y;
-
-							let size = 1;
-
-							if ( movement < 0 ) {
-
-								size = 1 / ( Math.pow( this.scaleFactor, - movement * screenNotches ) );
-
-							} else if ( movement > 0 ) {
-
-								size = Math.pow( this.scaleFactor, movement * screenNotches );
-
-							}
-
-							this._v3_1.setFromMatrixPosition( this._cameraMatrixState );
-							const x = this._v3_1.distanceTo( this._gizmos.position );
-							let xNew = x / size; //distance between camera and gizmos if scale(size, scalepoint) would be performed
-
-							//check min and max distance
-							xNew = MathUtils.clamp( xNew, this.minDistance, this.maxDistance );
-
-							const y = x * Math.tan( MathUtils.DEG2RAD * this._fovState * 0.5 );
-
-							//calculate new fov
-							let newFov = MathUtils.RAD2DEG * ( Math.atan( y / xNew ) * 2 );
-
-							//check min and max fov
-							newFov = MathUtils.clamp( newFov, this.minFov, this.maxFov );
-
-							const newDistance = y / Math.tan( MathUtils.DEG2RAD * ( newFov / 2 ) );
-							size = x / newDistance;
-							this._v3_2.setFromMatrixPosition( this._gizmoMatrixState );
-
-							this.setFov( newFov );
-							this.applyTransformMatrix( this.scale( size, this._v3_2, false ) );
-
-							//adjusting distance
-							_offset.copy( this._gizmos.position ).sub( this.object.position ).normalize().multiplyScalar( newDistance / x );
-							this._m4_1.makeTranslation( _offset.x, _offset.y, _offset.z );
+							this.disposeGrid();
 
 						}
 
+						this.activateGizmos( false );
+
+					} else {
+
+						//continue with fov operation
+						const screenNotches = 8;	//how many wheel notches corresponds to a full screen pan
+						this._currentCursorPosition.setY( this.getCursorNDC( _center.x, _center.y, this.domElement ).y * 0.5 );
+
+						const movement = this._currentCursorPosition.y - this._startCursorPosition.y;
+
+						let size = 1;
+
+						if ( movement < 0 ) {
+
+							size = 1 / ( Math.pow( this.scaleFactor, - movement * screenNotches ) );
+
+						} else if ( movement > 0 ) {
+
+							size = Math.pow( this.scaleFactor, movement * screenNotches );
+
+						}
+
+						this._v3_1.setFromMatrixPosition( this._cameraMatrixState );
+						const x = this._v3_1.distanceTo( this._gizmos.position );
+						let xNew = x / size; //distance between camera and gizmos if scale(size, scalepoint) would be performed
+
+						//check min and max distance
+						xNew = MathUtils.clamp( xNew, this.minDistance, this.maxDistance );
+
+						const y = x * Math.tan( MathUtils.DEG2RAD * this._fovState * 0.5 );
+
+						//calculate new fov
+						let newFov = MathUtils.RAD2DEG * ( Math.atan( y / xNew ) * 2 );
+
+						//check min and max fov
+						newFov = MathUtils.clamp( newFov, this.minFov, this.maxFov );
+
+						const newDistance = y / Math.tan( MathUtils.DEG2RAD * ( newFov / 2 ) );
+						size = x / newDistance;
+						this._v3_2.setFromMatrixPosition( this._gizmoMatrixState );
+
+						this.setFov( newFov );
+						this.applyTransformMatrix( this.scale( size, this._v3_2, false ) );
+
+						//adjusting distance
+						_offset.copy( this._gizmos.position ).sub( this.object.position ).normalize().multiplyScalar( newDistance / x );
+						this._m4_1.makeTranslation( _offset.x, _offset.y, _offset.z );
+
 					}
 
-					break;
+				}
+
+				break;
 
 			}
 
@@ -1343,25 +1343,25 @@ class ArcballControls extends Controls {
 
 		switch ( operation ) {
 
-			case 'PAN':
+		case 'PAN':
 
-				state = STATE.PAN;
-				break;
+			state = STATE.PAN;
+			break;
 
-			case 'ROTATE':
+		case 'ROTATE':
 
-				state = STATE.ROTATE;
-				break;
+			state = STATE.ROTATE;
+			break;
 
-			case 'ZOOM':
+		case 'ZOOM':
 
-				state = STATE.SCALE;
-				break;
+			state = STATE.SCALE;
+			break;
 
-			case 'FOV':
+		case 'FOV':
 
-				state = STATE.FOV;
-				break;
+			state = STATE.FOV;
+			break;
 
 		}
 
@@ -3059,35 +3059,35 @@ function onPointerDown( event ) {
 
 		switch ( this._input ) {
 
-			case INPUT.NONE:
+		case INPUT.NONE:
 
-				//singleStart
-				this._input = INPUT.ONE_FINGER;
-				this.onSinglePanStart( event, 'ROTATE' );
+			//singleStart
+			this._input = INPUT.ONE_FINGER;
+			this.onSinglePanStart( event, 'ROTATE' );
 
-				window.addEventListener( 'pointermove', this._onPointerMove );
-				window.addEventListener( 'pointerup', this._onPointerUp );
+			window.addEventListener( 'pointermove', this._onPointerMove );
+			window.addEventListener( 'pointerup', this._onPointerUp );
 
-				break;
+			break;
 
-			case INPUT.ONE_FINGER:
-			case INPUT.ONE_FINGER_SWITCHED:
+		case INPUT.ONE_FINGER:
+		case INPUT.ONE_FINGER_SWITCHED:
 
-				//doubleStart
-				this._input = INPUT.TWO_FINGER;
+			//doubleStart
+			this._input = INPUT.TWO_FINGER;
 
-				this.onRotateStart();
-				this.onPinchStart();
-				this.onDoublePanStart();
+			this.onRotateStart();
+			this.onPinchStart();
+			this.onDoublePanStart();
 
-				break;
+			break;
 
-			case INPUT.TWO_FINGER:
+		case INPUT.TWO_FINGER:
 
-				//multipleStart
-				this._input = INPUT.MULT_FINGER;
-				this.onTriplePanStart( event );
-				break;
+			//multipleStart
+			this._input = INPUT.MULT_FINGER;
+			this.onTriplePanStart( event );
+			break;
 
 		}
 
@@ -3128,49 +3128,49 @@ function onPointerMove( event ) {
 
 		switch ( this._input ) {
 
-			case INPUT.ONE_FINGER:
+		case INPUT.ONE_FINGER:
+
+			//singleMove
+			this.updateTouchEvent( event );
+
+			this.onSinglePanMove( event, STATE.ROTATE );
+			break;
+
+		case INPUT.ONE_FINGER_SWITCHED:
+
+			const movement = this.calculatePointersDistance( this._touchCurrent[ 0 ], event ) * this._devPxRatio;
+
+			if ( movement >= this._switchSensibility ) {
 
 				//singleMove
+				this._input = INPUT.ONE_FINGER;
 				this.updateTouchEvent( event );
 
-				this.onSinglePanMove( event, STATE.ROTATE );
+				this.onSinglePanStart( event, 'ROTATE' );
 				break;
 
-			case INPUT.ONE_FINGER_SWITCHED:
+			}
 
-				const movement = this.calculatePointersDistance( this._touchCurrent[ 0 ], event ) * this._devPxRatio;
+			break;
 
-				if ( movement >= this._switchSensibility ) {
+		case INPUT.TWO_FINGER:
 
-					//singleMove
-					this._input = INPUT.ONE_FINGER;
-					this.updateTouchEvent( event );
+			//rotate/pan/pinchMove
+			this.updateTouchEvent( event );
 
-					this.onSinglePanStart( event, 'ROTATE' );
-					break;
+			this.onRotateMove();
+			this.onPinchMove();
+			this.onDoublePanMove();
 
-				}
+			break;
 
-				break;
+		case INPUT.MULT_FINGER:
 
-			case INPUT.TWO_FINGER:
+			//multMove
+			this.updateTouchEvent( event );
 
-				//rotate/pan/pinchMove
-				this.updateTouchEvent( event );
-
-				this.onRotateMove();
-				this.onPinchMove();
-				this.onDoublePanMove();
-
-				break;
-
-			case INPUT.MULT_FINGER:
-
-				//multMove
-				this.updateTouchEvent( event );
-
-				this.onTriplePanMove( event );
-				break;
+			this.onTriplePanMove( event );
+			break;
 
 		}
 
@@ -3232,44 +3232,44 @@ function onPointerUp( event ) {
 
 		switch ( this._input ) {
 
-			case INPUT.ONE_FINGER:
-			case INPUT.ONE_FINGER_SWITCHED:
+		case INPUT.ONE_FINGER:
+		case INPUT.ONE_FINGER_SWITCHED:
 
-				//singleEnd
+			//singleEnd
+			window.removeEventListener( 'pointermove', this._onPointerMove );
+			window.removeEventListener( 'pointerup', this._onPointerUp );
+
+			this._input = INPUT.NONE;
+			this.onSinglePanEnd();
+
+			break;
+
+		case INPUT.TWO_FINGER:
+
+			//doubleEnd
+			this.onDoublePanEnd( event );
+			this.onPinchEnd( event );
+			this.onRotateEnd( event );
+
+			//switching to singleStart
+			this._input = INPUT.ONE_FINGER_SWITCHED;
+
+			break;
+
+		case INPUT.MULT_FINGER:
+
+			if ( this._touchCurrent.length == 0 ) {
+
 				window.removeEventListener( 'pointermove', this._onPointerMove );
 				window.removeEventListener( 'pointerup', this._onPointerUp );
 
+				//multCancel
 				this._input = INPUT.NONE;
-				this.onSinglePanEnd();
+				this.onTriplePanEnd();
 
-				break;
+			}
 
-			case INPUT.TWO_FINGER:
-
-				//doubleEnd
-				this.onDoublePanEnd( event );
-				this.onPinchEnd( event );
-				this.onRotateEnd( event );
-
-				//switching to singleStart
-				this._input = INPUT.ONE_FINGER_SWITCHED;
-
-				break;
-
-			case INPUT.MULT_FINGER:
-
-				if ( this._touchCurrent.length == 0 ) {
-
-					window.removeEventListener( 'pointermove', this._onPointerMove );
-					window.removeEventListener( 'pointerup', this._onPointerUp );
-
-					//multCancel
-					this._input = INPUT.NONE;
-					this.onTriplePanEnd();
-
-				}
-
-				break;
+			break;
 
 		}
 
@@ -3381,138 +3381,138 @@ function onWheel( event ) {
 
 			switch ( mouseOp ) {
 
-				case 'ZOOM':
+			case 'ZOOM':
 
-					this.updateTbState( STATE.SCALE, true );
+				this.updateTbState( STATE.SCALE, true );
 
-					if ( sgn > 0 ) {
+				if ( sgn > 0 ) {
 
-						size = 1 / ( Math.pow( this.scaleFactor, sgn ) );
+					size = 1 / ( Math.pow( this.scaleFactor, sgn ) );
 
-					} else if ( sgn < 0 ) {
+				} else if ( sgn < 0 ) {
 
-						size = Math.pow( this.scaleFactor, - sgn );
+					size = Math.pow( this.scaleFactor, - sgn );
+
+				}
+
+				if ( this.cursorZoom && this.enablePan ) {
+
+					let scalePoint;
+
+					if ( this.object.isOrthographicCamera ) {
+
+						scalePoint = this.unprojectOnTbPlane( this.object, event.clientX, event.clientY, this.domElement ).applyQuaternion( this.object.quaternion ).multiplyScalar( 1 / this.object.zoom ).add( this._gizmos.position );
+
+					} else if ( this.object.isPerspectiveCamera ) {
+
+						scalePoint = this.unprojectOnTbPlane( this.object, event.clientX, event.clientY, this.domElement ).applyQuaternion( this.object.quaternion ).add( this._gizmos.position );
 
 					}
 
-					if ( this.cursorZoom && this.enablePan ) {
+					this.applyTransformMatrix( this.scale( size, scalePoint ) );
 
-						let scalePoint;
+				} else {
 
-						if ( this.object.isOrthographicCamera ) {
+					this.applyTransformMatrix( this.scale( size, this._gizmos.position ) );
 
-							scalePoint = this.unprojectOnTbPlane( this.object, event.clientX, event.clientY, this.domElement ).applyQuaternion( this.object.quaternion ).multiplyScalar( 1 / this.object.zoom ).add( this._gizmos.position );
+				}
 
-						} else if ( this.object.isPerspectiveCamera ) {
+				if ( this._grid != null ) {
 
-							scalePoint = this.unprojectOnTbPlane( this.object, event.clientX, event.clientY, this.domElement ).applyQuaternion( this.object.quaternion ).add( this._gizmos.position );
+					this.disposeGrid();
+					this.drawGrid();
+
+				}
+
+				this.updateTbState( STATE.IDLE, false );
+
+				this.dispatchEvent( _changeEvent );
+				this.dispatchEvent( _endEvent );
+
+				break;
+
+			case 'FOV':
+
+				if ( this.object.isPerspectiveCamera ) {
+
+					this.updateTbState( STATE.FOV, true );
+
+
+					//Vertigo effect
+
+					//	  fov / 2
+					//		|\
+					//		| \
+					//		|  \
+					//	x	|	\
+					//		| 	 \
+					//		| 	  \
+					//		| _ _ _\
+					//			y
+
+					//check for iOs shift shortcut
+					if ( event.deltaX != 0 ) {
+
+						sgn = event.deltaX / notchDeltaY;
+
+						size = 1;
+
+						if ( sgn > 0 ) {
+
+							size = 1 / ( Math.pow( this.scaleFactor, sgn ) );
+
+						} else if ( sgn < 0 ) {
+
+							size = Math.pow( this.scaleFactor, - sgn );
 
 						}
 
-						this.applyTransformMatrix( this.scale( size, scalePoint ) );
+					}
 
-					} else {
+					this._v3_1.setFromMatrixPosition( this._cameraMatrixState );
+					const x = this._v3_1.distanceTo( this._gizmos.position );
+					let xNew = x / size;	//distance between camera and gizmos if scale(size, scalepoint) would be performed
 
-						this.applyTransformMatrix( this.scale( size, this._gizmos.position ) );
+					//check min and max distance
+					xNew = MathUtils.clamp( xNew, this.minDistance, this.maxDistance );
+
+					const y = x * Math.tan( MathUtils.DEG2RAD * this.object.fov * 0.5 );
+
+					//calculate new fov
+					let newFov = MathUtils.RAD2DEG * ( Math.atan( y / xNew ) * 2 );
+
+					//check min and max fov
+					if ( newFov > this.maxFov ) {
+
+						newFov = this.maxFov;
+
+					} else if ( newFov < this.minFov ) {
+
+						newFov = this.minFov;
 
 					}
 
-					if ( this._grid != null ) {
+					const newDistance = y / Math.tan( MathUtils.DEG2RAD * ( newFov / 2 ) );
+					size = x / newDistance;
 
-						this.disposeGrid();
-						this.drawGrid();
+					this.setFov( newFov );
+					this.applyTransformMatrix( this.scale( size, this._gizmos.position, false ) );
 
-					}
+				}
 
-					this.updateTbState( STATE.IDLE, false );
+				if ( this._grid != null ) {
 
-					this.dispatchEvent( _changeEvent );
-					this.dispatchEvent( _endEvent );
+					this.disposeGrid();
+					this.drawGrid();
 
-					break;
+				}
 
-				case 'FOV':
+				this.updateTbState( STATE.IDLE, false );
 
-					if ( this.object.isPerspectiveCamera ) {
+				this.dispatchEvent( _changeEvent );
+				this.dispatchEvent( _endEvent );
 
-						this.updateTbState( STATE.FOV, true );
-
-
-						//Vertigo effect
-
-						//	  fov / 2
-						//		|\
-						//		| \
-						//		|  \
-						//	x	|	\
-						//		| 	 \
-						//		| 	  \
-						//		| _ _ _\
-						//			y
-
-						//check for iOs shift shortcut
-						if ( event.deltaX != 0 ) {
-
-							sgn = event.deltaX / notchDeltaY;
-
-							size = 1;
-
-							if ( sgn > 0 ) {
-
-								size = 1 / ( Math.pow( this.scaleFactor, sgn ) );
-
-							} else if ( sgn < 0 ) {
-
-								size = Math.pow( this.scaleFactor, - sgn );
-
-							}
-
-						}
-
-						this._v3_1.setFromMatrixPosition( this._cameraMatrixState );
-						const x = this._v3_1.distanceTo( this._gizmos.position );
-						let xNew = x / size;	//distance between camera and gizmos if scale(size, scalepoint) would be performed
-
-						//check min and max distance
-						xNew = MathUtils.clamp( xNew, this.minDistance, this.maxDistance );
-
-						const y = x * Math.tan( MathUtils.DEG2RAD * this.object.fov * 0.5 );
-
-						//calculate new fov
-						let newFov = MathUtils.RAD2DEG * ( Math.atan( y / xNew ) * 2 );
-
-						//check min and max fov
-						if ( newFov > this.maxFov ) {
-
-							newFov = this.maxFov;
-
-						} else if ( newFov < this.minFov ) {
-
-							newFov = this.minFov;
-
-						}
-
-						const newDistance = y / Math.tan( MathUtils.DEG2RAD * ( newFov / 2 ) );
-						size = x / newDistance;
-
-						this.setFov( newFov );
-						this.applyTransformMatrix( this.scale( size, this._gizmos.position, false ) );
-
-					}
-
-					if ( this._grid != null ) {
-
-						this.disposeGrid();
-						this.drawGrid();
-
-					}
-
-					this.updateTbState( STATE.IDLE, false );
-
-					this.dispatchEvent( _changeEvent );
-					this.dispatchEvent( _endEvent );
-
-					break;
+				break;
 
 			}
 

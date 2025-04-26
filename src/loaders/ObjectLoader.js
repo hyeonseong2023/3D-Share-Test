@@ -331,23 +331,23 @@ class ObjectLoader extends Loader {
 
 				switch ( data.type ) {
 
-					case 'BufferGeometry':
-					case 'InstancedBufferGeometry':
+				case 'BufferGeometry':
+				case 'InstancedBufferGeometry':
 
-						geometry = bufferGeometryLoader.parse( data );
-						break;
+					geometry = bufferGeometryLoader.parse( data );
+					break;
 
-					default:
+				default:
 
-						if ( data.type in Geometries ) {
+					if ( data.type in Geometries ) {
 
-							geometry = Geometries[ data.type ].fromJSON( data, shapes );
+						geometry = Geometries[ data.type ].fromJSON( data, shapes );
 
-						} else {
+					} else {
 
-							console.warn( `THREE.ObjectLoader: Unsupported geometry type "${ data.type }"` );
+						console.warn( `THREE.ObjectLoader: Unsupported geometry type "${ data.type }"` );
 
-						}
+					}
 
 				}
 
@@ -806,259 +806,259 @@ class ObjectLoader extends Loader {
 
 		switch ( data.type ) {
 
-			case 'Scene':
+		case 'Scene':
 
-				object = new Scene();
+			object = new Scene();
 
-				if ( data.background !== undefined ) {
+			if ( data.background !== undefined ) {
 
-					if ( Number.isInteger( data.background ) ) {
+				if ( Number.isInteger( data.background ) ) {
 
-						object.background = new Color( data.background );
+					object.background = new Color( data.background );
 
-					} else {
+				} else {
 
-						object.background = getTexture( data.background );
-
-					}
+					object.background = getTexture( data.background );
 
 				}
 
-				if ( data.environment !== undefined ) {
+			}
 
-					object.environment = getTexture( data.environment );
+			if ( data.environment !== undefined ) {
 
-				}
+				object.environment = getTexture( data.environment );
 
-				if ( data.fog !== undefined ) {
+			}
 
-					if ( data.fog.type === 'Fog' ) {
+			if ( data.fog !== undefined ) {
 
-						object.fog = new Fog( data.fog.color, data.fog.near, data.fog.far );
+				if ( data.fog.type === 'Fog' ) {
 
-					} else if ( data.fog.type === 'FogExp2' ) {
+					object.fog = new Fog( data.fog.color, data.fog.near, data.fog.far );
 
-						object.fog = new FogExp2( data.fog.color, data.fog.density );
+				} else if ( data.fog.type === 'FogExp2' ) {
 
-					}
-
-					if ( data.fog.name !== '' ) {
-
-						object.fog.name = data.fog.name;
-
-					}
+					object.fog = new FogExp2( data.fog.color, data.fog.density );
 
 				}
 
-				if ( data.backgroundBlurriness !== undefined ) object.backgroundBlurriness = data.backgroundBlurriness;
-				if ( data.backgroundIntensity !== undefined ) object.backgroundIntensity = data.backgroundIntensity;
-				if ( data.backgroundRotation !== undefined ) object.backgroundRotation.fromArray( data.backgroundRotation );
+				if ( data.fog.name !== '' ) {
 
-				if ( data.environmentIntensity !== undefined ) object.environmentIntensity = data.environmentIntensity;
-				if ( data.environmentRotation !== undefined ) object.environmentRotation.fromArray( data.environmentRotation );
+					object.fog.name = data.fog.name;
 
-				break;
+				}
 
-			case 'PerspectiveCamera':
+			}
 
-				object = new PerspectiveCamera( data.fov, data.aspect, data.near, data.far );
+			if ( data.backgroundBlurriness !== undefined ) object.backgroundBlurriness = data.backgroundBlurriness;
+			if ( data.backgroundIntensity !== undefined ) object.backgroundIntensity = data.backgroundIntensity;
+			if ( data.backgroundRotation !== undefined ) object.backgroundRotation.fromArray( data.backgroundRotation );
 
-				if ( data.focus !== undefined ) object.focus = data.focus;
-				if ( data.zoom !== undefined ) object.zoom = data.zoom;
-				if ( data.filmGauge !== undefined ) object.filmGauge = data.filmGauge;
-				if ( data.filmOffset !== undefined ) object.filmOffset = data.filmOffset;
-				if ( data.view !== undefined ) object.view = Object.assign( {}, data.view );
+			if ( data.environmentIntensity !== undefined ) object.environmentIntensity = data.environmentIntensity;
+			if ( data.environmentRotation !== undefined ) object.environmentRotation.fromArray( data.environmentRotation );
 
-				break;
+			break;
 
-			case 'OrthographicCamera':
+		case 'PerspectiveCamera':
 
-				object = new OrthographicCamera( data.left, data.right, data.top, data.bottom, data.near, data.far );
+			object = new PerspectiveCamera( data.fov, data.aspect, data.near, data.far );
 
-				if ( data.zoom !== undefined ) object.zoom = data.zoom;
-				if ( data.view !== undefined ) object.view = Object.assign( {}, data.view );
+			if ( data.focus !== undefined ) object.focus = data.focus;
+			if ( data.zoom !== undefined ) object.zoom = data.zoom;
+			if ( data.filmGauge !== undefined ) object.filmGauge = data.filmGauge;
+			if ( data.filmOffset !== undefined ) object.filmOffset = data.filmOffset;
+			if ( data.view !== undefined ) object.view = Object.assign( {}, data.view );
 
-				break;
+			break;
 
-			case 'AmbientLight':
+		case 'OrthographicCamera':
 
-				object = new AmbientLight( data.color, data.intensity );
+			object = new OrthographicCamera( data.left, data.right, data.top, data.bottom, data.near, data.far );
 
-				break;
+			if ( data.zoom !== undefined ) object.zoom = data.zoom;
+			if ( data.view !== undefined ) object.view = Object.assign( {}, data.view );
 
-			case 'DirectionalLight':
+			break;
 
-				object = new DirectionalLight( data.color, data.intensity );
-				object.target = data.target || '';
+		case 'AmbientLight':
 
-				break;
+			object = new AmbientLight( data.color, data.intensity );
 
-			case 'PointLight':
+			break;
 
-				object = new PointLight( data.color, data.intensity, data.distance, data.decay );
+		case 'DirectionalLight':
 
-				break;
+			object = new DirectionalLight( data.color, data.intensity );
+			object.target = data.target || '';
 
-			case 'RectAreaLight':
+			break;
 
-				object = new RectAreaLight( data.color, data.intensity, data.width, data.height );
+		case 'PointLight':
 
-				break;
+			object = new PointLight( data.color, data.intensity, data.distance, data.decay );
 
-			case 'SpotLight':
+			break;
 
-				object = new SpotLight( data.color, data.intensity, data.distance, data.angle, data.penumbra, data.decay );
-				object.target = data.target || '';
+		case 'RectAreaLight':
 
-				break;
+			object = new RectAreaLight( data.color, data.intensity, data.width, data.height );
 
-			case 'HemisphereLight':
+			break;
 
-				object = new HemisphereLight( data.color, data.groundColor, data.intensity );
+		case 'SpotLight':
 
-				break;
+			object = new SpotLight( data.color, data.intensity, data.distance, data.angle, data.penumbra, data.decay );
+			object.target = data.target || '';
 
-			case 'LightProbe':
+			break;
 
-				object = new LightProbe().fromJSON( data );
+		case 'HemisphereLight':
 
-				break;
+			object = new HemisphereLight( data.color, data.groundColor, data.intensity );
 
-			case 'SkinnedMesh':
+			break;
 
-				geometry = getGeometry( data.geometry );
+		case 'LightProbe':
+
+			object = new LightProbe().fromJSON( data );
+
+			break;
+
+		case 'SkinnedMesh':
+
+			geometry = getGeometry( data.geometry );
 			 	material = getMaterial( data.material );
 
-				object = new SkinnedMesh( geometry, material );
+			object = new SkinnedMesh( geometry, material );
 
-				if ( data.bindMode !== undefined ) object.bindMode = data.bindMode;
-				if ( data.bindMatrix !== undefined ) object.bindMatrix.fromArray( data.bindMatrix );
-				if ( data.skeleton !== undefined ) object.skeleton = data.skeleton;
+			if ( data.bindMode !== undefined ) object.bindMode = data.bindMode;
+			if ( data.bindMatrix !== undefined ) object.bindMatrix.fromArray( data.bindMatrix );
+			if ( data.skeleton !== undefined ) object.skeleton = data.skeleton;
 
-				break;
+			break;
 
-			case 'Mesh':
+		case 'Mesh':
 
-				geometry = getGeometry( data.geometry );
-				material = getMaterial( data.material );
+			geometry = getGeometry( data.geometry );
+			material = getMaterial( data.material );
 
-				object = new Mesh( geometry, material );
+			object = new Mesh( geometry, material );
 
-				break;
+			break;
 
-			case 'InstancedMesh':
+		case 'InstancedMesh':
 
-				geometry = getGeometry( data.geometry );
-				material = getMaterial( data.material );
-				const count = data.count;
-				const instanceMatrix = data.instanceMatrix;
-				const instanceColor = data.instanceColor;
+			geometry = getGeometry( data.geometry );
+			material = getMaterial( data.material );
+			const count = data.count;
+			const instanceMatrix = data.instanceMatrix;
+			const instanceColor = data.instanceColor;
 
-				object = new InstancedMesh( geometry, material, count );
-				object.instanceMatrix = new InstancedBufferAttribute( new Float32Array( instanceMatrix.array ), 16 );
-				if ( instanceColor !== undefined ) object.instanceColor = new InstancedBufferAttribute( new Float32Array( instanceColor.array ), instanceColor.itemSize );
+			object = new InstancedMesh( geometry, material, count );
+			object.instanceMatrix = new InstancedBufferAttribute( new Float32Array( instanceMatrix.array ), 16 );
+			if ( instanceColor !== undefined ) object.instanceColor = new InstancedBufferAttribute( new Float32Array( instanceColor.array ), instanceColor.itemSize );
 
-				break;
+			break;
 
-			case 'BatchedMesh':
+		case 'BatchedMesh':
 
-				geometry = getGeometry( data.geometry );
-				material = getMaterial( data.material );
+			geometry = getGeometry( data.geometry );
+			material = getMaterial( data.material );
 
-				object = new BatchedMesh( data.maxInstanceCount, data.maxVertexCount, data.maxIndexCount, material );
-				object.geometry = geometry;
-				object.perObjectFrustumCulled = data.perObjectFrustumCulled;
-				object.sortObjects = data.sortObjects;
+			object = new BatchedMesh( data.maxInstanceCount, data.maxVertexCount, data.maxIndexCount, material );
+			object.geometry = geometry;
+			object.perObjectFrustumCulled = data.perObjectFrustumCulled;
+			object.sortObjects = data.sortObjects;
 
-				object._drawRanges = data.drawRanges;
-				object._reservedRanges = data.reservedRanges;
+			object._drawRanges = data.drawRanges;
+			object._reservedRanges = data.reservedRanges;
 
-				object._visibility = data.visibility;
-				object._active = data.active;
-				object._bounds = data.bounds.map( bound => {
+			object._visibility = data.visibility;
+			object._active = data.active;
+			object._bounds = data.bounds.map( bound => {
 
-					const box = new Box3();
-					box.min.fromArray( bound.boxMin );
-					box.max.fromArray( bound.boxMax );
+				const box = new Box3();
+				box.min.fromArray( bound.boxMin );
+				box.max.fromArray( bound.boxMax );
 
-					const sphere = new Sphere();
-					sphere.radius = bound.sphereRadius;
-					sphere.center.fromArray( bound.sphereCenter );
+				const sphere = new Sphere();
+				sphere.radius = bound.sphereRadius;
+				sphere.center.fromArray( bound.sphereCenter );
 
-					return {
-						boxInitialized: bound.boxInitialized,
-						box: box,
+				return {
+					boxInitialized: bound.boxInitialized,
+					box: box,
 
-						sphereInitialized: bound.sphereInitialized,
-						sphere: sphere
-					};
+					sphereInitialized: bound.sphereInitialized,
+					sphere: sphere
+				};
 
-				} );
+			} );
 
-				object._maxInstanceCount = data.maxInstanceCount;
-				object._maxVertexCount = data.maxVertexCount;
-				object._maxIndexCount = data.maxIndexCount;
+			object._maxInstanceCount = data.maxInstanceCount;
+			object._maxVertexCount = data.maxVertexCount;
+			object._maxIndexCount = data.maxIndexCount;
 
-				object._geometryInitialized = data.geometryInitialized;
-				object._geometryCount = data.geometryCount;
+			object._geometryInitialized = data.geometryInitialized;
+			object._geometryCount = data.geometryCount;
 
-				object._matricesTexture = getTexture( data.matricesTexture.uuid );
-				if ( data.colorsTexture !== undefined ) object._colorsTexture = getTexture( data.colorsTexture.uuid );
+			object._matricesTexture = getTexture( data.matricesTexture.uuid );
+			if ( data.colorsTexture !== undefined ) object._colorsTexture = getTexture( data.colorsTexture.uuid );
 
-				break;
+			break;
 
-			case 'LOD':
+		case 'LOD':
 
-				object = new LOD();
+			object = new LOD();
 
-				break;
+			break;
 
-			case 'Line':
+		case 'Line':
 
-				object = new Line( getGeometry( data.geometry ), getMaterial( data.material ) );
+			object = new Line( getGeometry( data.geometry ), getMaterial( data.material ) );
 
-				break;
+			break;
 
-			case 'LineLoop':
+		case 'LineLoop':
 
-				object = new LineLoop( getGeometry( data.geometry ), getMaterial( data.material ) );
+			object = new LineLoop( getGeometry( data.geometry ), getMaterial( data.material ) );
 
-				break;
+			break;
 
-			case 'LineSegments':
+		case 'LineSegments':
 
-				object = new LineSegments( getGeometry( data.geometry ), getMaterial( data.material ) );
+			object = new LineSegments( getGeometry( data.geometry ), getMaterial( data.material ) );
 
-				break;
+			break;
 
-			case 'PointCloud':
-			case 'Points':
+		case 'PointCloud':
+		case 'Points':
 
-				object = new Points( getGeometry( data.geometry ), getMaterial( data.material ) );
+			object = new Points( getGeometry( data.geometry ), getMaterial( data.material ) );
 
-				break;
+			break;
 
-			case 'Sprite':
+		case 'Sprite':
 
-				object = new Sprite( getMaterial( data.material ) );
+			object = new Sprite( getMaterial( data.material ) );
 
-				break;
+			break;
 
-			case 'Group':
+		case 'Group':
 
-				object = new Group();
+			object = new Group();
 
-				break;
+			break;
 
-			case 'Bone':
+		case 'Bone':
 
-				object = new Bone();
+			object = new Bone();
 
-				break;
+			break;
 
-			default:
+		default:
 
-				object = new Object3D();
+			object = new Object3D();
 
 		}
 

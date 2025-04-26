@@ -326,25 +326,25 @@ class WebGLState {
 
 					switch ( blending ) {
 
-						case NormalBlending:
-							gl.blendFuncSeparate( gl.ONE, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
-							break;
+					case NormalBlending:
+						gl.blendFuncSeparate( gl.ONE, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
+						break;
 
-						case AdditiveBlending:
-							gl.blendFunc( gl.ONE, gl.ONE );
-							break;
+					case AdditiveBlending:
+						gl.blendFunc( gl.ONE, gl.ONE );
+						break;
 
-						case SubtractiveBlending:
-							gl.blendFuncSeparate( gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ZERO, gl.ONE );
-							break;
+					case SubtractiveBlending:
+						gl.blendFuncSeparate( gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ZERO, gl.ONE );
+						break;
 
-						case MultiplyBlending:
-							gl.blendFuncSeparate( gl.ZERO, gl.SRC_COLOR, gl.ZERO, gl.SRC_ALPHA );
-							break;
+					case MultiplyBlending:
+						gl.blendFuncSeparate( gl.ZERO, gl.SRC_COLOR, gl.ZERO, gl.SRC_ALPHA );
+						break;
 
-						default:
-							console.error( 'THREE.WebGLState: Invalid blending: ', blending );
-							break;
+					default:
+						console.error( 'THREE.WebGLState: Invalid blending: ', blending );
+						break;
 
 					}
 
@@ -352,25 +352,25 @@ class WebGLState {
 
 					switch ( blending ) {
 
-						case NormalBlending:
-							gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
-							break;
+					case NormalBlending:
+						gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
+						break;
 
-						case AdditiveBlending:
-							gl.blendFunc( gl.SRC_ALPHA, gl.ONE );
-							break;
+					case AdditiveBlending:
+						gl.blendFunc( gl.SRC_ALPHA, gl.ONE );
+						break;
 
-						case SubtractiveBlending:
-							gl.blendFuncSeparate( gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ZERO, gl.ONE );
-							break;
+					case SubtractiveBlending:
+						gl.blendFuncSeparate( gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ZERO, gl.ONE );
+						break;
 
-						case MultiplyBlending:
-							gl.blendFunc( gl.ZERO, gl.SRC_COLOR );
-							break;
+					case MultiplyBlending:
+						gl.blendFunc( gl.ZERO, gl.SRC_COLOR );
+						break;
 
-						default:
-							console.error( 'THREE.WebGLState: Invalid blending: ', blending );
-							break;
+					default:
+						console.error( 'THREE.WebGLState: Invalid blending: ', blending );
+						break;
 
 					}
 
@@ -498,49 +498,49 @@ class WebGLState {
 
 			switch ( depthFunc ) {
 
-				case NeverDepth:
+			case NeverDepth:
 
-					gl.depthFunc( gl.NEVER );
-					break;
+				gl.depthFunc( gl.NEVER );
+				break;
 
-				case AlwaysDepth:
+			case AlwaysDepth:
 
-					gl.depthFunc( gl.ALWAYS );
-					break;
+				gl.depthFunc( gl.ALWAYS );
+				break;
 
-				case LessDepth:
+			case LessDepth:
 
-					gl.depthFunc( gl.LESS );
-					break;
+				gl.depthFunc( gl.LESS );
+				break;
 
-				case LessEqualDepth:
+			case LessEqualDepth:
 
-					gl.depthFunc( gl.LEQUAL );
-					break;
+				gl.depthFunc( gl.LEQUAL );
+				break;
 
-				case EqualDepth:
+			case EqualDepth:
 
-					gl.depthFunc( gl.EQUAL );
-					break;
+				gl.depthFunc( gl.EQUAL );
+				break;
 
-				case GreaterEqualDepth:
+			case GreaterEqualDepth:
 
-					gl.depthFunc( gl.GEQUAL );
-					break;
+				gl.depthFunc( gl.GEQUAL );
+				break;
 
-				case GreaterDepth:
+			case GreaterDepth:
 
-					gl.depthFunc( gl.GREATER );
-					break;
+				gl.depthFunc( gl.GREATER );
+				break;
 
-				case NotEqualDepth:
+			case NotEqualDepth:
 
-					gl.depthFunc( gl.NOTEQUAL );
-					break;
+				gl.depthFunc( gl.NOTEQUAL );
+				break;
 
-				default:
+			default:
 
-					gl.depthFunc( gl.LEQUAL );
+				gl.depthFunc( gl.LEQUAL );
 
 			}
 

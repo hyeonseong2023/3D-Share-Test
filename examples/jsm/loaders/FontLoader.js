@@ -186,47 +186,47 @@ function createPath( char, scale, offsetX, offsetY, data ) {
 
 			switch ( action ) {
 
-				case 'm': // moveTo
+			case 'm': // moveTo
 
-					x = outline[ i ++ ] * scale + offsetX;
-					y = outline[ i ++ ] * scale + offsetY;
+				x = outline[ i ++ ] * scale + offsetX;
+				y = outline[ i ++ ] * scale + offsetY;
 
-					path.moveTo( x, y );
+				path.moveTo( x, y );
 
-					break;
+				break;
 
-				case 'l': // lineTo
+			case 'l': // lineTo
 
-					x = outline[ i ++ ] * scale + offsetX;
-					y = outline[ i ++ ] * scale + offsetY;
+				x = outline[ i ++ ] * scale + offsetX;
+				y = outline[ i ++ ] * scale + offsetY;
 
-					path.lineTo( x, y );
+				path.lineTo( x, y );
 
-					break;
+				break;
 
-				case 'q': // quadraticCurveTo
+			case 'q': // quadraticCurveTo
 
-					cpx = outline[ i ++ ] * scale + offsetX;
-					cpy = outline[ i ++ ] * scale + offsetY;
-					cpx1 = outline[ i ++ ] * scale + offsetX;
-					cpy1 = outline[ i ++ ] * scale + offsetY;
+				cpx = outline[ i ++ ] * scale + offsetX;
+				cpy = outline[ i ++ ] * scale + offsetY;
+				cpx1 = outline[ i ++ ] * scale + offsetX;
+				cpy1 = outline[ i ++ ] * scale + offsetY;
 
-					path.quadraticCurveTo( cpx1, cpy1, cpx, cpy );
+				path.quadraticCurveTo( cpx1, cpy1, cpx, cpy );
 
-					break;
+				break;
 
-				case 'b': // bezierCurveTo
+			case 'b': // bezierCurveTo
 
-					cpx = outline[ i ++ ] * scale + offsetX;
-					cpy = outline[ i ++ ] * scale + offsetY;
-					cpx1 = outline[ i ++ ] * scale + offsetX;
-					cpy1 = outline[ i ++ ] * scale + offsetY;
-					cpx2 = outline[ i ++ ] * scale + offsetX;
-					cpy2 = outline[ i ++ ] * scale + offsetY;
+				cpx = outline[ i ++ ] * scale + offsetX;
+				cpy = outline[ i ++ ] * scale + offsetY;
+				cpx1 = outline[ i ++ ] * scale + offsetX;
+				cpy1 = outline[ i ++ ] * scale + offsetY;
+				cpx2 = outline[ i ++ ] * scale + offsetX;
+				cpy2 = outline[ i ++ ] * scale + offsetY;
 
-					path.bezierCurveTo( cpx1, cpy1, cpx2, cpy2, cpx, cpy );
+				path.bezierCurveTo( cpx1, cpy1, cpx2, cpy2, cpx, cpy );
 
-					break;
+				break;
 
 			}
 

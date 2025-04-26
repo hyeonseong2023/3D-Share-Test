@@ -236,117 +236,117 @@ class DecalGeometry extends BufferGeometry {
 
 				switch ( total ) {
 
-					case 0: {
+				case 0: {
 
-						// the entire face lies inside of the plane, no clipping needed
+					// the entire face lies inside of the plane, no clipping needed
 
-						outVertices.push( inVertices[ i ] );
-						outVertices.push( inVertices[ i + 1 ] );
-						outVertices.push( inVertices[ i + 2 ] );
+					outVertices.push( inVertices[ i ] );
+					outVertices.push( inVertices[ i + 1 ] );
+					outVertices.push( inVertices[ i + 2 ] );
+					break;
+
+				}
+
+				case 1: {
+
+					// one vertex lies outside of the plane, perform clipping
+
+					if ( v1Out ) {
+
+						nV1 = inVertices[ i + 1 ];
+						nV2 = inVertices[ i + 2 ];
+						nV3 = clip( inVertices[ i ], nV1, plane, s );
+						nV4 = clip( inVertices[ i ], nV2, plane, s );
+
+					}
+
+					if ( v2Out ) {
+
+						nV1 = inVertices[ i ];
+						nV2 = inVertices[ i + 2 ];
+						nV3 = clip( inVertices[ i + 1 ], nV1, plane, s );
+						nV4 = clip( inVertices[ i + 1 ], nV2, plane, s );
+
+						outVertices.push( nV3 );
+						outVertices.push( nV2.clone() );
+						outVertices.push( nV1.clone() );
+
+						outVertices.push( nV2.clone() );
+						outVertices.push( nV3.clone() );
+						outVertices.push( nV4 );
 						break;
 
 					}
 
-					case 1: {
+					if ( v3Out ) {
 
-						// one vertex lies outside of the plane, perform clipping
+						nV1 = inVertices[ i ];
+						nV2 = inVertices[ i + 1 ];
+						nV3 = clip( inVertices[ i + 2 ], nV1, plane, s );
+						nV4 = clip( inVertices[ i + 2 ], nV2, plane, s );
 
-						if ( v1Out ) {
+					}
 
-							nV1 = inVertices[ i + 1 ];
-							nV2 = inVertices[ i + 2 ];
-							nV3 = clip( inVertices[ i ], nV1, plane, s );
-							nV4 = clip( inVertices[ i ], nV2, plane, s );
+					outVertices.push( nV1.clone() );
+					outVertices.push( nV2.clone() );
+					outVertices.push( nV3 );
 
-						}
+					outVertices.push( nV4 );
+					outVertices.push( nV3.clone() );
+					outVertices.push( nV2.clone() );
 
-						if ( v2Out ) {
+					break;
 
-							nV1 = inVertices[ i ];
-							nV2 = inVertices[ i + 2 ];
-							nV3 = clip( inVertices[ i + 1 ], nV1, plane, s );
-							nV4 = clip( inVertices[ i + 1 ], nV2, plane, s );
+				}
 
-							outVertices.push( nV3 );
-							outVertices.push( nV2.clone() );
-							outVertices.push( nV1.clone() );
+				case 2: {
 
-							outVertices.push( nV2.clone() );
-							outVertices.push( nV3.clone() );
-							outVertices.push( nV4 );
-							break;
+					// two vertices lies outside of the plane, perform clipping
 
-						}
+					if ( ! v1Out ) {
 
-						if ( v3Out ) {
-
-							nV1 = inVertices[ i ];
-							nV2 = inVertices[ i + 1 ];
-							nV3 = clip( inVertices[ i + 2 ], nV1, plane, s );
-							nV4 = clip( inVertices[ i + 2 ], nV2, plane, s );
-
-						}
-
-						outVertices.push( nV1.clone() );
-						outVertices.push( nV2.clone() );
+						nV1 = inVertices[ i ].clone();
+						nV2 = clip( nV1, inVertices[ i + 1 ], plane, s );
+						nV3 = clip( nV1, inVertices[ i + 2 ], plane, s );
+						outVertices.push( nV1 );
+						outVertices.push( nV2 );
 						outVertices.push( nV3 );
 
-						outVertices.push( nV4 );
-						outVertices.push( nV3.clone() );
-						outVertices.push( nV2.clone() );
+					}
 
-						break;
+					if ( ! v2Out ) {
+
+						nV1 = inVertices[ i + 1 ].clone();
+						nV2 = clip( nV1, inVertices[ i + 2 ], plane, s );
+						nV3 = clip( nV1, inVertices[ i ], plane, s );
+						outVertices.push( nV1 );
+						outVertices.push( nV2 );
+						outVertices.push( nV3 );
 
 					}
 
-					case 2: {
+					if ( ! v3Out ) {
 
-						// two vertices lies outside of the plane, perform clipping
-
-						if ( ! v1Out ) {
-
-							nV1 = inVertices[ i ].clone();
-							nV2 = clip( nV1, inVertices[ i + 1 ], plane, s );
-							nV3 = clip( nV1, inVertices[ i + 2 ], plane, s );
-							outVertices.push( nV1 );
-							outVertices.push( nV2 );
-							outVertices.push( nV3 );
-
-						}
-
-						if ( ! v2Out ) {
-
-							nV1 = inVertices[ i + 1 ].clone();
-							nV2 = clip( nV1, inVertices[ i + 2 ], plane, s );
-							nV3 = clip( nV1, inVertices[ i ], plane, s );
-							outVertices.push( nV1 );
-							outVertices.push( nV2 );
-							outVertices.push( nV3 );
-
-						}
-
-						if ( ! v3Out ) {
-
-							nV1 = inVertices[ i + 2 ].clone();
-							nV2 = clip( nV1, inVertices[ i ], plane, s );
-							nV3 = clip( nV1, inVertices[ i + 1 ], plane, s );
-							outVertices.push( nV1 );
-							outVertices.push( nV2 );
-							outVertices.push( nV3 );
-
-						}
-
-						break;
+						nV1 = inVertices[ i + 2 ].clone();
+						nV2 = clip( nV1, inVertices[ i ], plane, s );
+						nV3 = clip( nV1, inVertices[ i + 1 ], plane, s );
+						outVertices.push( nV1 );
+						outVertices.push( nV2 );
+						outVertices.push( nV3 );
 
 					}
 
-					case 3: {
+					break;
 
-						// the entire face lies outside of the plane, so let's discard the corresponding vertices
+				}
 
-						break;
+				case 3: {
 
-					}
+					// the entire face lies outside of the plane, so let's discard the corresponding vertices
+
+					break;
+
+				}
 
 				}
 

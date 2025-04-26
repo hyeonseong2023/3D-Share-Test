@@ -571,45 +571,45 @@ class OBJLoader extends Loader {
 
 				switch ( data[ 0 ] ) {
 
-					case 'v':
-						state.vertices.push(
-							parseFloat( data[ 1 ] ),
-							parseFloat( data[ 2 ] ),
-							parseFloat( data[ 3 ] )
+				case 'v':
+					state.vertices.push(
+						parseFloat( data[ 1 ] ),
+						parseFloat( data[ 2 ] ),
+						parseFloat( data[ 3 ] )
+					);
+					if ( data.length >= 7 ) {
+
+						_color.setRGB(
+							parseFloat( data[ 4 ] ),
+							parseFloat( data[ 5 ] ),
+							parseFloat( data[ 6 ] ),
+							SRGBColorSpace
 						);
-						if ( data.length >= 7 ) {
 
-							_color.setRGB(
-								parseFloat( data[ 4 ] ),
-								parseFloat( data[ 5 ] ),
-								parseFloat( data[ 6 ] ),
-								SRGBColorSpace
-							);
+						state.colors.push( _color.r, _color.g, _color.b );
 
-							state.colors.push( _color.r, _color.g, _color.b );
+					} else {
 
-						} else {
+						// if no colors are defined, add placeholders so color and vertex indices match
 
-							// if no colors are defined, add placeholders so color and vertex indices match
+						state.colors.push( undefined, undefined, undefined );
 
-							state.colors.push( undefined, undefined, undefined );
+					}
 
-						}
-
-						break;
-					case 'vn':
-						state.normals.push(
-							parseFloat( data[ 1 ] ),
-							parseFloat( data[ 2 ] ),
-							parseFloat( data[ 3 ] )
-						);
-						break;
-					case 'vt':
-						state.uvs.push(
-							parseFloat( data[ 1 ] ),
-							parseFloat( data[ 2 ] )
-						);
-						break;
+					break;
+				case 'vn':
+					state.normals.push(
+						parseFloat( data[ 1 ] ),
+						parseFloat( data[ 2 ] ),
+						parseFloat( data[ 3 ] )
+					);
+					break;
+				case 'vt':
+					state.uvs.push(
+						parseFloat( data[ 1 ] ),
+						parseFloat( data[ 2 ] )
+					);
+					break;
 
 				}
 

@@ -345,8 +345,8 @@ function onPointerDown( event ) {
 
 		switch ( event.button ) {
 
-			case 0: this._moveForward = true; break;
-			case 2: this._moveBackward = true; break;
+		case 0: this._moveForward = true; break;
+		case 2: this._moveBackward = true; break;
 
 		}
 
@@ -362,8 +362,8 @@ function onPointerUp( event ) {
 
 		switch ( event.button ) {
 
-			case 0: this._moveForward = false; break;
-			case 2: this._moveBackward = false; break;
+		case 0: this._moveForward = false; break;
+		case 2: this._moveBackward = false; break;
 
 		}
 
@@ -393,20 +393,20 @@ function onKeyDown( event ) {
 
 	switch ( event.code ) {
 
-		case 'ArrowUp':
-		case 'KeyW': this._moveForward = true; break;
+	case 'ArrowUp':
+	case 'KeyW': this._moveForward = true; break;
 
-		case 'ArrowLeft':
-		case 'KeyA': this._moveLeft = true; break;
+	case 'ArrowLeft':
+	case 'KeyA': this._moveLeft = true; break;
 
-		case 'ArrowDown':
-		case 'KeyS': this._moveBackward = true; break;
+	case 'ArrowDown':
+	case 'KeyS': this._moveBackward = true; break;
 
-		case 'ArrowRight':
-		case 'KeyD': this._moveRight = true; break;
+	case 'ArrowRight':
+	case 'KeyD': this._moveRight = true; break;
 
-		case 'KeyR': this._moveUp = true; break;
-		case 'KeyF': this._moveDown = true; break;
+	case 'KeyR': this._moveUp = true; break;
+	case 'KeyF': this._moveDown = true; break;
 
 	}
 
@@ -416,20 +416,20 @@ function onKeyUp( event ) {
 
 	switch ( event.code ) {
 
-		case 'ArrowUp':
-		case 'KeyW': this._moveForward = false; break;
+	case 'ArrowUp':
+	case 'KeyW': this._moveForward = false; break;
 
-		case 'ArrowLeft':
-		case 'KeyA': this._moveLeft = false; break;
+	case 'ArrowLeft':
+	case 'KeyA': this._moveLeft = false; break;
 
-		case 'ArrowDown':
-		case 'KeyS': this._moveBackward = false; break;
+	case 'ArrowDown':
+	case 'KeyS': this._moveBackward = false; break;
 
-		case 'ArrowRight':
-		case 'KeyD': this._moveRight = false; break;
+	case 'ArrowRight':
+	case 'KeyD': this._moveRight = false; break;
 
-		case 'KeyR': this._moveUp = false; break;
-		case 'KeyF': this._moveDown = false; break;
+	case 'KeyR': this._moveUp = false; break;
+	case 'KeyF': this._moveDown = false; break;
 
 	}
 

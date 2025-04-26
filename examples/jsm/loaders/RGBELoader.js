@@ -61,11 +61,11 @@ class RGBELoader extends DataTextureLoader {
 
 				switch ( rgbe_error_code ) {
 
-					case rgbe_read_error: throw new Error( 'THREE.RGBELoader: Read Error: ' + ( msg || '' ) );
-					case rgbe_write_error: throw new Error( 'THREE.RGBELoader: Write Error: ' + ( msg || '' ) );
-					case rgbe_format_error: throw new Error( 'THREE.RGBELoader: Bad File Format: ' + ( msg || '' ) );
-					default:
-					case rgbe_memory_error: throw new Error( 'THREE.RGBELoader: Memory Error: ' + ( msg || '' ) );
+				case rgbe_read_error: throw new Error( 'THREE.RGBELoader: Read Error: ' + ( msg || '' ) );
+				case rgbe_write_error: throw new Error( 'THREE.RGBELoader: Write Error: ' + ( msg || '' ) );
+				case rgbe_format_error: throw new Error( 'THREE.RGBELoader: Bad File Format: ' + ( msg || '' ) );
+				default:
+				case rgbe_memory_error: throw new Error( 'THREE.RGBELoader: Memory Error: ' + ( msg || '' ) );
 
 				}
 
@@ -390,40 +390,40 @@ class RGBELoader extends DataTextureLoader {
 
 		switch ( this.type ) {
 
-			case FloatType:
+		case FloatType:
 
-				numElements = image_rgba_data.length / 4;
-				const floatArray = new Float32Array( numElements * 4 );
+			numElements = image_rgba_data.length / 4;
+			const floatArray = new Float32Array( numElements * 4 );
 
-				for ( let j = 0; j < numElements; j ++ ) {
+			for ( let j = 0; j < numElements; j ++ ) {
 
-					RGBEByteToRGBFloat( image_rgba_data, j * 4, floatArray, j * 4 );
+				RGBEByteToRGBFloat( image_rgba_data, j * 4, floatArray, j * 4 );
 
-				}
+			}
 
-				data = floatArray;
-				type = FloatType;
-				break;
+			data = floatArray;
+			type = FloatType;
+			break;
 
-			case HalfFloatType:
+		case HalfFloatType:
 
-				numElements = image_rgba_data.length / 4;
-				const halfArray = new Uint16Array( numElements * 4 );
+			numElements = image_rgba_data.length / 4;
+			const halfArray = new Uint16Array( numElements * 4 );
 
-				for ( let j = 0; j < numElements; j ++ ) {
+			for ( let j = 0; j < numElements; j ++ ) {
 
-					RGBEByteToRGBHalf( image_rgba_data, j * 4, halfArray, j * 4 );
+				RGBEByteToRGBHalf( image_rgba_data, j * 4, halfArray, j * 4 );
 
-				}
+			}
 
-				data = halfArray;
-				type = HalfFloatType;
-				break;
+			data = halfArray;
+			type = HalfFloatType;
+			break;
 
-			default:
+		default:
 
-				throw new Error( 'THREE.RGBELoader: Unsupported type: ' + this.type );
-				break;
+			throw new Error( 'THREE.RGBELoader: Unsupported type: ' + this.type );
+			break;
 
 		}
 
@@ -457,16 +457,16 @@ class RGBELoader extends DataTextureLoader {
 
 			switch ( texture.type ) {
 
-				case FloatType:
-				case HalfFloatType:
+			case FloatType:
+			case HalfFloatType:
 
-					texture.colorSpace = LinearSRGBColorSpace;
-					texture.minFilter = LinearFilter;
-					texture.magFilter = LinearFilter;
-					texture.generateMipmaps = false;
-					texture.flipY = true;
+				texture.colorSpace = LinearSRGBColorSpace;
+				texture.minFilter = LinearFilter;
+				texture.magFilter = LinearFilter;
+				texture.generateMipmaps = false;
+				texture.flipY = true;
 
-					break;
+				break;
 
 			}
 

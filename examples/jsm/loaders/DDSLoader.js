@@ -218,77 +218,77 @@ class DDSLoader extends CompressedTextureLoader {
 
 		switch ( fourCC ) {
 
-			case FOURCC_DXT1:
+		case FOURCC_DXT1:
 
-				blockBytes = 8;
-				dds.format = RGB_S3TC_DXT1_Format;
-				break;
+			blockBytes = 8;
+			dds.format = RGB_S3TC_DXT1_Format;
+			break;
 
-			case FOURCC_DXT3:
+		case FOURCC_DXT3:
+
+			blockBytes = 16;
+			dds.format = RGBA_S3TC_DXT3_Format;
+			break;
+
+		case FOURCC_DXT5:
+
+			blockBytes = 16;
+			dds.format = RGBA_S3TC_DXT5_Format;
+			break;
+
+		case FOURCC_ETC1:
+
+			blockBytes = 8;
+			dds.format = RGB_ETC1_Format;
+			break;
+
+		case FOURCC_DX10:
+
+			dataOffset += extendedHeaderLengthInt * 4;
+			const extendedHeader = new Int32Array( buffer, ( headerLengthInt + 1 ) * 4, extendedHeaderLengthInt );
+			const dxgiFormat = extendedHeader[ off_dxgiFormat ];
+			switch ( dxgiFormat ) {
+
+			case DXGI_FORMAT_BC6H_SF16: {
 
 				blockBytes = 16;
-				dds.format = RGBA_S3TC_DXT3_Format;
+				dds.format = RGB_BPTC_SIGNED_Format;
 				break;
 
-			case FOURCC_DXT5:
+			}
+
+			case DXGI_FORMAT_BC6H_UF16: {
 
 				blockBytes = 16;
-				dds.format = RGBA_S3TC_DXT5_Format;
+				dds.format = RGB_BPTC_UNSIGNED_Format;
 				break;
 
-			case FOURCC_ETC1:
+			}
 
-				blockBytes = 8;
-				dds.format = RGB_ETC1_Format;
-				break;
+			default: {
 
-			case FOURCC_DX10:
+				console.error( 'THREE.DDSLoader.parse: Unsupported DXGI_FORMAT code ', dxgiFormat );
+				return dds;
 
-				dataOffset += extendedHeaderLengthInt * 4;
-				const extendedHeader = new Int32Array( buffer, ( headerLengthInt + 1 ) * 4, extendedHeaderLengthInt );
-				const dxgiFormat = extendedHeader[ off_dxgiFormat ];
-				switch ( dxgiFormat ) {
+			}
 
-					case DXGI_FORMAT_BC6H_SF16: {
+			}
 
-						blockBytes = 16;
-						dds.format = RGB_BPTC_SIGNED_Format;
-						break;
+			break;
 
-					}
+		default:
 
-					case DXGI_FORMAT_BC6H_UF16: {
-
-						blockBytes = 16;
-						dds.format = RGB_BPTC_UNSIGNED_Format;
-						break;
-
-					}
-
-					default: {
-
-						console.error( 'THREE.DDSLoader.parse: Unsupported DXGI_FORMAT code ', dxgiFormat );
-						return dds;
-
-					}
-
-				}
-
-				break;
-
-			default:
-
-				if ( header[ off_RGBBitCount ] === 32
+			if ( header[ off_RGBBitCount ] === 32
 					&& header[ off_RBitMask ] & 0xff0000
 					&& header[ off_GBitMask ] & 0xff00
 					&& header[ off_BBitMask ] & 0xff
 					&& header[ off_ABitMask ] & 0xff000000 ) {
 
-					isRGBAUncompressed = true;
-					blockBytes = 64;
-					dds.format = RGBAFormat;
+				isRGBAUncompressed = true;
+				blockBytes = 64;
+				dds.format = RGBAFormat;
 
-				} else if ( header[ off_RGBBitCount ] === 24
+			} else if ( header[ off_RGBBitCount ] === 24
 					&& header[ off_RBitMask ] & 0xff0000
 					&& header[ off_GBitMask ] & 0xff00
 					&& header[ off_BBitMask ] & 0xff ) {
@@ -297,12 +297,12 @@ class DDSLoader extends CompressedTextureLoader {
                     			blockBytes = 64;
                     			dds.format = RGBAFormat;
 
-				} else {
+			} else {
 
-					console.error( 'THREE.DDSLoader.parse: Unsupported FourCC code ', int32ToFourCC( fourCC ) );
-					return dds;
+				console.error( 'THREE.DDSLoader.parse: Unsupported FourCC code ', int32ToFourCC( fourCC ) );
+				return dds;
 
-				}
+			}
 
 		}
 

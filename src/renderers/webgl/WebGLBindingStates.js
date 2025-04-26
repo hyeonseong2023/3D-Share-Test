@@ -442,20 +442,20 @@ function WebGLBindingStates( gl, attributes ) {
 
 						switch ( value.length ) {
 
-							case 2:
-								gl.vertexAttrib2fv( programAttribute.location, value );
-								break;
+						case 2:
+							gl.vertexAttrib2fv( programAttribute.location, value );
+							break;
 
-							case 3:
-								gl.vertexAttrib3fv( programAttribute.location, value );
-								break;
+						case 3:
+							gl.vertexAttrib3fv( programAttribute.location, value );
+							break;
 
-							case 4:
-								gl.vertexAttrib4fv( programAttribute.location, value );
-								break;
+						case 4:
+							gl.vertexAttrib4fv( programAttribute.location, value );
+							break;
 
-							default:
-								gl.vertexAttrib1fv( programAttribute.location, value );
+						default:
+							gl.vertexAttrib1fv( programAttribute.location, value );
 
 						}
 

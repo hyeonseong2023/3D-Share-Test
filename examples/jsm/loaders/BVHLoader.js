@@ -211,29 +211,29 @@ class BVHLoader extends Loader {
 
 				switch ( bone.channels[ i ] ) {
 
-					case 'Xposition':
-						keyframe.position.x = parseFloat( data.shift().trim() );
-						break;
-					case 'Yposition':
-						keyframe.position.y = parseFloat( data.shift().trim() );
-						break;
-					case 'Zposition':
-						keyframe.position.z = parseFloat( data.shift().trim() );
-						break;
-					case 'Xrotation':
-						quat.setFromAxisAngle( vx, parseFloat( data.shift().trim() ) * Math.PI / 180 );
-						keyframe.rotation.multiply( quat );
-						break;
-					case 'Yrotation':
-						quat.setFromAxisAngle( vy, parseFloat( data.shift().trim() ) * Math.PI / 180 );
-						keyframe.rotation.multiply( quat );
-						break;
-					case 'Zrotation':
-						quat.setFromAxisAngle( vz, parseFloat( data.shift().trim() ) * Math.PI / 180 );
-						keyframe.rotation.multiply( quat );
-						break;
-					default:
-						console.warn( 'THREE.BVHLoader: Invalid channel type.' );
+				case 'Xposition':
+					keyframe.position.x = parseFloat( data.shift().trim() );
+					break;
+				case 'Yposition':
+					keyframe.position.y = parseFloat( data.shift().trim() );
+					break;
+				case 'Zposition':
+					keyframe.position.z = parseFloat( data.shift().trim() );
+					break;
+				case 'Xrotation':
+					quat.setFromAxisAngle( vx, parseFloat( data.shift().trim() ) * Math.PI / 180 );
+					keyframe.rotation.multiply( quat );
+					break;
+				case 'Yrotation':
+					quat.setFromAxisAngle( vy, parseFloat( data.shift().trim() ) * Math.PI / 180 );
+					keyframe.rotation.multiply( quat );
+					break;
+				case 'Zrotation':
+					quat.setFromAxisAngle( vz, parseFloat( data.shift().trim() ) * Math.PI / 180 );
+					keyframe.rotation.multiply( quat );
+					break;
+				default:
+					console.warn( 'THREE.BVHLoader: Invalid channel type.' );
 
 				}
 

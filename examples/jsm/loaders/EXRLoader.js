@@ -1415,44 +1415,44 @@ class EXRLoader extends DataTextureLoader {
 					const type = info.inputChannels[ c ].pixelType;
 					switch ( type ) {
 
-						case 1:
+					case 1:
 
-							ptr[ 0 ] = tmpBufferEnd;
-							ptr[ 1 ] = ptr[ 0 ] + info.columns;
-							tmpBufferEnd = ptr[ 1 ] + info.columns;
+						ptr[ 0 ] = tmpBufferEnd;
+						ptr[ 1 ] = ptr[ 0 ] + info.columns;
+						tmpBufferEnd = ptr[ 1 ] + info.columns;
 
-							for ( let j = 0; j < info.columns; ++ j ) {
+						for ( let j = 0; j < info.columns; ++ j ) {
 
-								const diff = ( rawBuffer[ ptr[ 0 ] ++ ] << 8 ) | rawBuffer[ ptr[ 1 ] ++ ];
+							const diff = ( rawBuffer[ ptr[ 0 ] ++ ] << 8 ) | rawBuffer[ ptr[ 1 ] ++ ];
 
-								pixel += diff;
+							pixel += diff;
 
-								viewer.setUint16( writePtr, pixel, true );
-								writePtr += 2;
+							viewer.setUint16( writePtr, pixel, true );
+							writePtr += 2;
 
-							}
+						}
 
-							break;
+						break;
 
-						case 2:
+					case 2:
 
-							ptr[ 0 ] = tmpBufferEnd;
-							ptr[ 1 ] = ptr[ 0 ] + info.columns;
-							ptr[ 2 ] = ptr[ 1 ] + info.columns;
-							tmpBufferEnd = ptr[ 2 ] + info.columns;
+						ptr[ 0 ] = tmpBufferEnd;
+						ptr[ 1 ] = ptr[ 0 ] + info.columns;
+						ptr[ 2 ] = ptr[ 1 ] + info.columns;
+						tmpBufferEnd = ptr[ 2 ] + info.columns;
 
-							for ( let j = 0; j < info.columns; ++ j ) {
+						for ( let j = 0; j < info.columns; ++ j ) {
 
-								const diff = ( rawBuffer[ ptr[ 0 ] ++ ] << 24 ) | ( rawBuffer[ ptr[ 1 ] ++ ] << 16 ) | ( rawBuffer[ ptr[ 2 ] ++ ] << 8 );
+							const diff = ( rawBuffer[ ptr[ 0 ] ++ ] << 24 ) | ( rawBuffer[ ptr[ 1 ] ++ ] << 16 ) | ( rawBuffer[ ptr[ 2 ] ++ ] << 8 );
 
-								pixel += diff;
+							pixel += diff;
 
-								viewer.setUint32( writePtr, pixel, true );
-								writePtr += 4;
+							viewer.setUint32( writePtr, pixel, true );
+							writePtr += 4;
 
-							}
+						}
 
-							break;
+						break;
 
 					}
 
@@ -1570,19 +1570,19 @@ class EXRLoader extends DataTextureLoader {
 
 				switch ( dwaHeader.acCompression ) {
 
-					case STATIC_HUFFMAN:
+				case STATIC_HUFFMAN:
 
-						acBuffer = new Uint16Array( dwaHeader.totalAcUncompressedCount );
-						hufUncompress( info.array, inDataView, inOffset, dwaHeader.acCompressedSize, acBuffer, dwaHeader.totalAcUncompressedCount );
-						break;
+					acBuffer = new Uint16Array( dwaHeader.totalAcUncompressedCount );
+					hufUncompress( info.array, inDataView, inOffset, dwaHeader.acCompressedSize, acBuffer, dwaHeader.totalAcUncompressedCount );
+					break;
 
-					case DEFLATE:
+				case DEFLATE:
 
-						const compressed = info.array.slice( inOffset.value, inOffset.value + dwaHeader.totalAcUncompressedCount );
-						const data = fflate.unzlibSync( compressed );
-						acBuffer = new Uint16Array( data.buffer );
-						inOffset.value += dwaHeader.totalAcUncompressedCount;
-						break;
+					const compressed = info.array.slice( inOffset.value, inOffset.value + dwaHeader.totalAcUncompressedCount );
+					const data = fflate.unzlibSync( compressed );
+					acBuffer = new Uint16Array( data.buffer );
+					inOffset.value += dwaHeader.totalAcUncompressedCount;
+					break;
 
 				}
 
@@ -1645,37 +1645,37 @@ class EXRLoader extends DataTextureLoader {
 
 				switch ( cd.compression ) {
 
-					case RLE:
+				case RLE:
 
-						let row = 0;
-						let rleOffset = 0;
+					let row = 0;
+					let rleOffset = 0;
 
-						for ( let y = 0; y < info.lines; ++ y ) {
+					for ( let y = 0; y < info.lines; ++ y ) {
 
-							let rowOffsetBytes = rowOffsets[ i ][ row ];
+						let rowOffsetBytes = rowOffsets[ i ][ row ];
 
-							for ( let x = 0; x < cd.width; ++ x ) {
+						for ( let x = 0; x < cd.width; ++ x ) {
 
-								for ( let byte = 0; byte < INT16_SIZE * cd.type; ++ byte ) {
+							for ( let byte = 0; byte < INT16_SIZE * cd.type; ++ byte ) {
 
-									outBuffer[ rowOffsetBytes ++ ] = rleBuffer[ rleOffset + byte * cd.width * cd.height ];
-
-								}
-
-								rleOffset ++;
+								outBuffer[ rowOffsetBytes ++ ] = rleBuffer[ rleOffset + byte * cd.width * cd.height ];
 
 							}
 
-							row ++;
+							rleOffset ++;
 
 						}
 
-						break;
+						row ++;
 
-					case LOSSY_DCT: // skip
+					}
 
-					default:
-						throw new Error( 'EXRLoader.parse: unsupported channel compression' );
+					break;
+
+				case LOSSY_DCT: // skip
+
+				default:
+					throw new Error( 'EXRLoader.parse: unsupported channel compression' );
 
 				}
 
@@ -2080,16 +2080,16 @@ class EXRLoader extends DataTextureLoader {
 
 			switch ( tiledesc.levelMode ) {
 
-				case 'ONE_LEVEL':
-					num = 1;
-					break;
+			case 'ONE_LEVEL':
+				num = 1;
+				break;
 
-				case 'MIPMAP_LEVELS':
-					num = roundLog2( Math.max( w, h ), tiledesc.roundingMode ) + 1;
-					break;
+			case 'MIPMAP_LEVELS':
+				num = roundLog2( Math.max( w, h ), tiledesc.roundingMode ) + 1;
+				break;
 
-				case 'RIPMAP_LEVELS':
-					throw new Error( 'THREE.EXRLoader: RIPMAP_LEVELS tiles currently unsupported.' );
+			case 'RIPMAP_LEVELS':
+				throw new Error( 'THREE.EXRLoader: RIPMAP_LEVELS tiles currently unsupported.' );
 
 			}
 
@@ -2314,48 +2314,48 @@ class EXRLoader extends DataTextureLoader {
 
 			switch ( EXRHeader.compression ) {
 
-				case 'NO_COMPRESSION':
-					EXRDecoder.blockHeight = 1;
-					EXRDecoder.uncompress = uncompressRAW;
-					break;
+			case 'NO_COMPRESSION':
+				EXRDecoder.blockHeight = 1;
+				EXRDecoder.uncompress = uncompressRAW;
+				break;
 
-				case 'RLE_COMPRESSION':
-					EXRDecoder.blockHeight = 1;
-					EXRDecoder.uncompress = uncompressRLE;
-					break;
+			case 'RLE_COMPRESSION':
+				EXRDecoder.blockHeight = 1;
+				EXRDecoder.uncompress = uncompressRLE;
+				break;
 
-				case 'ZIPS_COMPRESSION':
-					EXRDecoder.blockHeight = 1;
-					EXRDecoder.uncompress = uncompressZIP;
-					break;
+			case 'ZIPS_COMPRESSION':
+				EXRDecoder.blockHeight = 1;
+				EXRDecoder.uncompress = uncompressZIP;
+				break;
 
-				case 'ZIP_COMPRESSION':
-					EXRDecoder.blockHeight = 16;
-					EXRDecoder.uncompress = uncompressZIP;
-					break;
+			case 'ZIP_COMPRESSION':
+				EXRDecoder.blockHeight = 16;
+				EXRDecoder.uncompress = uncompressZIP;
+				break;
 
-				case 'PIZ_COMPRESSION':
-					EXRDecoder.blockHeight = 32;
-					EXRDecoder.uncompress = uncompressPIZ;
-					break;
+			case 'PIZ_COMPRESSION':
+				EXRDecoder.blockHeight = 32;
+				EXRDecoder.uncompress = uncompressPIZ;
+				break;
 
-				case 'PXR24_COMPRESSION':
-					EXRDecoder.blockHeight = 16;
-					EXRDecoder.uncompress = uncompressPXR;
-					break;
+			case 'PXR24_COMPRESSION':
+				EXRDecoder.blockHeight = 16;
+				EXRDecoder.uncompress = uncompressPXR;
+				break;
 
-				case 'DWAA_COMPRESSION':
-					EXRDecoder.blockHeight = 32;
-					EXRDecoder.uncompress = uncompressDWA;
-					break;
+			case 'DWAA_COMPRESSION':
+				EXRDecoder.blockHeight = 32;
+				EXRDecoder.uncompress = uncompressDWA;
+				break;
 
-				case 'DWAB_COMPRESSION':
-					EXRDecoder.blockHeight = 256;
-					EXRDecoder.uncompress = uncompressDWA;
-					break;
+			case 'DWAB_COMPRESSION':
+				EXRDecoder.blockHeight = 256;
+				EXRDecoder.uncompress = uncompressDWA;
+				break;
 
-				default:
-					throw new Error( 'EXRLoader.parse: ' + EXRHeader.compression + ' is unsupported' );
+			default:
+				throw new Error( 'EXRLoader.parse: ' + EXRHeader.compression + ' is unsupported' );
 
 			}
 
@@ -2364,13 +2364,13 @@ class EXRLoader extends DataTextureLoader {
 
 				switch ( channel.name ) {
 
-					case 'Y':
-					case 'R':
-					case 'G':
-					case 'B':
-					case 'A':
-						channels[ channel.name ] = true;
-						EXRDecoder.type = channel.pixelType;
+				case 'Y':
+				case 'R':
+				case 'G':
+				case 'B':
+				case 'A':
+					channels[ channel.name ] = true;
+					EXRDecoder.type = channel.pixelType;
 
 				}
 
@@ -2401,13 +2401,13 @@ class EXRLoader extends DataTextureLoader {
 				// half
 				switch ( outputType ) {
 
-					case FloatType:
-						EXRDecoder.getter = parseFloat16;
-						break;
+				case FloatType:
+					EXRDecoder.getter = parseFloat16;
+					break;
 
-					case HalfFloatType:
-						EXRDecoder.getter = parseUint16;
-						break;
+				case HalfFloatType:
+					EXRDecoder.getter = parseUint16;
+					break;
 
 				}
 
@@ -2416,12 +2416,12 @@ class EXRLoader extends DataTextureLoader {
 				// float
 				switch ( outputType ) {
 
-					case FloatType:
-						EXRDecoder.getter = parseFloat32;
-						break;
+				case FloatType:
+					EXRDecoder.getter = parseFloat32;
+					break;
 
-					case HalfFloatType:
-						EXRDecoder.getter = decodeFloat32;
+				case HalfFloatType:
+					EXRDecoder.getter = decodeFloat32;
 
 				}
 
@@ -2436,26 +2436,26 @@ class EXRLoader extends DataTextureLoader {
 
 			switch ( outputType ) {
 
-				case FloatType:
-					EXRDecoder.byteArray = new Float32Array( size );
+			case FloatType:
+				EXRDecoder.byteArray = new Float32Array( size );
 
-					// Fill initially with 1s for the alpha value if the texture is not RGBA, RGB values will be overwritten
-					if ( fillAlpha )
-						EXRDecoder.byteArray.fill( 1, 0, size );
+				// Fill initially with 1s for the alpha value if the texture is not RGBA, RGB values will be overwritten
+				if ( fillAlpha )
+					EXRDecoder.byteArray.fill( 1, 0, size );
 
-					break;
+				break;
 
-				case HalfFloatType:
-					EXRDecoder.byteArray = new Uint16Array( size );
+			case HalfFloatType:
+				EXRDecoder.byteArray = new Uint16Array( size );
 
-					if ( fillAlpha )
-						EXRDecoder.byteArray.fill( 0x3C00, 0, size ); // Uint16Array holds half float data, 0x3C00 is 1
+				if ( fillAlpha )
+					EXRDecoder.byteArray.fill( 0x3C00, 0, size ); // Uint16Array holds half float data, 0x3C00 is 1
 
-					break;
+				break;
 
-				default:
-					console.error( 'THREE.EXRLoader: unsupported type: ', outputType );
-					break;
+			default:
+				console.error( 'THREE.EXRLoader: unsupported type: ', outputType );
+				break;
 
 			}
 

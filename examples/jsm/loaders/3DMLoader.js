@@ -362,130 +362,130 @@ class Rhino3dmLoader extends Loader {
 
 				switch ( texture.type ) {
 
-					case 'Bump':
+				case 'Bump':
 
-						mat.bumpMap = map;
+					mat.bumpMap = map;
 
-						break;
+					break;
 
-					case 'Diffuse':
+				case 'Diffuse':
 
-						mat.map = map;
+					mat.map = map;
 
-						break;
+					break;
 
-					case 'Emap':
+				case 'Emap':
 
-						mat.envMap = map;
+					mat.envMap = map;
 
-						break;
+					break;
 
-					case 'Opacity':
+				case 'Opacity':
 
-						mat.transmissionMap = map;
+					mat.transmissionMap = map;
 
-						break;
+					break;
 
-					case 'Transparency':
+				case 'Transparency':
 
-						mat.alphaMap = map;
-						mat.transparent = true;
+					mat.alphaMap = map;
+					mat.transparent = true;
 
-						break;
+					break;
 
-					case 'PBR_Alpha':
+				case 'PBR_Alpha':
 
-						mat.alphaMap = map;
-						mat.transparent = true;
+					mat.alphaMap = map;
+					mat.transparent = true;
 
-						break;
+					break;
 
-					case 'PBR_AmbientOcclusion':
+				case 'PBR_AmbientOcclusion':
 
-						mat.aoMap = map;
+					mat.aoMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Anisotropic':
+				case 'PBR_Anisotropic':
 
-						mat.anisotropyMap = map;
+					mat.anisotropyMap = map;
 
-						break;
+					break;
 
-					case 'PBR_BaseColor':
+				case 'PBR_BaseColor':
 
-						mat.map = map;
+					mat.map = map;
 
-						break;
+					break;
 
-					case 'PBR_Clearcoat':
+				case 'PBR_Clearcoat':
 
-						mat.clearcoatMap = map;
+					mat.clearcoatMap = map;
 
-						break;
+					break;
 
-					case 'PBR_ClearcoatBump':
+				case 'PBR_ClearcoatBump':
 
-						mat.clearcoatNormalMap = map;
+					mat.clearcoatNormalMap = map;
 
-						break;
+					break;
 
-					case 'PBR_ClearcoatRoughness':
+				case 'PBR_ClearcoatRoughness':
 
-						mat.clearcoatRoughnessMap = map;
+					mat.clearcoatRoughnessMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Displacement':
+				case 'PBR_Displacement':
 
-						mat.displacementMap = map;
+					mat.displacementMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Emission':
+				case 'PBR_Emission':
 
-						mat.emissiveMap = map;
+					mat.emissiveMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Metallic':
+				case 'PBR_Metallic':
 
-						mat.metalnessMap = map;
+					mat.metalnessMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Roughness':
+				case 'PBR_Roughness':
 
-						mat.roughnessMap = map;
+					mat.roughnessMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Sheen':
+				case 'PBR_Sheen':
 
-						mat.sheenColorMap = map;
+					mat.sheenColorMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Specular':
+				case 'PBR_Specular':
 
-						mat.specularColorMap = map;
+					mat.specularColorMap = map;
 
-						break;
+					break;
 
-					case 'PBR_Subsurface':
+				case 'PBR_Subsurface':
 
-						mat.thicknessMap = map;
+					mat.thicknessMap = map;
 
-						break;
+					break;
 
-					default:
+				default:
 
-						this.warnings.push( {
-							message: `THREE.3DMLoader: No conversion exists for 3dm ${texture.type}.`,
-							type: 'no conversion'
-						} );
+					this.warnings.push( {
+						message: `THREE.3DMLoader: No conversion exists for 3dm ${texture.type}.`,
+						type: 'no conversion'
+					} );
 
-						break;
+					break;
 
 				}
 
@@ -543,79 +543,79 @@ class Rhino3dmLoader extends Loader {
 
 			switch ( obj.objectType ) {
 
-				case 'InstanceDefinition':
+			case 'InstanceDefinition':
 
-					instanceDefinitions.push( obj );
+				instanceDefinitions.push( obj );
 
-					break;
+				break;
 
-				case 'InstanceReference':
+			case 'InstanceReference':
 
-					instanceReferences.push( obj );
+				instanceReferences.push( obj );
 
-					break;
+				break;
 
-				default:
+			default:
 
-					let matId = null;
+				let matId = null;
 
-					switch ( attributes.materialSource.name ) {
+				switch ( attributes.materialSource.name ) {
 
-						case 'ObjectMaterialSource_MaterialFromLayer':
-							//check layer index
-							if ( attributes.layerIndex >= 0 ) {
+				case 'ObjectMaterialSource_MaterialFromLayer':
+					//check layer index
+					if ( attributes.layerIndex >= 0 ) {
 
-								matId = data.layers[ attributes.layerIndex ].renderMaterialIndex;
-
-							}
-
-							break;
-
-						case 'ObjectMaterialSource_MaterialFromObject':
-
-							if ( attributes.materialIndex >= 0 ) {
-
-								matId = attributes.materialIndex;
-
-							}
-
-							break;
-
-					}
-
-					let material = null;
-
-					if ( matId >= 0 ) {
-
-						const rMaterial = materials[ matId ];
-						material = this._createMaterial( rMaterial, data.renderEnvironment );
-
-
-					}
-
-					const _object = this._createObject( obj, material );
-
-					if ( _object === undefined ) {
-
-						continue;
-
-					}
-
-					const layer = data.layers[ attributes.layerIndex ];
-
-					_object.visible = layer ? data.layers[ attributes.layerIndex ].visible : true;
-
-					if ( attributes.isInstanceDefinitionObject ) {
-
-						instanceDefinitionObjects.push( _object );
-
-					} else {
-
-						object.add( _object );
+						matId = data.layers[ attributes.layerIndex ].renderMaterialIndex;
 
 					}
 
 					break;
+
+				case 'ObjectMaterialSource_MaterialFromObject':
+
+					if ( attributes.materialIndex >= 0 ) {
+
+						matId = attributes.materialIndex;
+
+					}
+
+					break;
+
+				}
+
+				let material = null;
+
+				if ( matId >= 0 ) {
+
+					const rMaterial = materials[ matId ];
+					material = this._createMaterial( rMaterial, data.renderEnvironment );
+
+
+				}
+
+				const _object = this._createObject( obj, material );
+
+				if ( _object === undefined ) {
+
+					continue;
+
+				}
+
+				const layer = data.layers[ attributes.layerIndex ];
+
+				_object.visible = layer ? data.layers[ attributes.layerIndex ].visible : true;
+
+				if ( attributes.isInstanceDefinitionObject ) {
+
+					instanceDefinitionObjects.push( _object );
+
+				} else {
+
+					object.add( _object );
+
+				}
+
+				break;
 
 			}
 
@@ -691,218 +691,218 @@ class Rhino3dmLoader extends Loader {
 
 		switch ( obj.objectType ) {
 
-			case 'Point':
-			case 'PointSet':
+		case 'Point':
+		case 'PointSet':
 
-				geometry = loader.parse( obj.geometry );
+			geometry = loader.parse( obj.geometry );
 
-				if ( geometry.attributes.hasOwnProperty( 'color' ) ) {
+			if ( geometry.attributes.hasOwnProperty( 'color' ) ) {
 
-					material = new PointsMaterial( { vertexColors: true, sizeAttenuation: false, size: 2 } );
+				material = new PointsMaterial( { vertexColors: true, sizeAttenuation: false, size: 2 } );
 
-				} else {
-
-					_color = attributes.drawColor;
-					color = new Color( _color.r / 255.0, _color.g / 255.0, _color.b / 255.0 );
-					material = new PointsMaterial( { color: color, sizeAttenuation: false, size: 2 } );
-
-				}
-
-				material = this._compareMaterials( material );
-
-				const points = new Points( geometry, material );
-				points.userData[ 'attributes' ] = attributes;
-				points.userData[ 'objectType' ] = obj.objectType;
-
-				if ( attributes.name ) {
-
-					points.name = attributes.name;
-
-				}
-
-				return points;
-
-			case 'Mesh':
-			case 'Extrusion':
-			case 'SubD':
-			case 'Brep':
-
-				if ( obj.geometry === null ) return;
-
-				geometry = loader.parse( obj.geometry );
-
-
-				if ( mat === null ) {
-
-					mat = this._createMaterial();
-
-				}
-
-
-				if ( geometry.attributes.hasOwnProperty( 'color' ) ) {
-
-					mat.vertexColors = true;
-
-				}
-
-				mat = this._compareMaterials( mat );
-
-				const mesh = new Mesh( geometry, mat );
-				mesh.castShadow = attributes.castsShadows;
-				mesh.receiveShadow = attributes.receivesShadows;
-				mesh.userData[ 'attributes' ] = attributes;
-				mesh.userData[ 'objectType' ] = obj.objectType;
-
-				if ( attributes.name ) {
-
-					mesh.name = attributes.name;
-
-				}
-
-				return mesh;
-
-			case 'Curve':
-
-				geometry = loader.parse( obj.geometry );
+			} else {
 
 				_color = attributes.drawColor;
 				color = new Color( _color.r / 255.0, _color.g / 255.0, _color.b / 255.0 );
+				material = new PointsMaterial( { color: color, sizeAttenuation: false, size: 2 } );
 
-				material = new LineBasicMaterial( { color: color } );
-				material = this._compareMaterials( material );
+			}
 
-				const lines = new Line( geometry, material );
-				lines.userData[ 'attributes' ] = attributes;
-				lines.userData[ 'objectType' ] = obj.objectType;
+			material = this._compareMaterials( material );
 
-				if ( attributes.name ) {
+			const points = new Points( geometry, material );
+			points.userData[ 'attributes' ] = attributes;
+			points.userData[ 'objectType' ] = obj.objectType;
 
-					lines.name = attributes.name;
+			if ( attributes.name ) {
 
-				}
+				points.name = attributes.name;
 
-				return lines;
+			}
 
-			case 'TextDot':
+			return points;
 
-				geometry = obj.geometry;
+		case 'Mesh':
+		case 'Extrusion':
+		case 'SubD':
+		case 'Brep':
 
-				const ctx = document.createElement( 'canvas' ).getContext( '2d' );
-				const font = `${geometry.fontHeight}px ${geometry.fontFace}`;
-				ctx.font = font;
-				const width = ctx.measureText( geometry.text ).width + 10;
-				const height = geometry.fontHeight + 10;
+			if ( obj.geometry === null ) return;
 
-				const r = window.devicePixelRatio;
+			geometry = loader.parse( obj.geometry );
 
-				ctx.canvas.width = width * r;
-				ctx.canvas.height = height * r;
-				ctx.canvas.style.width = width + 'px';
-				ctx.canvas.style.height = height + 'px';
-				ctx.setTransform( r, 0, 0, r, 0, 0 );
 
-				ctx.font = font;
-				ctx.textBaseline = 'middle';
-				ctx.textAlign = 'center';
-				color = attributes.drawColor;
-				ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-				ctx.fillRect( 0, 0, width, height );
-				ctx.fillStyle = 'white';
-				ctx.fillText( geometry.text, width / 2, height / 2 );
+			if ( mat === null ) {
 
-				const texture = new CanvasTexture( ctx.canvas );
-				texture.minFilter = LinearFilter;
-				texture.generateMipmaps = false;
-				texture.wrapS = ClampToEdgeWrapping;
-				texture.wrapT = ClampToEdgeWrapping;
+				mat = this._createMaterial();
 
-				material = new SpriteMaterial( { map: texture, depthTest: false } );
-				const sprite = new Sprite( material );
-				sprite.position.set( geometry.point[ 0 ], geometry.point[ 1 ], geometry.point[ 2 ] );
-				sprite.scale.set( width / 10, height / 10, 1.0 );
+			}
 
-				sprite.userData[ 'attributes' ] = attributes;
-				sprite.userData[ 'objectType' ] = obj.objectType;
 
-				if ( attributes.name ) {
+			if ( geometry.attributes.hasOwnProperty( 'color' ) ) {
 
-					sprite.name = attributes.name;
+				mat.vertexColors = true;
 
-				}
+			}
 
-				return sprite;
+			mat = this._compareMaterials( mat );
 
-			case 'Light':
+			const mesh = new Mesh( geometry, mat );
+			mesh.castShadow = attributes.castsShadows;
+			mesh.receiveShadow = attributes.receivesShadows;
+			mesh.userData[ 'attributes' ] = attributes;
+			mesh.userData[ 'objectType' ] = obj.objectType;
 
-				geometry = obj.geometry;
+			if ( attributes.name ) {
 
-				let light;
+				mesh.name = attributes.name;
 
-				switch ( geometry.lightStyle.name ) {
+			}
 
-					case 'LightStyle_WorldPoint':
+			return mesh;
 
-						light = new PointLight();
-						light.castShadow = attributes.castsShadows;
-						light.position.set( geometry.location[ 0 ], geometry.location[ 1 ], geometry.location[ 2 ] );
-						light.shadow.normalBias = 0.1;
+		case 'Curve':
 
-						break;
+			geometry = loader.parse( obj.geometry );
 
-					case 'LightStyle_WorldSpot':
+			_color = attributes.drawColor;
+			color = new Color( _color.r / 255.0, _color.g / 255.0, _color.b / 255.0 );
 
-						light = new SpotLight();
-						light.castShadow = attributes.castsShadows;
-						light.position.set( geometry.location[ 0 ], geometry.location[ 1 ], geometry.location[ 2 ] );
-						light.target.position.set( geometry.direction[ 0 ], geometry.direction[ 1 ], geometry.direction[ 2 ] );
-						light.angle = geometry.spotAngleRadians;
-						light.shadow.normalBias = 0.1;
+			material = new LineBasicMaterial( { color: color } );
+			material = this._compareMaterials( material );
 
-						break;
+			const lines = new Line( geometry, material );
+			lines.userData[ 'attributes' ] = attributes;
+			lines.userData[ 'objectType' ] = obj.objectType;
 
-					case 'LightStyle_WorldRectangular':
+			if ( attributes.name ) {
 
-						light = new RectAreaLight();
-						const width = Math.abs( geometry.width[ 2 ] );
-						const height = Math.abs( geometry.length[ 0 ] );
-						light.position.set( geometry.location[ 0 ] - ( height / 2 ), geometry.location[ 1 ], geometry.location[ 2 ] - ( width / 2 ) );
-						light.height = height;
-						light.width = width;
-						light.lookAt( geometry.direction[ 0 ], geometry.direction[ 1 ], geometry.direction[ 2 ] );
+				lines.name = attributes.name;
 
-						break;
+			}
 
-					case 'LightStyle_WorldDirectional':
+			return lines;
 
-						light = new DirectionalLight();
-						light.castShadow = attributes.castsShadows;
-						light.position.set( geometry.location[ 0 ], geometry.location[ 1 ], geometry.location[ 2 ] );
-						light.target.position.set( geometry.direction[ 0 ], geometry.direction[ 1 ], geometry.direction[ 2 ] );
-						light.shadow.normalBias = 0.1;
+		case 'TextDot':
 
-						break;
+			geometry = obj.geometry;
 
-					case 'LightStyle_WorldLinear':
-						// no conversion exists, warning has already been printed to the console
-						break;
+			const ctx = document.createElement( 'canvas' ).getContext( '2d' );
+			const font = `${geometry.fontHeight}px ${geometry.fontFace}`;
+			ctx.font = font;
+			const width = ctx.measureText( geometry.text ).width + 10;
+			const height = geometry.fontHeight + 10;
 
-					default:
-						break;
+			const r = window.devicePixelRatio;
 
-				}
+			ctx.canvas.width = width * r;
+			ctx.canvas.height = height * r;
+			ctx.canvas.style.width = width + 'px';
+			ctx.canvas.style.height = height + 'px';
+			ctx.setTransform( r, 0, 0, r, 0, 0 );
 
-				if ( light ) {
+			ctx.font = font;
+			ctx.textBaseline = 'middle';
+			ctx.textAlign = 'center';
+			color = attributes.drawColor;
+			ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+			ctx.fillRect( 0, 0, width, height );
+			ctx.fillStyle = 'white';
+			ctx.fillText( geometry.text, width / 2, height / 2 );
 
-					light.intensity = geometry.intensity;
-					_color = geometry.diffuse;
-					color = new Color( _color.r / 255.0, _color.g / 255.0, _color.b / 255.0 );
-					light.color = color;
-					light.userData[ 'attributes' ] = attributes;
-					light.userData[ 'objectType' ] = obj.objectType;
+			const texture = new CanvasTexture( ctx.canvas );
+			texture.minFilter = LinearFilter;
+			texture.generateMipmaps = false;
+			texture.wrapS = ClampToEdgeWrapping;
+			texture.wrapT = ClampToEdgeWrapping;
 
-				}
+			material = new SpriteMaterial( { map: texture, depthTest: false } );
+			const sprite = new Sprite( material );
+			sprite.position.set( geometry.point[ 0 ], geometry.point[ 1 ], geometry.point[ 2 ] );
+			sprite.scale.set( width / 10, height / 10, 1.0 );
 
-				return light;
+			sprite.userData[ 'attributes' ] = attributes;
+			sprite.userData[ 'objectType' ] = obj.objectType;
+
+			if ( attributes.name ) {
+
+				sprite.name = attributes.name;
+
+			}
+
+			return sprite;
+
+		case 'Light':
+
+			geometry = obj.geometry;
+
+			let light;
+
+			switch ( geometry.lightStyle.name ) {
+
+			case 'LightStyle_WorldPoint':
+
+				light = new PointLight();
+				light.castShadow = attributes.castsShadows;
+				light.position.set( geometry.location[ 0 ], geometry.location[ 1 ], geometry.location[ 2 ] );
+				light.shadow.normalBias = 0.1;
+
+				break;
+
+			case 'LightStyle_WorldSpot':
+
+				light = new SpotLight();
+				light.castShadow = attributes.castsShadows;
+				light.position.set( geometry.location[ 0 ], geometry.location[ 1 ], geometry.location[ 2 ] );
+				light.target.position.set( geometry.direction[ 0 ], geometry.direction[ 1 ], geometry.direction[ 2 ] );
+				light.angle = geometry.spotAngleRadians;
+				light.shadow.normalBias = 0.1;
+
+				break;
+
+			case 'LightStyle_WorldRectangular':
+
+				light = new RectAreaLight();
+				const width = Math.abs( geometry.width[ 2 ] );
+				const height = Math.abs( geometry.length[ 0 ] );
+				light.position.set( geometry.location[ 0 ] - ( height / 2 ), geometry.location[ 1 ], geometry.location[ 2 ] - ( width / 2 ) );
+				light.height = height;
+				light.width = width;
+				light.lookAt( geometry.direction[ 0 ], geometry.direction[ 1 ], geometry.direction[ 2 ] );
+
+				break;
+
+			case 'LightStyle_WorldDirectional':
+
+				light = new DirectionalLight();
+				light.castShadow = attributes.castsShadows;
+				light.position.set( geometry.location[ 0 ], geometry.location[ 1 ], geometry.location[ 2 ] );
+				light.target.position.set( geometry.direction[ 0 ], geometry.direction[ 1 ], geometry.direction[ 2 ] );
+				light.shadow.normalBias = 0.1;
+
+				break;
+
+			case 'LightStyle_WorldLinear':
+				// no conversion exists, warning has already been printed to the console
+				break;
+
+			default:
+				break;
+
+			}
+
+			if ( light ) {
+
+				light.intensity = geometry.intensity;
+				_color = geometry.diffuse;
+				color = new Color( _color.r / 255.0, _color.g / 255.0, _color.b / 255.0 );
+				light.color = color;
+				light.userData[ 'attributes' ] = attributes;
+				light.userData[ 'objectType' ] = obj.objectType;
+
+			}
+
+			return light;
 
 		}
 
@@ -979,21 +979,21 @@ class Rhino3dmLoader extends Loader {
 
 					switch ( message.type ) {
 
-						case 'warning':
-							this.warnings.push( message.data );
-							console.warn( message.data );
-							break;
+					case 'warning':
+						this.warnings.push( message.data );
+						console.warn( message.data );
+						break;
 
-						case 'decode':
-							worker._callbacks[ message.id ].resolve( message );
-							break;
+					case 'decode':
+						worker._callbacks[ message.id ].resolve( message );
+						break;
 
-						case 'error':
-							worker._callbacks[ message.id ].reject( message );
-							break;
+					case 'error':
+						worker._callbacks[ message.id ].reject( message );
+						break;
 
-						default:
-							console.error( 'THREE.Rhino3dmLoader: Unexpected message, "' + message.type + '"' );
+					default:
+						console.error( 'THREE.Rhino3dmLoader: Unexpected message, "' + message.type + '"' );
 
 					}
 
@@ -1062,46 +1062,46 @@ function Rhino3dmWorker() {
 
 		switch ( message.type ) {
 
-			case 'init':
+		case 'init':
 
-				libraryConfig = message.libraryConfig;
-				const wasmBinary = libraryConfig.wasmBinary;
-				let RhinoModule;
-				libraryPending = new Promise( function ( resolve ) {
+			libraryConfig = message.libraryConfig;
+			const wasmBinary = libraryConfig.wasmBinary;
+			let RhinoModule;
+			libraryPending = new Promise( function ( resolve ) {
 
-					/* Like Basis Loader */
-					RhinoModule = { wasmBinary, onRuntimeInitialized: resolve };
+				/* Like Basis Loader */
+				RhinoModule = { wasmBinary, onRuntimeInitialized: resolve };
 
-					rhino3dm( RhinoModule ); // eslint-disable-line no-undef
+				rhino3dm( RhinoModule ); // eslint-disable-line no-undef
 
 				 } ).then( () => {
 
-					rhino = RhinoModule;
+				rhino = RhinoModule;
 
 				 } );
 
-				break;
+			break;
 
-			case 'decode':
+		case 'decode':
 
-				taskID = message.id;
-				const buffer = message.buffer;
-				libraryPending.then( () => {
+			taskID = message.id;
+			const buffer = message.buffer;
+			libraryPending.then( () => {
 
-					try {
+				try {
 
-						const data = decodeObjects( rhino, buffer );
-						self.postMessage( { type: 'decode', id: message.id, data } );
+					const data = decodeObjects( rhino, buffer );
+					self.postMessage( { type: 'decode', id: message.id, data } );
 
-					} catch ( error ) {
+				} catch ( error ) {
 
-						self.postMessage( { type: 'error', id: message.id, error } );
+					self.postMessage( { type: 'error', id: message.id, error } );
 
-					}
+				}
 
-				} );
+			} );
 
-				break;
+			break;
 
 		}
 
@@ -1307,31 +1307,31 @@ function Rhino3dmWorker() {
 
 			switch ( content.kind ) {
 
-				case 'environment':
+			case 'environment':
 
-					const id = content.id;
+				const id = content.id;
 
-					// there could be multiple render environments in a 3dm file
-					if ( id !== reflectionId ) break;
+				// there could be multiple render environments in a 3dm file
+				if ( id !== reflectionId ) break;
 
-					const renderTexture = content.findChild( 'texture' );
-					const fileName = renderTexture.fileName;
+				const renderTexture = content.findChild( 'texture' );
+				const fileName = renderTexture.fileName;
 
-					for ( let j = 0; j < doc.embeddedFiles().count; j ++ ) {
+				for ( let j = 0; j < doc.embeddedFiles().count; j ++ ) {
 
-						const _fileName = doc.embeddedFiles().get( j ).fileName;
+					const _fileName = doc.embeddedFiles().get( j ).fileName;
 
-						if ( fileName === _fileName ) {
+					if ( fileName === _fileName ) {
 
-							const background = doc.getEmbeddedFileAsBase64( fileName );
-							const backgroundImage = 'data:image/png;base64,' + background;
-							renderEnvironment = { type: 'renderEnvironment', image: backgroundImage, name: fileName };
-
-						}
+						const background = doc.getEmbeddedFileAsBase64( fileName );
+						const backgroundImage = 'data:image/png;base64,' + background;
+						renderEnvironment = { type: 'renderEnvironment', image: backgroundImage, name: fileName };
 
 					}
 
-					break;
+				}
+
+				break;
 
 			}
 
@@ -1448,176 +1448,176 @@ function Rhino3dmWorker() {
 		// TODO: handle other geometry types
 		switch ( objectType ) {
 
-			case rhino.ObjectType.Curve:
+		case rhino.ObjectType.Curve:
 
-				const pts = curveToPoints( _geometry, 100 );
+			const pts = curveToPoints( _geometry, 100 );
 
-				position = {};
-				attributes = {};
-				data = {};
+			position = {};
+			attributes = {};
+			data = {};
 
-				position.itemSize = 3;
-				position.type = 'Float32Array';
-				position.array = [];
+			position.itemSize = 3;
+			position.type = 'Float32Array';
+			position.array = [];
 
-				for ( let j = 0; j < pts.length; j ++ ) {
+			for ( let j = 0; j < pts.length; j ++ ) {
 
-					position.array.push( pts[ j ][ 0 ] );
-					position.array.push( pts[ j ][ 1 ] );
-					position.array.push( pts[ j ][ 2 ] );
+				position.array.push( pts[ j ][ 0 ] );
+				position.array.push( pts[ j ][ 1 ] );
+				position.array.push( pts[ j ][ 2 ] );
 
-				}
+			}
 
-				attributes.position = position;
-				data.attributes = attributes;
+			attributes.position = position;
+			data.attributes = attributes;
 
-				geometry = { data };
+			geometry = { data };
 
-				break;
+			break;
 
-			case rhino.ObjectType.Point:
+		case rhino.ObjectType.Point:
 
-				const pt = _geometry.location;
+			const pt = _geometry.location;
 
-				position = {};
-				const color = {};
-				attributes = {};
-				data = {};
+			position = {};
+			const color = {};
+			attributes = {};
+			data = {};
 
-				position.itemSize = 3;
-				position.type = 'Float32Array';
-				position.array = [ pt[ 0 ], pt[ 1 ], pt[ 2 ] ];
+			position.itemSize = 3;
+			position.type = 'Float32Array';
+			position.array = [ pt[ 0 ], pt[ 1 ], pt[ 2 ] ];
 
-				const _color = _attributes.drawColor( doc );
+			const _color = _attributes.drawColor( doc );
 
-				color.itemSize = 3;
-				color.type = 'Float32Array';
-				color.array = [ _color.r / 255.0, _color.g / 255.0, _color.b / 255.0 ];
+			color.itemSize = 3;
+			color.type = 'Float32Array';
+			color.array = [ _color.r / 255.0, _color.g / 255.0, _color.b / 255.0 ];
 
-				attributes.position = position;
-				attributes.color = color;
-				data.attributes = attributes;
+			attributes.position = position;
+			attributes.color = color;
+			data.attributes = attributes;
 
-				geometry = { data };
+			geometry = { data };
 
-				break;
+			break;
 
-			case rhino.ObjectType.PointSet:
-			case rhino.ObjectType.Mesh:
+		case rhino.ObjectType.PointSet:
+		case rhino.ObjectType.Mesh:
 
-				geometry = _geometry.toThreejsJSON();
+			geometry = _geometry.toThreejsJSON();
 
-				break;
+			break;
 
-			case rhino.ObjectType.Brep:
+		case rhino.ObjectType.Brep:
 
-				const faces = _geometry.faces();
-				mesh = new rhino.Mesh();
+			const faces = _geometry.faces();
+			mesh = new rhino.Mesh();
 
-				for ( let faceIndex = 0; faceIndex < faces.count; faceIndex ++ ) {
+			for ( let faceIndex = 0; faceIndex < faces.count; faceIndex ++ ) {
 
-					const face = faces.get( faceIndex );
-					const _mesh = face.getMesh( rhino.MeshType.Any );
+				const face = faces.get( faceIndex );
+				const _mesh = face.getMesh( rhino.MeshType.Any );
 
-					if ( _mesh ) {
+				if ( _mesh ) {
 
-						mesh.append( _mesh );
-						_mesh.delete();
-
-					}
-
-					face.delete();
+					mesh.append( _mesh );
+					_mesh.delete();
 
 				}
 
-				if ( mesh.faces().count > 0 ) {
+				face.delete();
 
-					mesh.compact();
-					geometry = mesh.toThreejsJSON();
-					faces.delete();
+			}
 
-				}
+			if ( mesh.faces().count > 0 ) {
 
+				mesh.compact();
+				geometry = mesh.toThreejsJSON();
+				faces.delete();
+
+			}
+
+			mesh.delete();
+
+			break;
+
+		case rhino.ObjectType.Extrusion:
+
+			mesh = _geometry.getMesh( rhino.MeshType.Any );
+
+			if ( mesh ) {
+
+				geometry = mesh.toThreejsJSON();
 				mesh.delete();
 
-				break;
+			}
 
-			case rhino.ObjectType.Extrusion:
+			break;
 
-				mesh = _geometry.getMesh( rhino.MeshType.Any );
+		case rhino.ObjectType.TextDot:
 
-				if ( mesh ) {
+			geometry = extractProperties( _geometry );
 
-					geometry = mesh.toThreejsJSON();
-					mesh.delete();
+			break;
 
-				}
+		case rhino.ObjectType.Light:
 
-				break;
+			geometry = extractProperties( _geometry );
 
-			case rhino.ObjectType.TextDot:
-
-				geometry = extractProperties( _geometry );
-
-				break;
-
-			case rhino.ObjectType.Light:
-
-				geometry = extractProperties( _geometry );
-
-				if ( geometry.lightStyle.name === 'LightStyle_WorldLinear' ) {
-
-					self.postMessage( { type: 'warning', id: taskID, data: {
-						message: `THREE.3DMLoader: No conversion exists for ${objectType.constructor.name} ${geometry.lightStyle.name}`,
-						type: 'no conversion',
-						guid: _attributes.id
-					}
-
-					} );
-
-				}
-
-				break;
-
-			case rhino.ObjectType.InstanceReference:
-
-				geometry = extractProperties( _geometry );
-				geometry.xform = extractProperties( _geometry.xform );
-				geometry.xform.array = _geometry.xform.toFloatArray( true );
-
-				break;
-
-			case rhino.ObjectType.SubD:
-
-				// TODO: precalculate resulting vertices and faces and warn on excessive results
-				_geometry.subdivide( 3 );
-				mesh = rhino.Mesh.createFromSubDControlNet( _geometry, false );
-				if ( mesh ) {
-
-					geometry = mesh.toThreejsJSON();
-					mesh.delete();
-
-				}
-
-				break;
-
-				/*
-				case rhino.ObjectType.Annotation:
-				case rhino.ObjectType.Hatch:
-				case rhino.ObjectType.ClipPlane:
-				*/
-
-			default:
+			if ( geometry.lightStyle.name === 'LightStyle_WorldLinear' ) {
 
 				self.postMessage( { type: 'warning', id: taskID, data: {
-					message: `THREE.3DMLoader: Conversion not implemented for ${objectType.constructor.name}`,
-					type: 'not implemented',
+					message: `THREE.3DMLoader: No conversion exists for ${objectType.constructor.name} ${geometry.lightStyle.name}`,
+					type: 'no conversion',
 					guid: _attributes.id
 				}
 
 				} );
 
-				break;
+			}
+
+			break;
+
+		case rhino.ObjectType.InstanceReference:
+
+			geometry = extractProperties( _geometry );
+			geometry.xform = extractProperties( _geometry.xform );
+			geometry.xform.array = _geometry.xform.toFloatArray( true );
+
+			break;
+
+		case rhino.ObjectType.SubD:
+
+			// TODO: precalculate resulting vertices and faces and warn on excessive results
+			_geometry.subdivide( 3 );
+			mesh = rhino.Mesh.createFromSubDControlNet( _geometry, false );
+			if ( mesh ) {
+
+				geometry = mesh.toThreejsJSON();
+				mesh.delete();
+
+			}
+
+			break;
+
+			/*
+				case rhino.ObjectType.Annotation:
+				case rhino.ObjectType.Hatch:
+				case rhino.ObjectType.ClipPlane:
+				*/
+
+		default:
+
+			self.postMessage( { type: 'warning', id: taskID, data: {
+				message: `THREE.3DMLoader: Conversion not implemented for ${objectType.constructor.name}`,
+				type: 'not implemented',
+				guid: _attributes.id
+			}
+
+			} );
+
+			break;
 
 		}
 

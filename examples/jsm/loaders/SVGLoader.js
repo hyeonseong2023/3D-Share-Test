@@ -151,76 +151,76 @@ class SVGLoader extends Loader {
 
 			switch ( node.nodeName ) {
 
-				case 'svg':
-					style = parseStyle( node, style );
-					break;
+			case 'svg':
+				style = parseStyle( node, style );
+				break;
 
-				case 'style':
-					parseCSSStylesheet( node );
-					break;
+			case 'style':
+				parseCSSStylesheet( node );
+				break;
 
-				case 'g':
-					style = parseStyle( node, style );
-					break;
+			case 'g':
+				style = parseStyle( node, style );
+				break;
 
-				case 'path':
-					style = parseStyle( node, style );
-					if ( node.hasAttribute( 'd' ) ) path = parsePathNode( node );
-					break;
+			case 'path':
+				style = parseStyle( node, style );
+				if ( node.hasAttribute( 'd' ) ) path = parsePathNode( node );
+				break;
 
-				case 'rect':
-					style = parseStyle( node, style );
-					path = parseRectNode( node );
-					break;
+			case 'rect':
+				style = parseStyle( node, style );
+				path = parseRectNode( node );
+				break;
 
-				case 'polygon':
-					style = parseStyle( node, style );
-					path = parsePolygonNode( node );
-					break;
+			case 'polygon':
+				style = parseStyle( node, style );
+				path = parsePolygonNode( node );
+				break;
 
-				case 'polyline':
-					style = parseStyle( node, style );
-					path = parsePolylineNode( node );
-					break;
+			case 'polyline':
+				style = parseStyle( node, style );
+				path = parsePolylineNode( node );
+				break;
 
-				case 'circle':
-					style = parseStyle( node, style );
-					path = parseCircleNode( node );
-					break;
+			case 'circle':
+				style = parseStyle( node, style );
+				path = parseCircleNode( node );
+				break;
 
-				case 'ellipse':
-					style = parseStyle( node, style );
-					path = parseEllipseNode( node );
-					break;
+			case 'ellipse':
+				style = parseStyle( node, style );
+				path = parseEllipseNode( node );
+				break;
 
-				case 'line':
-					style = parseStyle( node, style );
-					path = parseLineNode( node );
-					break;
+			case 'line':
+				style = parseStyle( node, style );
+				path = parseLineNode( node );
+				break;
 
-				case 'defs':
-					isDefsNode = true;
-					break;
+			case 'defs':
+				isDefsNode = true;
+				break;
 
-				case 'use':
-					style = parseStyle( node, style );
+			case 'use':
+				style = parseStyle( node, style );
 
-					const href = node.getAttributeNS( 'http://www.w3.org/1999/xlink', 'href' ) || '';
-					const usedNodeId = href.substring( 1 );
-					const usedNode = node.viewportElement.getElementById( usedNodeId );
-					if ( usedNode ) {
+				const href = node.getAttributeNS( 'http://www.w3.org/1999/xlink', 'href' ) || '';
+				const usedNodeId = href.substring( 1 );
+				const usedNode = node.viewportElement.getElementById( usedNodeId );
+				if ( usedNode ) {
 
-						parseNode( usedNode, style );
+					parseNode( usedNode, style );
 
-					} else {
+				} else {
 
-						console.warn( 'SVGLoader: \'use node\' references non-existent node id: ' + usedNodeId );
+					console.warn( 'SVGLoader: \'use node\' references non-existent node id: ' + usedNodeId );
 
-					}
+				}
 
-					break;
+				break;
 
-				default:
+			default:
 					// console.log( node );
 
 			}
@@ -316,406 +316,406 @@ class SVGLoader extends Loader {
 
 				switch ( type ) {
 
-					case 'M':
-						numbers = parseFloats( data );
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+				case 'M':
+					numbers = parseFloats( data );
+					for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
 
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
+						point.x = numbers[ j + 0 ];
+						point.y = numbers[ j + 1 ];
+						control.x = point.x;
+						control.y = point.y;
 
-							if ( j === 0 ) {
+						if ( j === 0 ) {
 
-								path.moveTo( point.x, point.y );
+							path.moveTo( point.x, point.y );
 
-							} else {
+						} else {
 
-								path.lineTo( point.x, point.y );
-
-							}
-
-							if ( j === 0 ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'H':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.x = numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
 							path.lineTo( point.x, point.y );
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
 						}
 
-						break;
+						if ( j === 0 ) firstPoint.copy( point );
 
-					case 'V':
-						numbers = parseFloats( data );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+					break;
 
-							point.y = numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
+				case 'H':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+
+						point.x = numbers[ j ];
+						control.x = point.x;
+						control.y = point.y;
+						path.lineTo( point.x, point.y );
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'V':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+
+						point.y = numbers[ j ];
+						control.x = point.x;
+						control.y = point.y;
+						path.lineTo( point.x, point.y );
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'L':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+						point.x = numbers[ j + 0 ];
+						point.y = numbers[ j + 1 ];
+						control.x = point.x;
+						control.y = point.y;
+						path.lineTo( point.x, point.y );
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'C':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
+
+						path.bezierCurveTo(
+							numbers[ j + 0 ],
+							numbers[ j + 1 ],
+							numbers[ j + 2 ],
+							numbers[ j + 3 ],
+							numbers[ j + 4 ],
+							numbers[ j + 5 ]
+						);
+						control.x = numbers[ j + 2 ];
+						control.y = numbers[ j + 3 ];
+						point.x = numbers[ j + 4 ];
+						point.y = numbers[ j + 5 ];
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'S':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+
+						path.bezierCurveTo(
+							getReflection( point.x, control.x ),
+							getReflection( point.y, control.y ),
+							numbers[ j + 0 ],
+							numbers[ j + 1 ],
+							numbers[ j + 2 ],
+							numbers[ j + 3 ]
+						);
+						control.x = numbers[ j + 0 ];
+						control.y = numbers[ j + 1 ];
+						point.x = numbers[ j + 2 ];
+						point.y = numbers[ j + 3 ];
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'Q':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+
+						path.quadraticCurveTo(
+							numbers[ j + 0 ],
+							numbers[ j + 1 ],
+							numbers[ j + 2 ],
+							numbers[ j + 3 ]
+						);
+						control.x = numbers[ j + 0 ];
+						control.y = numbers[ j + 1 ];
+						point.x = numbers[ j + 2 ];
+						point.y = numbers[ j + 3 ];
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'T':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+						const rx = getReflection( point.x, control.x );
+						const ry = getReflection( point.y, control.y );
+						path.quadraticCurveTo(
+							rx,
+							ry,
+							numbers[ j + 0 ],
+							numbers[ j + 1 ]
+						);
+						control.x = rx;
+						control.y = ry;
+						point.x = numbers[ j + 0 ];
+						point.y = numbers[ j + 1 ];
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'A':
+					numbers = parseFloats( data, [ 3, 4 ], 7 );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
+
+						// skip command if start point == end point
+						if ( numbers[ j + 5 ] == point.x && numbers[ j + 6 ] == point.y ) continue;
+
+						const start = point.clone();
+						point.x = numbers[ j + 5 ];
+						point.y = numbers[ j + 6 ];
+						control.x = point.x;
+						control.y = point.y;
+						parseArcCommand(
+							path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
+						);
+
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+					}
+
+					break;
+
+				case 'm':
+					numbers = parseFloats( data );
+
+					for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+						point.x += numbers[ j + 0 ];
+						point.y += numbers[ j + 1 ];
+						control.x = point.x;
+						control.y = point.y;
+
+						if ( j === 0 ) {
+
+							path.moveTo( point.x, point.y );
+
+						} else {
+
 							path.lineTo( point.x, point.y );
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
 						}
 
-						break;
+						if ( j === 0 ) firstPoint.copy( point );
 
-					case 'L':
-						numbers = parseFloats( data );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+					break;
 
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
+				case 'h':
+					numbers = parseFloats( data );
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+					for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
 
-						}
+						point.x += numbers[ j ];
+						control.x = point.x;
+						control.y = point.y;
+						path.lineTo( point.x, point.y );
 
-						break;
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-					case 'C':
-						numbers = parseFloats( data );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
+					break;
 
-							path.bezierCurveTo(
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ],
-								numbers[ j + 4 ],
-								numbers[ j + 5 ]
-							);
-							control.x = numbers[ j + 2 ];
-							control.y = numbers[ j + 3 ];
-							point.x = numbers[ j + 4 ];
-							point.y = numbers[ j + 5 ];
+				case 'v':
+					numbers = parseFloats( data );
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+					for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
 
-						}
+						point.y += numbers[ j ];
+						control.x = point.x;
+						control.y = point.y;
+						path.lineTo( point.x, point.y );
 
-						break;
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-					case 'S':
-						numbers = parseFloats( data );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+					break;
 
-							path.bezierCurveTo(
-								getReflection( point.x, control.x ),
-								getReflection( point.y, control.y ),
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ]
-							);
-							control.x = numbers[ j + 0 ];
-							control.y = numbers[ j + 1 ];
-							point.x = numbers[ j + 2 ];
-							point.y = numbers[ j + 3 ];
+				case 'l':
+					numbers = parseFloats( data );
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+					for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
 
-						}
+						point.x += numbers[ j + 0 ];
+						point.y += numbers[ j + 1 ];
+						control.x = point.x;
+						control.y = point.y;
+						path.lineTo( point.x, point.y );
 
-						break;
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-					case 'Q':
-						numbers = parseFloats( data );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+					break;
 
-							path.quadraticCurveTo(
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ]
-							);
-							control.x = numbers[ j + 0 ];
-							control.y = numbers[ j + 1 ];
-							point.x = numbers[ j + 2 ];
-							point.y = numbers[ j + 3 ];
+				case 'c':
+					numbers = parseFloats( data );
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+					for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
 
-						}
+						path.bezierCurveTo(
+							point.x + numbers[ j + 0 ],
+							point.y + numbers[ j + 1 ],
+							point.x + numbers[ j + 2 ],
+							point.y + numbers[ j + 3 ],
+							point.x + numbers[ j + 4 ],
+							point.y + numbers[ j + 5 ]
+						);
+						control.x = point.x + numbers[ j + 2 ];
+						control.y = point.y + numbers[ j + 3 ];
+						point.x += numbers[ j + 4 ];
+						point.y += numbers[ j + 5 ];
 
-						break;
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-					case 'T':
-						numbers = parseFloats( data );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+					break;
 
-							const rx = getReflection( point.x, control.x );
-							const ry = getReflection( point.y, control.y );
-							path.quadraticCurveTo(
-								rx,
-								ry,
-								numbers[ j + 0 ],
-								numbers[ j + 1 ]
-							);
-							control.x = rx;
-							control.y = ry;
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
+				case 's':
+					numbers = parseFloats( data );
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+					for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
 
-						}
+						path.bezierCurveTo(
+							getReflection( point.x, control.x ),
+							getReflection( point.y, control.y ),
+							point.x + numbers[ j + 0 ],
+							point.y + numbers[ j + 1 ],
+							point.x + numbers[ j + 2 ],
+							point.y + numbers[ j + 3 ]
+						);
+						control.x = point.x + numbers[ j + 0 ];
+						control.y = point.y + numbers[ j + 1 ];
+						point.x += numbers[ j + 2 ];
+						point.y += numbers[ j + 3 ];
 
-						break;
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-					case 'A':
-						numbers = parseFloats( data, [ 3, 4 ], 7 );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
+					break;
 
-							// skip command if start point == end point
-							if ( numbers[ j + 5 ] == point.x && numbers[ j + 6 ] == point.y ) continue;
+				case 'q':
+					numbers = parseFloats( data );
 
-							const start = point.clone();
-							point.x = numbers[ j + 5 ];
-							point.y = numbers[ j + 6 ];
-							control.x = point.x;
-							control.y = point.y;
-							parseArcCommand(
-								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
-							);
+					for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+						path.quadraticCurveTo(
+							point.x + numbers[ j + 0 ],
+							point.y + numbers[ j + 1 ],
+							point.x + numbers[ j + 2 ],
+							point.y + numbers[ j + 3 ]
+						);
+						control.x = point.x + numbers[ j + 0 ];
+						control.y = point.y + numbers[ j + 1 ];
+						point.x += numbers[ j + 2 ];
+						point.y += numbers[ j + 3 ];
 
-						}
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-						break;
+					}
 
-					case 'm':
-						numbers = parseFloats( data );
+					break;
 
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+				case 't':
+					numbers = parseFloats( data );
 
-							point.x += numbers[ j + 0 ];
-							point.y += numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
+					for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
 
-							if ( j === 0 ) {
+						const rx = getReflection( point.x, control.x );
+						const ry = getReflection( point.y, control.y );
+						path.quadraticCurveTo(
+							rx,
+							ry,
+							point.x + numbers[ j + 0 ],
+							point.y + numbers[ j + 1 ]
+						);
+						control.x = rx;
+						control.y = ry;
+						point.x = point.x + numbers[ j + 0 ];
+						point.y = point.y + numbers[ j + 1 ];
 
-								path.moveTo( point.x, point.y );
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-							} else {
+					}
 
-								path.lineTo( point.x, point.y );
+					break;
 
-							}
+				case 'a':
+					numbers = parseFloats( data, [ 3, 4 ], 7 );
 
-							if ( j === 0 ) firstPoint.copy( point );
+					for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
 
-						}
+						// skip command if no displacement
+						if ( numbers[ j + 5 ] == 0 && numbers[ j + 6 ] == 0 ) continue;
 
-						break;
+						const start = point.clone();
+						point.x += numbers[ j + 5 ];
+						point.y += numbers[ j + 6 ];
+						control.x = point.x;
+						control.y = point.y;
+						parseArcCommand(
+							path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
+						);
 
-					case 'h':
-						numbers = parseFloats( data );
+						if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
 
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+					}
 
-							point.x += numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
+					break;
 
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+				case 'Z':
+				case 'z':
+					path.currentPath.autoClose = true;
 
-						}
+					if ( path.currentPath.curves.length > 0 ) {
 
-						break;
+						// Reset point to beginning of Path
+						point.copy( firstPoint );
+						path.currentPath.currentPoint.copy( point );
+						isFirstPoint = true;
 
-					case 'v':
-						numbers = parseFloats( data );
+					}
 
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+					break;
 
-							point.y += numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'l':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x += numbers[ j + 0 ];
-							point.y += numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'c':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
-
-							path.bezierCurveTo(
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ],
-								point.x + numbers[ j + 4 ],
-								point.y + numbers[ j + 5 ]
-							);
-							control.x = point.x + numbers[ j + 2 ];
-							control.y = point.y + numbers[ j + 3 ];
-							point.x += numbers[ j + 4 ];
-							point.y += numbers[ j + 5 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 's':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.bezierCurveTo(
-								getReflection( point.x, control.x ),
-								getReflection( point.y, control.y ),
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ]
-							);
-							control.x = point.x + numbers[ j + 0 ];
-							control.y = point.y + numbers[ j + 1 ];
-							point.x += numbers[ j + 2 ];
-							point.y += numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'q':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.quadraticCurveTo(
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ]
-							);
-							control.x = point.x + numbers[ j + 0 ];
-							control.y = point.y + numbers[ j + 1 ];
-							point.x += numbers[ j + 2 ];
-							point.y += numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 't':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							const rx = getReflection( point.x, control.x );
-							const ry = getReflection( point.y, control.y );
-							path.quadraticCurveTo(
-								rx,
-								ry,
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ]
-							);
-							control.x = rx;
-							control.y = ry;
-							point.x = point.x + numbers[ j + 0 ];
-							point.y = point.y + numbers[ j + 1 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'a':
-						numbers = parseFloats( data, [ 3, 4 ], 7 );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
-
-							// skip command if no displacement
-							if ( numbers[ j + 5 ] == 0 && numbers[ j + 6 ] == 0 ) continue;
-
-							const start = point.clone();
-							point.x += numbers[ j + 5 ];
-							point.y += numbers[ j + 6 ];
-							control.x = point.x;
-							control.y = point.y;
-							parseArcCommand(
-								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
-							);
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'Z':
-					case 'z':
-						path.currentPath.autoClose = true;
-
-						if ( path.currentPath.curves.length > 0 ) {
-
-							// Reset point to beginning of Path
-							point.copy( firstPoint );
-							path.currentPath.currentPoint.copy( point );
-							isFirstPoint = true;
-
-						}
-
-						break;
-
-					default:
-						console.warn( command );
+				default:
+					console.warn( command );
 
 				}
 
@@ -1531,115 +1531,115 @@ class SVGLoader extends Loader {
 
 						switch ( transformType ) {
 
-							case 'translate':
+						case 'translate':
 
-								if ( array.length >= 1 ) {
+							if ( array.length >= 1 ) {
 
-									const tx = array[ 0 ];
-									let ty = 0;
+								const tx = array[ 0 ];
+								let ty = 0;
 
-									if ( array.length >= 2 ) {
+								if ( array.length >= 2 ) {
 
-										ty = array[ 1 ];
-
-									}
-
-									currentTransform.translate( tx, ty );
+									ty = array[ 1 ];
 
 								}
 
-								break;
+								currentTransform.translate( tx, ty );
 
-							case 'rotate':
+							}
 
-								if ( array.length >= 1 ) {
+							break;
 
-									let angle = 0;
-									let cx = 0;
-									let cy = 0;
+						case 'rotate':
 
-									// Angle
-									angle = array[ 0 ] * Math.PI / 180;
+							if ( array.length >= 1 ) {
 
-									if ( array.length >= 3 ) {
+								let angle = 0;
+								let cx = 0;
+								let cy = 0;
 
-										// Center x, y
-										cx = array[ 1 ];
-										cy = array[ 2 ];
+								// Angle
+								angle = array[ 0 ] * Math.PI / 180;
 
-									}
+								if ( array.length >= 3 ) {
 
-									// Rotate around center (cx, cy)
-									tempTransform1.makeTranslation( - cx, - cy );
-									tempTransform2.makeRotation( angle );
-									tempTransform3.multiplyMatrices( tempTransform2, tempTransform1 );
-									tempTransform1.makeTranslation( cx, cy );
-									currentTransform.multiplyMatrices( tempTransform1, tempTransform3 );
+									// Center x, y
+									cx = array[ 1 ];
+									cy = array[ 2 ];
 
 								}
 
-								break;
+								// Rotate around center (cx, cy)
+								tempTransform1.makeTranslation( - cx, - cy );
+								tempTransform2.makeRotation( angle );
+								tempTransform3.multiplyMatrices( tempTransform2, tempTransform1 );
+								tempTransform1.makeTranslation( cx, cy );
+								currentTransform.multiplyMatrices( tempTransform1, tempTransform3 );
 
-							case 'scale':
+							}
 
-								if ( array.length >= 1 ) {
+							break;
 
-									const scaleX = array[ 0 ];
-									let scaleY = scaleX;
+						case 'scale':
 
-									if ( array.length >= 2 ) {
+							if ( array.length >= 1 ) {
 
-										scaleY = array[ 1 ];
+								const scaleX = array[ 0 ];
+								let scaleY = scaleX;
 
-									}
+								if ( array.length >= 2 ) {
 
-									currentTransform.scale( scaleX, scaleY );
-
-								}
-
-								break;
-
-							case 'skewX':
-
-								if ( array.length === 1 ) {
-
-									currentTransform.set(
-										1, Math.tan( array[ 0 ] * Math.PI / 180 ), 0,
-										0, 1, 0,
-										0, 0, 1
-									);
+									scaleY = array[ 1 ];
 
 								}
 
-								break;
+								currentTransform.scale( scaleX, scaleY );
 
-							case 'skewY':
+							}
 
-								if ( array.length === 1 ) {
+							break;
 
-									currentTransform.set(
-										1, 0, 0,
-										Math.tan( array[ 0 ] * Math.PI / 180 ), 1, 0,
-										0, 0, 1
-									);
+						case 'skewX':
 
-								}
+							if ( array.length === 1 ) {
 
-								break;
+								currentTransform.set(
+									1, Math.tan( array[ 0 ] * Math.PI / 180 ), 0,
+									0, 1, 0,
+									0, 0, 1
+								);
 
-							case 'matrix':
+							}
 
-								if ( array.length === 6 ) {
+							break;
 
-									currentTransform.set(
-										array[ 0 ], array[ 2 ], array[ 4 ],
-										array[ 1 ], array[ 3 ], array[ 5 ],
-										0, 0, 1
-									);
+						case 'skewY':
 
-								}
+							if ( array.length === 1 ) {
 
-								break;
+								currentTransform.set(
+									1, 0, 0,
+									Math.tan( array[ 0 ] * Math.PI / 180 ), 1, 0,
+									0, 0, 1
+								);
+
+							}
+
+							break;
+
+						case 'matrix':
+
+							if ( array.length === 6 ) {
+
+								currentTransform.set(
+									array[ 0 ], array[ 2 ], array[ 4 ],
+									array[ 1 ], array[ 3 ], array[ 5 ],
+									0, 0, 1
+								);
+
+							}
+
+							break;
 
 						}
 
@@ -2678,168 +2678,168 @@ class SVGLoader extends Loader {
 
 					switch ( style.strokeLineJoin ) {
 
-						case 'bevel':
+					case 'bevel':
 
-							makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
+						makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
 
-							break;
+						break;
 
-						case 'round':
+					case 'round':
 
-							// Segment triangles
+						// Segment triangles
 
-							createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
+						createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
 
-							// Join triangles
+						// Join triangles
 
-							if ( joinIsOnLeftSide ) {
+						if ( joinIsOnLeftSide ) {
 
-								makeCircularSector( currentPoint, currentPointL, nextPointL, u1, 0 );
+							makeCircularSector( currentPoint, currentPointL, nextPointL, u1, 0 );
 
-							} else {
+						} else {
 
-								makeCircularSector( currentPoint, nextPointR, currentPointR, u1, 1 );
+							makeCircularSector( currentPoint, nextPointR, currentPointR, u1, 1 );
 
-							}
+						}
 
-							break;
+						break;
 
-						case 'miter':
-						case 'miter-clip':
-						default:
+					case 'miter':
+					case 'miter-clip':
+					default:
 
-							const miterFraction = ( strokeWidth2 * style.strokeMiterLimit ) / miterLength2;
+						const miterFraction = ( strokeWidth2 * style.strokeMiterLimit ) / miterLength2;
 
-							if ( miterFraction < 1 ) {
+						if ( miterFraction < 1 ) {
 
-								// The join miter length exceeds the miter limit
+							// The join miter length exceeds the miter limit
 
-								if ( style.strokeLineJoin !== 'miter-clip' ) {
+							if ( style.strokeLineJoin !== 'miter-clip' ) {
 
-									makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
-									break;
-
-								} else {
-
-									// Segment triangles
-
-									createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
-
-									// Miter-clip join triangles
-
-									if ( joinIsOnLeftSide ) {
-
-										tempV2_6.subVectors( outerPoint, currentPointL ).multiplyScalar( miterFraction ).add( currentPointL );
-										tempV2_7.subVectors( outerPoint, nextPointL ).multiplyScalar( miterFraction ).add( nextPointL );
-
-										addVertex( currentPointL, u1, 0 );
-										addVertex( tempV2_6, u1, 0 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_6, u1, 0 );
-										addVertex( tempV2_7, u1, 0 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_7, u1, 0 );
-										addVertex( nextPointL, u1, 0 );
-
-									} else {
-
-										tempV2_6.subVectors( outerPoint, currentPointR ).multiplyScalar( miterFraction ).add( currentPointR );
-										tempV2_7.subVectors( outerPoint, nextPointR ).multiplyScalar( miterFraction ).add( nextPointR );
-
-										addVertex( currentPointR, u1, 1 );
-										addVertex( tempV2_6, u1, 1 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_6, u1, 1 );
-										addVertex( tempV2_7, u1, 1 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_7, u1, 1 );
-										addVertex( nextPointR, u1, 1 );
-
-									}
-
-								}
+								makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
+								break;
 
 							} else {
 
-								// Miter join segment triangles
+								// Segment triangles
 
-								if ( innerSideModified ) {
+								createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
 
-									// Optimized segment + join triangles
+								// Miter-clip join triangles
 
-									if ( joinIsOnLeftSide ) {
+								if ( joinIsOnLeftSide ) {
 
-										addVertex( lastPointR, u0, 1 );
-										addVertex( lastPointL, u0, 0 );
-										addVertex( outerPoint, u1, 0 );
+									tempV2_6.subVectors( outerPoint, currentPointL ).multiplyScalar( miterFraction ).add( currentPointL );
+									tempV2_7.subVectors( outerPoint, nextPointL ).multiplyScalar( miterFraction ).add( nextPointL );
 
-										addVertex( lastPointR, u0, 1 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( innerPoint, u1, 1 );
+									addVertex( currentPointL, u1, 0 );
+									addVertex( tempV2_6, u1, 0 );
+									addVertex( currentPoint, u1, 0.5 );
 
-									} else {
+									addVertex( currentPoint, u1, 0.5 );
+									addVertex( tempV2_6, u1, 0 );
+									addVertex( tempV2_7, u1, 0 );
 
-										addVertex( lastPointR, u0, 1 );
-										addVertex( lastPointL, u0, 0 );
-										addVertex( outerPoint, u1, 1 );
-
-										addVertex( lastPointL, u0, 0 );
-										addVertex( innerPoint, u1, 0 );
-										addVertex( outerPoint, u1, 1 );
-
-									}
-
-
-									if ( joinIsOnLeftSide ) {
-
-										nextPointL.copy( outerPoint );
-
-									} else {
-
-										nextPointR.copy( outerPoint );
-
-									}
-
+									addVertex( currentPoint, u1, 0.5 );
+									addVertex( tempV2_7, u1, 0 );
+									addVertex( nextPointL, u1, 0 );
 
 								} else {
 
-									// Add extra miter join triangles
+									tempV2_6.subVectors( outerPoint, currentPointR ).multiplyScalar( miterFraction ).add( currentPointR );
+									tempV2_7.subVectors( outerPoint, nextPointR ).multiplyScalar( miterFraction ).add( nextPointR );
 
-									if ( joinIsOnLeftSide ) {
+									addVertex( currentPointR, u1, 1 );
+									addVertex( tempV2_6, u1, 1 );
+									addVertex( currentPoint, u1, 0.5 );
 
-										addVertex( currentPointL, u1, 0 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( currentPoint, u1, 0.5 );
+									addVertex( currentPoint, u1, 0.5 );
+									addVertex( tempV2_6, u1, 1 );
+									addVertex( tempV2_7, u1, 1 );
 
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( nextPointL, u1, 0 );
-
-									} else {
-
-										addVertex( currentPointR, u1, 1 );
-										addVertex( outerPoint, u1, 1 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( outerPoint, u1, 1 );
-										addVertex( nextPointR, u1, 1 );
-
-									}
+									addVertex( currentPoint, u1, 0.5 );
+									addVertex( tempV2_7, u1, 1 );
+									addVertex( nextPointR, u1, 1 );
 
 								}
 
-								isMiter = true;
+							}
+
+						} else {
+
+							// Miter join segment triangles
+
+							if ( innerSideModified ) {
+
+								// Optimized segment + join triangles
+
+								if ( joinIsOnLeftSide ) {
+
+									addVertex( lastPointR, u0, 1 );
+									addVertex( lastPointL, u0, 0 );
+									addVertex( outerPoint, u1, 0 );
+
+									addVertex( lastPointR, u0, 1 );
+									addVertex( outerPoint, u1, 0 );
+									addVertex( innerPoint, u1, 1 );
+
+								} else {
+
+									addVertex( lastPointR, u0, 1 );
+									addVertex( lastPointL, u0, 0 );
+									addVertex( outerPoint, u1, 1 );
+
+									addVertex( lastPointL, u0, 0 );
+									addVertex( innerPoint, u1, 0 );
+									addVertex( outerPoint, u1, 1 );
+
+								}
+
+
+								if ( joinIsOnLeftSide ) {
+
+									nextPointL.copy( outerPoint );
+
+								} else {
+
+									nextPointR.copy( outerPoint );
+
+								}
+
+
+							} else {
+
+								// Add extra miter join triangles
+
+								if ( joinIsOnLeftSide ) {
+
+									addVertex( currentPointL, u1, 0 );
+									addVertex( outerPoint, u1, 0 );
+									addVertex( currentPoint, u1, 0.5 );
+
+									addVertex( currentPoint, u1, 0.5 );
+									addVertex( outerPoint, u1, 0 );
+									addVertex( nextPointL, u1, 0 );
+
+								} else {
+
+									addVertex( currentPointR, u1, 1 );
+									addVertex( outerPoint, u1, 1 );
+									addVertex( currentPoint, u1, 0.5 );
+
+									addVertex( currentPoint, u1, 0.5 );
+									addVertex( outerPoint, u1, 1 );
+									addVertex( nextPointR, u1, 1 );
+
+								}
 
 							}
 
-							break;
+							isMiter = true;
+
+						}
+
+						break;
 
 					}
 
@@ -3141,80 +3141,80 @@ class SVGLoader extends Loader {
 
 			switch ( style.strokeLineCap ) {
 
-				case 'round':
+			case 'round':
 
-					if ( start ) {
+				if ( start ) {
 
-						makeCircularSector( center, p2, p1, u, 0.5 );
+					makeCircularSector( center, p2, p1, u, 0.5 );
 
-					} else {
+				} else {
 
-						makeCircularSector( center, p1, p2, u, 0.5 );
+					makeCircularSector( center, p1, p2, u, 0.5 );
 
-					}
+				}
 
-					break;
+				break;
 
-				case 'square':
+			case 'square':
 
-					if ( start ) {
+				if ( start ) {
 
-						tempV2_1.subVectors( p1, center );
-						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
+					tempV2_1.subVectors( p1, center );
+					tempV2_2.set( tempV2_1.y, - tempV2_1.x );
 
-						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
-						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
+					tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
+					tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
 
-						// Modify already existing vertices
-						if ( joinIsOnLeftSide ) {
+					// Modify already existing vertices
+					if ( joinIsOnLeftSide ) {
 
-							tempV2_3.toArray( vertices, 1 * 3 );
-							tempV2_4.toArray( vertices, 0 * 3 );
-							tempV2_4.toArray( vertices, 3 * 3 );
-
-						} else {
-
-							tempV2_3.toArray( vertices, 1 * 3 );
-							// using tempV2_4 to update 3rd vertex if the uv.y of 3rd vertex is 1
-							uvs[ 3 * 2 + 1 ] === 1 ? tempV2_4.toArray( vertices, 3 * 3 ) : tempV2_3.toArray( vertices, 3 * 3 );
-							tempV2_4.toArray( vertices, 0 * 3 );
-
-						}
+						tempV2_3.toArray( vertices, 1 * 3 );
+						tempV2_4.toArray( vertices, 0 * 3 );
+						tempV2_4.toArray( vertices, 3 * 3 );
 
 					} else {
 
-						tempV2_1.subVectors( p2, center );
-						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
-
-						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
-						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
-
-						const vl = vertices.length;
-
-						// Modify already existing vertices
-						if ( joinIsOnLeftSide ) {
-
-							tempV2_3.toArray( vertices, vl - 1 * 3 );
-							tempV2_4.toArray( vertices, vl - 2 * 3 );
-							tempV2_4.toArray( vertices, vl - 4 * 3 );
-
-						} else {
-
-							tempV2_4.toArray( vertices, vl - 2 * 3 );
-							tempV2_3.toArray( vertices, vl - 1 * 3 );
-							tempV2_4.toArray( vertices, vl - 4 * 3 );
-
-						}
+						tempV2_3.toArray( vertices, 1 * 3 );
+						// using tempV2_4 to update 3rd vertex if the uv.y of 3rd vertex is 1
+						uvs[ 3 * 2 + 1 ] === 1 ? tempV2_4.toArray( vertices, 3 * 3 ) : tempV2_3.toArray( vertices, 3 * 3 );
+						tempV2_4.toArray( vertices, 0 * 3 );
 
 					}
 
-					break;
+				} else {
 
-				case 'butt':
-				default:
+					tempV2_1.subVectors( p2, center );
+					tempV2_2.set( tempV2_1.y, - tempV2_1.x );
 
-					// Nothing to do here
-					break;
+					tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
+					tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
+
+					const vl = vertices.length;
+
+					// Modify already existing vertices
+					if ( joinIsOnLeftSide ) {
+
+						tempV2_3.toArray( vertices, vl - 1 * 3 );
+						tempV2_4.toArray( vertices, vl - 2 * 3 );
+						tempV2_4.toArray( vertices, vl - 4 * 3 );
+
+					} else {
+
+						tempV2_4.toArray( vertices, vl - 2 * 3 );
+						tempV2_3.toArray( vertices, vl - 1 * 3 );
+						tempV2_4.toArray( vertices, vl - 4 * 3 );
+
+					}
+
+				}
+
+				break;
+
+			case 'butt':
+			default:
+
+				// Nothing to do here
+				break;
 
 			}
 

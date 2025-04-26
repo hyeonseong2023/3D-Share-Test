@@ -87,28 +87,28 @@ function _parseV3( pvrDatas ) {
 
 	switch ( pixelFormat ) {
 
-		case 0 : // PVRTC 2bpp RGB
-			bpp = 2;
-			format = RGB_PVRTC_2BPPV1_Format;
-			break;
+	case 0 : // PVRTC 2bpp RGB
+		bpp = 2;
+		format = RGB_PVRTC_2BPPV1_Format;
+		break;
 
-		case 1 : // PVRTC 2bpp RGBA
-			bpp = 2;
-			format = RGBA_PVRTC_2BPPV1_Format;
-			break;
+	case 1 : // PVRTC 2bpp RGBA
+		bpp = 2;
+		format = RGBA_PVRTC_2BPPV1_Format;
+		break;
 
-		case 2 : // PVRTC 4bpp RGB
-			bpp = 4;
-			format = RGB_PVRTC_4BPPV1_Format;
-			break;
+	case 2 : // PVRTC 4bpp RGB
+		bpp = 4;
+		format = RGB_PVRTC_4BPPV1_Format;
+		break;
 
-		case 3 : // PVRTC 4bpp RGBA
-			bpp = 4;
-			format = RGBA_PVRTC_4BPPV1_Format;
-			break;
+	case 3 : // PVRTC 4bpp RGBA
+		bpp = 4;
+		format = RGBA_PVRTC_4BPPV1_Format;
+		break;
 
-		default :
-			console.error( 'THREE.PVRLoader: Unsupported PVR format:', pixelFormat );
+	default :
+		console.error( 'THREE.PVRLoader: Unsupported PVR format:', pixelFormat );
 
 	}
 

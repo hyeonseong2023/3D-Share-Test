@@ -580,48 +580,48 @@ class LDrawParsedCache {
 			let subobjectURL = fileName;
 			switch ( locationState ) {
 
-				case FILE_LOCATION_AS_IS:
-					locationState = locationState + 1;
-					break;
+			case FILE_LOCATION_AS_IS:
+				locationState = locationState + 1;
+				break;
 
-				case FILE_LOCATION_TRY_PARTS:
-					subobjectURL = 'parts/' + subobjectURL;
-					locationState = locationState + 1;
-					break;
+			case FILE_LOCATION_TRY_PARTS:
+				subobjectURL = 'parts/' + subobjectURL;
+				locationState = locationState + 1;
+				break;
 
-				case FILE_LOCATION_TRY_P:
-					subobjectURL = 'p/' + subobjectURL;
-					locationState = locationState + 1;
-					break;
+			case FILE_LOCATION_TRY_P:
+				subobjectURL = 'p/' + subobjectURL;
+				locationState = locationState + 1;
+				break;
 
-				case FILE_LOCATION_TRY_MODELS:
-					subobjectURL = 'models/' + subobjectURL;
-					locationState = locationState + 1;
-					break;
+			case FILE_LOCATION_TRY_MODELS:
+				subobjectURL = 'models/' + subobjectURL;
+				locationState = locationState + 1;
+				break;
 
-				case FILE_LOCATION_TRY_RELATIVE:
-					subobjectURL = fileName.substring( 0, fileName.lastIndexOf( '/' ) + 1 ) + subobjectURL;
-					locationState = locationState + 1;
-					break;
+			case FILE_LOCATION_TRY_RELATIVE:
+				subobjectURL = fileName.substring( 0, fileName.lastIndexOf( '/' ) + 1 ) + subobjectURL;
+				locationState = locationState + 1;
+				break;
 
-				case FILE_LOCATION_TRY_ABSOLUTE:
+			case FILE_LOCATION_TRY_ABSOLUTE:
 
-					if ( triedLowerCase ) {
+				if ( triedLowerCase ) {
 
-						// Try absolute path
-						locationState = FILE_LOCATION_NOT_FOUND;
+					// Try absolute path
+					locationState = FILE_LOCATION_NOT_FOUND;
 
-					} else {
+				} else {
 
-						// Next attempt is lower case
-						fileName = fileName.toLowerCase();
-						subobjectURL = fileName;
-						triedLowerCase = true;
-						locationState = FILE_LOCATION_TRY_PARTS;
+					// Next attempt is lower case
+					fileName = fileName.toLowerCase();
+					subobjectURL = fileName;
+					triedLowerCase = true;
+					locationState = FILE_LOCATION_TRY_PARTS;
 
-					}
+				}
 
-					break;
+				break;
 
 			}
 
@@ -743,348 +743,348 @@ class LDrawParsedCache {
 
 			switch ( lineType ) {
 
-				// Line type 0: Comment or META
-				case '0':
+			// Line type 0: Comment or META
+			case '0':
 
-					// Parse meta directive
-					const meta = lp.getToken();
+				// Parse meta directive
+				const meta = lp.getToken();
 
-					if ( meta ) {
+				if ( meta ) {
 
-						switch ( meta ) {
+					switch ( meta ) {
 
-							case '!LDRAW_ORG':
+					case '!LDRAW_ORG':
 
-								type = lp.getToken();
-								break;
+						type = lp.getToken();
+						break;
 
-							case '!COLOUR':
+					case '!COLOUR':
 
-								material = loader.parseColorMetaDirective( lp );
-								if ( material ) {
+						material = loader.parseColorMetaDirective( lp );
+						if ( material ) {
 
-									materials[ material.userData.code ] = material;
+							materials[ material.userData.code ] = material;
 
-								}	else {
+						}	else {
 
-									console.warn( 'LDrawLoader: Error parsing material' + lp.getLineNumberString() );
+							console.warn( 'LDrawLoader: Error parsing material' + lp.getLineNumberString() );
 
-								}
+						}
 
-								break;
+						break;
 
-							case '!CATEGORY':
+					case '!CATEGORY':
 
-								category = lp.getToken();
-								break;
+						category = lp.getToken();
+						break;
 
-							case '!KEYWORDS':
+					case '!KEYWORDS':
 
-								const newKeywords = lp.getRemainingString().split( ',' );
-								if ( newKeywords.length > 0 ) {
+						const newKeywords = lp.getRemainingString().split( ',' );
+						if ( newKeywords.length > 0 ) {
 
-									if ( ! keywords ) {
+							if ( ! keywords ) {
 
-										keywords = [];
+								keywords = [];
 
-									}
+							}
 
-									newKeywords.forEach( function ( keyword ) {
+							newKeywords.forEach( function ( keyword ) {
 
-										keywords.push( keyword.trim() );
+								keywords.push( keyword.trim() );
 
-									} );
+							} );
 
-								}
+						}
 
-								break;
+						break;
 
-							case 'FILE':
+					case 'FILE':
 
-								if ( lineIndex > 0 ) {
+						if ( lineIndex > 0 ) {
 
-									// Start embedded text files parsing
-									parsingEmbeddedFiles = true;
-									currentEmbeddedFileName = lp.getRemainingString();
-									currentEmbeddedText = '';
+							// Start embedded text files parsing
+							parsingEmbeddedFiles = true;
+							currentEmbeddedFileName = lp.getRemainingString();
+							currentEmbeddedText = '';
 
-									bfcCertified = false;
-									bfcCCW = true;
+							bfcCertified = false;
+							bfcCCW = true;
 
-								}
+						}
 
-								break;
+						break;
 
-							case 'BFC':
+					case 'BFC':
 
-								// Changes to the backface culling state
-								while ( ! lp.isAtTheEnd() ) {
+						// Changes to the backface culling state
+						while ( ! lp.isAtTheEnd() ) {
 
-									const token = lp.getToken();
+							const token = lp.getToken();
 
-									switch ( token ) {
+							switch ( token ) {
 
-										case 'CERTIFY':
-										case 'NOCERTIFY':
+							case 'CERTIFY':
+							case 'NOCERTIFY':
 
-											bfcCertified = token === 'CERTIFY';
-											bfcCCW = true;
-
-											break;
-
-										case 'CW':
-										case 'CCW':
-
-											bfcCCW = token === 'CCW';
-
-											break;
-
-										case 'INVERTNEXT':
-
-											bfcInverted = true;
-
-											break;
-
-										case 'CLIP':
-										case 'NOCLIP':
-
-											bfcCull = token === 'CLIP';
-
-											break;
-
-										default:
-
-											console.warn( 'THREE.LDrawLoader: BFC directive "' + token + '" is unknown.' );
-
-											break;
-
-									}
-
-								}
+								bfcCertified = token === 'CERTIFY';
+								bfcCCW = true;
 
 								break;
 
-							case 'STEP':
+							case 'CW':
+							case 'CCW':
 
-								startingBuildingStep = true;
+								bfcCCW = token === 'CCW';
 
 								break;
 
-							case 'Author:':
+							case 'INVERTNEXT':
 
-								author = lp.getToken();
+								bfcInverted = true;
+
+								break;
+
+							case 'CLIP':
+							case 'NOCLIP':
+
+								bfcCull = token === 'CLIP';
 
 								break;
 
 							default:
-								// Other meta directives are not implemented
+
+								console.warn( 'THREE.LDrawLoader: BFC directive "' + token + '" is unknown.' );
+
 								break;
 
-						}
-
-					}
-
-					break;
-
-					// Line type 1: Sub-object file
-				case '1':
-
-					colorCode = lp.getToken();
-					material = getLocalMaterial( colorCode );
-
-					const posX = parseFloat( lp.getToken() );
-					const posY = parseFloat( lp.getToken() );
-					const posZ = parseFloat( lp.getToken() );
-					const m0 = parseFloat( lp.getToken() );
-					const m1 = parseFloat( lp.getToken() );
-					const m2 = parseFloat( lp.getToken() );
-					const m3 = parseFloat( lp.getToken() );
-					const m4 = parseFloat( lp.getToken() );
-					const m5 = parseFloat( lp.getToken() );
-					const m6 = parseFloat( lp.getToken() );
-					const m7 = parseFloat( lp.getToken() );
-					const m8 = parseFloat( lp.getToken() );
-
-					const matrix = new Matrix4().set(
-						m0, m1, m2, posX,
-						m3, m4, m5, posY,
-						m6, m7, m8, posZ,
-						0, 0, 0, 1
-					);
-
-					let fileName = lp.getRemainingString().trim().replace( /\\/g, '/' );
-
-					if ( loader.fileMap[ fileName ] ) {
-
-						// Found the subobject path in the preloaded file path map
-						fileName = loader.fileMap[ fileName ];
-
-					} else {
-
-						// Standardized subfolders
-						if ( fileName.startsWith( 's/' ) ) {
-
-							fileName = 'parts/' + fileName;
-
-						} else if ( fileName.startsWith( '48/' ) ) {
-
-							fileName = 'p/' + fileName;
+							}
 
 						}
 
-					}
+						break;
 
-					subobjects.push( {
-						material: material,
-						colorCode: colorCode,
-						matrix: matrix,
-						fileName: fileName,
-						inverted: bfcInverted,
-						startingBuildingStep: startingBuildingStep
-					} );
+					case 'STEP':
 
-					startingBuildingStep = false;
-					bfcInverted = false;
+						startingBuildingStep = true;
 
-					break;
+						break;
 
-					// Line type 2: Line segment
-				case '2':
+					case 'Author:':
 
-					colorCode = lp.getToken();
-					material = getLocalMaterial( colorCode );
-					v0 = lp.getVector();
-					v1 = lp.getVector();
+						author = lp.getToken();
 
-					segment = {
-						material: material,
-						colorCode: colorCode,
-						vertices: [ v0, v1 ],
-					};
+						break;
 
-					lineSegments.push( segment );
-
-					break;
-
-					// Line type 5: Conditional Line segment
-				case '5':
-
-					colorCode = lp.getToken();
-					material = getLocalMaterial( colorCode );
-					v0 = lp.getVector();
-					v1 = lp.getVector();
-					c0 = lp.getVector();
-					c1 = lp.getVector();
-
-					segment = {
-						material: material,
-						colorCode: colorCode,
-						vertices: [ v0, v1 ],
-						controlPoints: [ c0, c1 ],
-					};
-
-					conditionalSegments.push( segment );
-
-					break;
-
-					// Line type 3: Triangle
-				case '3':
-
-					colorCode = lp.getToken();
-					material = getLocalMaterial( colorCode );
-					ccw = bfcCCW;
-					doubleSided = ! bfcCertified || ! bfcCull;
-
-					if ( ccw === true ) {
-
-						v0 = lp.getVector();
-						v1 = lp.getVector();
-						v2 = lp.getVector();
-
-					} else {
-
-						v2 = lp.getVector();
-						v1 = lp.getVector();
-						v0 = lp.getVector();
+					default:
+						// Other meta directives are not implemented
+						break;
 
 					}
+
+				}
+
+				break;
+
+				// Line type 1: Sub-object file
+			case '1':
+
+				colorCode = lp.getToken();
+				material = getLocalMaterial( colorCode );
+
+				const posX = parseFloat( lp.getToken() );
+				const posY = parseFloat( lp.getToken() );
+				const posZ = parseFloat( lp.getToken() );
+				const m0 = parseFloat( lp.getToken() );
+				const m1 = parseFloat( lp.getToken() );
+				const m2 = parseFloat( lp.getToken() );
+				const m3 = parseFloat( lp.getToken() );
+				const m4 = parseFloat( lp.getToken() );
+				const m5 = parseFloat( lp.getToken() );
+				const m6 = parseFloat( lp.getToken() );
+				const m7 = parseFloat( lp.getToken() );
+				const m8 = parseFloat( lp.getToken() );
+
+				const matrix = new Matrix4().set(
+					m0, m1, m2, posX,
+					m3, m4, m5, posY,
+					m6, m7, m8, posZ,
+					0, 0, 0, 1
+				);
+
+				let fileName = lp.getRemainingString().trim().replace( /\\/g, '/' );
+
+				if ( loader.fileMap[ fileName ] ) {
+
+					// Found the subobject path in the preloaded file path map
+					fileName = loader.fileMap[ fileName ];
+
+				} else {
+
+					// Standardized subfolders
+					if ( fileName.startsWith( 's/' ) ) {
+
+						fileName = 'parts/' + fileName;
+
+					} else if ( fileName.startsWith( '48/' ) ) {
+
+						fileName = 'p/' + fileName;
+
+					}
+
+				}
+
+				subobjects.push( {
+					material: material,
+					colorCode: colorCode,
+					matrix: matrix,
+					fileName: fileName,
+					inverted: bfcInverted,
+					startingBuildingStep: startingBuildingStep
+				} );
+
+				startingBuildingStep = false;
+				bfcInverted = false;
+
+				break;
+
+				// Line type 2: Line segment
+			case '2':
+
+				colorCode = lp.getToken();
+				material = getLocalMaterial( colorCode );
+				v0 = lp.getVector();
+				v1 = lp.getVector();
+
+				segment = {
+					material: material,
+					colorCode: colorCode,
+					vertices: [ v0, v1 ],
+				};
+
+				lineSegments.push( segment );
+
+				break;
+
+				// Line type 5: Conditional Line segment
+			case '5':
+
+				colorCode = lp.getToken();
+				material = getLocalMaterial( colorCode );
+				v0 = lp.getVector();
+				v1 = lp.getVector();
+				c0 = lp.getVector();
+				c1 = lp.getVector();
+
+				segment = {
+					material: material,
+					colorCode: colorCode,
+					vertices: [ v0, v1 ],
+					controlPoints: [ c0, c1 ],
+				};
+
+				conditionalSegments.push( segment );
+
+				break;
+
+				// Line type 3: Triangle
+			case '3':
+
+				colorCode = lp.getToken();
+				material = getLocalMaterial( colorCode );
+				ccw = bfcCCW;
+				doubleSided = ! bfcCertified || ! bfcCull;
+
+				if ( ccw === true ) {
+
+					v0 = lp.getVector();
+					v1 = lp.getVector();
+					v2 = lp.getVector();
+
+				} else {
+
+					v2 = lp.getVector();
+					v1 = lp.getVector();
+					v0 = lp.getVector();
+
+				}
+
+				faces.push( {
+					material: material,
+					colorCode: colorCode,
+					faceNormal: null,
+					vertices: [ v0, v1, v2 ],
+					normals: [ null, null, null ],
+				} );
+				totalFaces ++;
+
+				if ( doubleSided === true ) {
 
 					faces.push( {
 						material: material,
 						colorCode: colorCode,
 						faceNormal: null,
-						vertices: [ v0, v1, v2 ],
+						vertices: [ v2, v1, v0 ],
 						normals: [ null, null, null ],
 					} );
 					totalFaces ++;
 
-					if ( doubleSided === true ) {
+				}
 
-						faces.push( {
-							material: material,
-							colorCode: colorCode,
-							faceNormal: null,
-							vertices: [ v2, v1, v0 ],
-							normals: [ null, null, null ],
-						} );
-						totalFaces ++;
+				break;
 
-					}
+				// Line type 4: Quadrilateral
+			case '4':
 
-					break;
+				colorCode = lp.getToken();
+				material = getLocalMaterial( colorCode );
+				ccw = bfcCCW;
+				doubleSided = ! bfcCertified || ! bfcCull;
 
-					// Line type 4: Quadrilateral
-				case '4':
+				if ( ccw === true ) {
 
-					colorCode = lp.getToken();
-					material = getLocalMaterial( colorCode );
-					ccw = bfcCCW;
-					doubleSided = ! bfcCertified || ! bfcCull;
+					v0 = lp.getVector();
+					v1 = lp.getVector();
+					v2 = lp.getVector();
+					v3 = lp.getVector();
 
-					if ( ccw === true ) {
+				} else {
 
-						v0 = lp.getVector();
-						v1 = lp.getVector();
-						v2 = lp.getVector();
-						v3 = lp.getVector();
+					v3 = lp.getVector();
+					v2 = lp.getVector();
+					v1 = lp.getVector();
+					v0 = lp.getVector();
 
-					} else {
+				}
 
-						v3 = lp.getVector();
-						v2 = lp.getVector();
-						v1 = lp.getVector();
-						v0 = lp.getVector();
+				// specifically place the triangle diagonal in the v0 and v1 slots so we can
+				// account for the doubling of vertices later when smoothing normals.
+				faces.push( {
+					material: material,
+					colorCode: colorCode,
+					faceNormal: null,
+					vertices: [ v0, v1, v2, v3 ],
+					normals: [ null, null, null, null ],
+				} );
+				totalFaces += 2;
 
-					}
+				if ( doubleSided === true ) {
 
-					// specifically place the triangle diagonal in the v0 and v1 slots so we can
-					// account for the doubling of vertices later when smoothing normals.
 					faces.push( {
 						material: material,
 						colorCode: colorCode,
 						faceNormal: null,
-						vertices: [ v0, v1, v2, v3 ],
+						vertices: [ v3, v2, v1, v0 ],
 						normals: [ null, null, null, null ],
 					} );
 					totalFaces += 2;
 
-					if ( doubleSided === true ) {
+				}
 
-						faces.push( {
-							material: material,
-							colorCode: colorCode,
-							faceNormal: null,
-							vertices: [ v3, v2, v1, v0 ],
-							normals: [ null, null, null, null ],
-						} );
-						totalFaces += 2;
+				break;
 
-					}
-
-					break;
-
-				default:
-					throw new Error( 'LDrawLoader: Unknown line type "' + lineType + '"' + lp.getLineNumberString() + '.' );
+			default:
+				throw new Error( 'LDrawLoader: Unknown line type "' + lineType + '"' + lp.getLineNumberString() + '.' );
 
 			}
 
@@ -2193,107 +2193,107 @@ class LDrawLoader extends Loader {
 
 				switch ( token.toUpperCase() ) {
 
-					case 'CODE':
+				case 'CODE':
 
-						code = lineParser.getToken();
-						break;
+					code = lineParser.getToken();
+					break;
 
-					case 'VALUE':
+				case 'VALUE':
 
-						fillColor = lineParser.getToken();
-						if ( fillColor.startsWith( '0x' ) ) {
+					fillColor = lineParser.getToken();
+					if ( fillColor.startsWith( '0x' ) ) {
 
-							fillColor = '#' + fillColor.substring( 2 );
+						fillColor = '#' + fillColor.substring( 2 );
 
-						} else if ( ! fillColor.startsWith( '#' ) ) {
+					} else if ( ! fillColor.startsWith( '#' ) ) {
 
-							throw new Error( 'LDrawLoader: Invalid color while parsing material' + lineParser.getLineNumberString() + '.' );
+						throw new Error( 'LDrawLoader: Invalid color while parsing material' + lineParser.getLineNumberString() + '.' );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'EDGE':
+				case 'EDGE':
 
-						edgeColor = lineParser.getToken();
-						if ( edgeColor.startsWith( '0x' ) ) {
+					edgeColor = lineParser.getToken();
+					if ( edgeColor.startsWith( '0x' ) ) {
 
-							edgeColor = '#' + edgeColor.substring( 2 );
+						edgeColor = '#' + edgeColor.substring( 2 );
 
-						} else if ( ! edgeColor.startsWith( '#' ) ) {
+					} else if ( ! edgeColor.startsWith( '#' ) ) {
 
-							// Try to see if edge color is a color code
-							edgeMaterial = this.getMaterial( edgeColor );
-							if ( ! edgeMaterial ) {
+						// Try to see if edge color is a color code
+						edgeMaterial = this.getMaterial( edgeColor );
+						if ( ! edgeMaterial ) {
 
-								throw new Error( 'LDrawLoader: Invalid edge color while parsing material' + lineParser.getLineNumberString() + '.' );
-
-							}
-
-							// Get the edge material for this triangle material
-							edgeMaterial = this.edgeMaterialCache.get( edgeMaterial );
+							throw new Error( 'LDrawLoader: Invalid edge color while parsing material' + lineParser.getLineNumberString() + '.' );
 
 						}
 
-						break;
+						// Get the edge material for this triangle material
+						edgeMaterial = this.edgeMaterialCache.get( edgeMaterial );
 
-					case 'ALPHA':
+					}
 
-						alpha = parseInt( lineParser.getToken() );
+					break;
 
-						if ( isNaN( alpha ) ) {
+				case 'ALPHA':
 
-							throw new Error( 'LDrawLoader: Invalid alpha value in material definition' + lineParser.getLineNumberString() + '.' );
+					alpha = parseInt( lineParser.getToken() );
 
-						}
+					if ( isNaN( alpha ) ) {
 
-						alpha = Math.max( 0, Math.min( 1, alpha / 255 ) );
+						throw new Error( 'LDrawLoader: Invalid alpha value in material definition' + lineParser.getLineNumberString() + '.' );
 
-						if ( alpha < 1 ) {
+					}
 
-							isTransparent = true;
+					alpha = Math.max( 0, Math.min( 1, alpha / 255 ) );
 
-						}
+					if ( alpha < 1 ) {
 
-						break;
+						isTransparent = true;
 
-					case 'LUMINANCE':
+					}
 
-						if ( ! parseLuminance( lineParser.getToken() ) ) {
+					break;
 
-							throw new Error( 'LDrawLoader: Invalid luminance value in material definition' + lineParser.getLineNumberString() + '.' );
+				case 'LUMINANCE':
 
-						}
+					if ( ! parseLuminance( lineParser.getToken() ) ) {
 
-						break;
+						throw new Error( 'LDrawLoader: Invalid luminance value in material definition' + lineParser.getLineNumberString() + '.' );
 
-					case 'CHROME':
-						finishType = FINISH_TYPE_CHROME;
-						break;
+					}
 
-					case 'PEARLESCENT':
-						finishType = FINISH_TYPE_PEARLESCENT;
-						break;
+					break;
 
-					case 'RUBBER':
-						finishType = FINISH_TYPE_RUBBER;
-						break;
+				case 'CHROME':
+					finishType = FINISH_TYPE_CHROME;
+					break;
 
-					case 'MATTE_METALLIC':
-						finishType = FINISH_TYPE_MATTE_METALLIC;
-						break;
+				case 'PEARLESCENT':
+					finishType = FINISH_TYPE_PEARLESCENT;
+					break;
 
-					case 'METAL':
-						finishType = FINISH_TYPE_METAL;
-						break;
+				case 'RUBBER':
+					finishType = FINISH_TYPE_RUBBER;
+					break;
 
-					case 'MATERIAL':
-						// Not implemented
-						lineParser.setToEnd();
-						break;
+				case 'MATTE_METALLIC':
+					finishType = FINISH_TYPE_MATTE_METALLIC;
+					break;
 
-					default:
-						throw new Error( 'LDrawLoader: Unknown token "' + token + '" while parsing material' + lineParser.getLineNumberString() + '.' );
+				case 'METAL':
+					finishType = FINISH_TYPE_METAL;
+					break;
+
+				case 'MATERIAL':
+					// Not implemented
+					lineParser.setToEnd();
+					break;
+
+				default:
+					throw new Error( 'LDrawLoader: Unknown token "' + token + '" while parsing material' + lineParser.getLineNumberString() + '.' );
 
 				}
 
@@ -2305,44 +2305,44 @@ class LDrawLoader extends Loader {
 
 		switch ( finishType ) {
 
-			case FINISH_TYPE_DEFAULT:
+		case FINISH_TYPE_DEFAULT:
 
-				material = new MeshStandardMaterial( { roughness: 0.3, metalness: 0 } );
-				break;
+			material = new MeshStandardMaterial( { roughness: 0.3, metalness: 0 } );
+			break;
 
-			case FINISH_TYPE_PEARLESCENT:
+		case FINISH_TYPE_PEARLESCENT:
 
-				// Try to imitate pearlescency by making the surface glossy
-				material = new MeshStandardMaterial( { roughness: 0.3, metalness: 0.25 } );
-				break;
+			// Try to imitate pearlescency by making the surface glossy
+			material = new MeshStandardMaterial( { roughness: 0.3, metalness: 0.25 } );
+			break;
 
-			case FINISH_TYPE_CHROME:
+		case FINISH_TYPE_CHROME:
 
-				// Mirror finish surface
-				material = new MeshStandardMaterial( { roughness: 0, metalness: 1 } );
-				break;
+			// Mirror finish surface
+			material = new MeshStandardMaterial( { roughness: 0, metalness: 1 } );
+			break;
 
-			case FINISH_TYPE_RUBBER:
+		case FINISH_TYPE_RUBBER:
 
-				// Rubber finish
-				material = new MeshStandardMaterial( { roughness: 0.9, metalness: 0 } );
-				break;
+			// Rubber finish
+			material = new MeshStandardMaterial( { roughness: 0.9, metalness: 0 } );
+			break;
 
-			case FINISH_TYPE_MATTE_METALLIC:
+		case FINISH_TYPE_MATTE_METALLIC:
 
-				// Brushed metal finish
-				material = new MeshStandardMaterial( { roughness: 0.8, metalness: 0.4 } );
-				break;
+			// Brushed metal finish
+			material = new MeshStandardMaterial( { roughness: 0.8, metalness: 0.4 } );
+			break;
 
-			case FINISH_TYPE_METAL:
+		case FINISH_TYPE_METAL:
 
-				// Average metal finish
-				material = new MeshStandardMaterial( { roughness: 0.2, metalness: 0.85 } );
-				break;
+			// Average metal finish
+			material = new MeshStandardMaterial( { roughness: 0.2, metalness: 0.85 } );
+			break;
 
-			default:
-				// Should not happen
-				break;
+		default:
+			// Should not happen
+			break;
 
 		}
 

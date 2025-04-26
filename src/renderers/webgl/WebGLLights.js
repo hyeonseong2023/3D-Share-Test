@@ -22,50 +22,50 @@ function UniformsCache() {
 
 			switch ( light.type ) {
 
-				case 'DirectionalLight':
-					uniforms = {
-						direction: new Vector3(),
-						color: new Color()
-					};
-					break;
+			case 'DirectionalLight':
+				uniforms = {
+					direction: new Vector3(),
+					color: new Color()
+				};
+				break;
 
-				case 'SpotLight':
-					uniforms = {
-						position: new Vector3(),
-						direction: new Vector3(),
-						color: new Color(),
-						distance: 0,
-						coneCos: 0,
-						penumbraCos: 0,
-						decay: 0
-					};
-					break;
+			case 'SpotLight':
+				uniforms = {
+					position: new Vector3(),
+					direction: new Vector3(),
+					color: new Color(),
+					distance: 0,
+					coneCos: 0,
+					penumbraCos: 0,
+					decay: 0
+				};
+				break;
 
-				case 'PointLight':
-					uniforms = {
-						position: new Vector3(),
-						color: new Color(),
-						distance: 0,
-						decay: 0
-					};
-					break;
+			case 'PointLight':
+				uniforms = {
+					position: new Vector3(),
+					color: new Color(),
+					distance: 0,
+					decay: 0
+				};
+				break;
 
-				case 'HemisphereLight':
-					uniforms = {
-						direction: new Vector3(),
-						skyColor: new Color(),
-						groundColor: new Color()
-					};
-					break;
+			case 'HemisphereLight':
+				uniforms = {
+					direction: new Vector3(),
+					skyColor: new Color(),
+					groundColor: new Color()
+				};
+				break;
 
-				case 'RectAreaLight':
-					uniforms = {
-						color: new Color(),
-						position: new Vector3(),
-						halfWidth: new Vector3(),
-						halfHeight: new Vector3()
-					};
-					break;
+			case 'RectAreaLight':
+				uniforms = {
+					color: new Color(),
+					position: new Vector3(),
+					halfWidth: new Vector3(),
+					halfHeight: new Vector3()
+				};
+				break;
 
 			}
 
@@ -97,37 +97,37 @@ function ShadowUniformsCache() {
 
 			switch ( light.type ) {
 
-				case 'DirectionalLight':
-					uniforms = {
-						shadowIntensity: 1,
-						shadowBias: 0,
-						shadowNormalBias: 0,
-						shadowRadius: 1,
-						shadowMapSize: new Vector2()
-					};
-					break;
+			case 'DirectionalLight':
+				uniforms = {
+					shadowIntensity: 1,
+					shadowBias: 0,
+					shadowNormalBias: 0,
+					shadowRadius: 1,
+					shadowMapSize: new Vector2()
+				};
+				break;
 
-				case 'SpotLight':
-					uniforms = {
-						shadowIntensity: 1,
-						shadowBias: 0,
-						shadowNormalBias: 0,
-						shadowRadius: 1,
-						shadowMapSize: new Vector2()
-					};
-					break;
+			case 'SpotLight':
+				uniforms = {
+					shadowIntensity: 1,
+					shadowBias: 0,
+					shadowNormalBias: 0,
+					shadowRadius: 1,
+					shadowMapSize: new Vector2()
+				};
+				break;
 
-				case 'PointLight':
-					uniforms = {
-						shadowIntensity: 1,
-						shadowBias: 0,
-						shadowNormalBias: 0,
-						shadowRadius: 1,
-						shadowMapSize: new Vector2(),
-						shadowCameraNear: 1,
-						shadowCameraFar: 1000
-					};
-					break;
+			case 'PointLight':
+				uniforms = {
+					shadowIntensity: 1,
+					shadowBias: 0,
+					shadowNormalBias: 0,
+					shadowRadius: 1,
+					shadowMapSize: new Vector2(),
+					shadowCameraNear: 1,
+					shadowCameraFar: 1000
+				};
+				break;
 
 				// TODO (abelnation): set RectAreaLight shadow uniforms
 

@@ -601,26 +601,26 @@ class AnimationAction {
 
 			switch ( this.blendMode ) {
 
-				case AdditiveAnimationBlendMode:
+			case AdditiveAnimationBlendMode:
 
-					for ( let j = 0, m = interpolants.length; j !== m; ++ j ) {
+				for ( let j = 0, m = interpolants.length; j !== m; ++ j ) {
 
-						interpolants[ j ].evaluate( clipTime );
-						propertyMixers[ j ].accumulateAdditive( weight );
+					interpolants[ j ].evaluate( clipTime );
+					propertyMixers[ j ].accumulateAdditive( weight );
 
-					}
+				}
 
-					break;
+				break;
 
-				case NormalAnimationBlendMode:
-				default:
+			case NormalAnimationBlendMode:
+			default:
 
-					for ( let j = 0, m = interpolants.length; j !== m; ++ j ) {
+				for ( let j = 0, m = interpolants.length; j !== m; ++ j ) {
 
-						interpolants[ j ].evaluate( clipTime );
-						propertyMixers[ j ].accumulate( accuIndex, weight );
+					interpolants[ j ].evaluate( clipTime );
+					propertyMixers[ j ].accumulate( accuIndex, weight );
 
-					}
+				}
 
 			}
 

@@ -196,50 +196,50 @@ class PLYLoader extends Loader {
 
 				switch ( lineType ) {
 
-					case 'format':
+				case 'format':
 
-						header.format = lineValues[ 0 ];
-						header.version = lineValues[ 1 ];
+					header.format = lineValues[ 0 ];
+					header.version = lineValues[ 1 ];
 
-						break;
+					break;
 
-					case 'comment':
+				case 'comment':
 
-						header.comments.push( line );
+					header.comments.push( line );
 
-						break;
+					break;
 
-					case 'element':
+				case 'element':
 
-						if ( currentElement !== undefined ) {
+					if ( currentElement !== undefined ) {
 
-							header.elements.push( currentElement );
+						header.elements.push( currentElement );
 
-						}
+					}
 
-						currentElement = {};
-						currentElement.name = lineValues[ 0 ];
-						currentElement.count = parseInt( lineValues[ 1 ] );
-						currentElement.properties = [];
+					currentElement = {};
+					currentElement.name = lineValues[ 0 ];
+					currentElement.count = parseInt( lineValues[ 1 ] );
+					currentElement.properties = [];
 
-						break;
+					break;
 
-					case 'property':
+				case 'property':
 
-						currentElement.properties.push( make_ply_element_property( lineValues, scope.propertyNameMapping ) );
+					currentElement.properties.push( make_ply_element_property( lineValues, scope.propertyNameMapping ) );
 
-						break;
+					break;
 
-					case 'obj_info':
+				case 'obj_info':
 
-						header.objInfo = line;
+					header.objInfo = line;
 
-						break;
+					break;
 
 
-					default:
+				default:
 
-						console.log( 'unhandled', lineType, lineValues );
+					console.log( 'unhandled', lineType, lineValues );
 
 				}
 
@@ -259,14 +259,14 @@ class PLYLoader extends Loader {
 
 			switch ( type ) {
 
-				case 'char': case 'uchar': case 'short': case 'ushort': case 'int': case 'uint':
-				case 'int8': case 'uint8': case 'int16': case 'uint16': case 'int32': case 'uint32':
+			case 'char': case 'uchar': case 'short': case 'ushort': case 'int': case 'uint':
+			case 'int8': case 'uint8': case 'int16': case 'uint16': case 'int32': case 'uint32':
 
-					return parseInt( n );
+				return parseInt( n );
 
-				case 'float': case 'double': case 'float32': case 'float64':
+			case 'float': case 'double': case 'float32': case 'float64':
 
-					return parseFloat( n );
+				return parseFloat( n );
 
 			}
 
@@ -606,47 +606,47 @@ class PLYLoader extends Loader {
 
 				switch ( type ) {
 
-					// correspondences for non-specific length types here match rply:
-					case 'int8':	case 'char':	return { read: ( at ) => {
+				// correspondences for non-specific length types here match rply:
+				case 'int8':	case 'char':	return { read: ( at ) => {
 
-						return dataview.getInt8( at );
+					return dataview.getInt8( at );
 
-					}, size: 1 };
-					case 'uint8':	case 'uchar':	return { read: ( at ) => {
+				}, size: 1 };
+				case 'uint8':	case 'uchar':	return { read: ( at ) => {
 
-						return dataview.getUint8( at );
+					return dataview.getUint8( at );
 
-					}, size: 1 };
-					case 'int16':	case 'short':	return { read: ( at ) => {
+				}, size: 1 };
+				case 'int16':	case 'short':	return { read: ( at ) => {
 
-						return dataview.getInt16( at, little_endian );
+					return dataview.getInt16( at, little_endian );
 
-					}, size: 2 };
-					case 'uint16':	case 'ushort':	return { read: ( at ) => {
+				}, size: 2 };
+				case 'uint16':	case 'ushort':	return { read: ( at ) => {
 
-						return dataview.getUint16( at, little_endian );
+					return dataview.getUint16( at, little_endian );
 
-					}, size: 2 };
-					case 'int32':	case 'int':		return { read: ( at ) => {
+				}, size: 2 };
+				case 'int32':	case 'int':		return { read: ( at ) => {
 
-						return dataview.getInt32( at, little_endian );
+					return dataview.getInt32( at, little_endian );
 
-					}, size: 4 };
-					case 'uint32':	case 'uint':	return { read: ( at ) => {
+				}, size: 4 };
+				case 'uint32':	case 'uint':	return { read: ( at ) => {
 
-						return dataview.getUint32( at, little_endian );
+					return dataview.getUint32( at, little_endian );
 
-					}, size: 4 };
-					case 'float32': case 'float':	return { read: ( at ) => {
+				}, size: 4 };
+				case 'float32': case 'float':	return { read: ( at ) => {
 
-						return dataview.getFloat32( at, little_endian );
+					return dataview.getFloat32( at, little_endian );
 
-					}, size: 4 };
-					case 'float64': case 'double':	return { read: ( at ) => {
+				}, size: 4 };
+				case 'float64': case 'double':	return { read: ( at ) => {
 
-						return dataview.getFloat64( at, little_endian );
+					return dataview.getFloat64( at, little_endian );
 
-					}, size: 8 };
+				}, size: 8 };
 
 				}
 

@@ -773,39 +773,39 @@ function onMouseDown( event ) {
 
 	switch ( event.button ) {
 
-		case 0:
-			mouseAction = this.mouseButtons.LEFT;
-			break;
+	case 0:
+		mouseAction = this.mouseButtons.LEFT;
+		break;
 
-		case 1:
-			mouseAction = this.mouseButtons.MIDDLE;
-			break;
+	case 1:
+		mouseAction = this.mouseButtons.MIDDLE;
+		break;
 
-		case 2:
-			mouseAction = this.mouseButtons.RIGHT;
-			break;
+	case 2:
+		mouseAction = this.mouseButtons.RIGHT;
+		break;
 
-		default:
-			mouseAction = - 1;
+	default:
+		mouseAction = - 1;
 
 	}
 
 	switch ( mouseAction ) {
 
-		case MOUSE.DOLLY:
-			this.state = _STATE.ZOOM;
-			break;
+	case MOUSE.DOLLY:
+		this.state = _STATE.ZOOM;
+		break;
 
-		case MOUSE.ROTATE:
-			this.state = _STATE.ROTATE;
-			break;
+	case MOUSE.ROTATE:
+		this.state = _STATE.ROTATE;
+		break;
 
-		case MOUSE.PAN:
-			this.state = _STATE.PAN;
-			break;
+	case MOUSE.PAN:
+		this.state = _STATE.PAN;
+		break;
 
-		default:
-			this.state = _STATE.NONE;
+	default:
+		this.state = _STATE.NONE;
 
 	}
 
@@ -871,20 +871,20 @@ function onMouseWheel( event ) {
 
 	switch ( event.deltaMode ) {
 
-		case 2:
-			// Zoom in pages
-			this._zoomStart.y -= event.deltaY * 0.025;
-			break;
+	case 2:
+		// Zoom in pages
+		this._zoomStart.y -= event.deltaY * 0.025;
+		break;
 
-		case 1:
-			// Zoom in lines
-			this._zoomStart.y -= event.deltaY * 0.01;
-			break;
+	case 1:
+		// Zoom in lines
+		this._zoomStart.y -= event.deltaY * 0.01;
+		break;
 
-		default:
-			// undefined, 0, assume pixels
-			this._zoomStart.y -= event.deltaY * 0.00025;
-			break;
+	default:
+		// undefined, 0, assume pixels
+		this._zoomStart.y -= event.deltaY * 0.00025;
+		break;
 
 	}
 
@@ -907,23 +907,23 @@ function onTouchStart( event ) {
 
 	switch ( this._pointers.length ) {
 
-		case 1:
-			this.state = _STATE.TOUCH_ROTATE;
-			this._moveCurr.copy( this._getMouseOnCircle( this._pointers[ 0 ].pageX, this._pointers[ 0 ].pageY ) );
-			this._movePrev.copy( this._moveCurr );
-			break;
+	case 1:
+		this.state = _STATE.TOUCH_ROTATE;
+		this._moveCurr.copy( this._getMouseOnCircle( this._pointers[ 0 ].pageX, this._pointers[ 0 ].pageY ) );
+		this._movePrev.copy( this._moveCurr );
+		break;
 
-		default: // 2 or more
-			this.state = _STATE.TOUCH_ZOOM_PAN;
-			const dx = this._pointers[ 0 ].pageX - this._pointers[ 1 ].pageX;
-			const dy = this._pointers[ 0 ].pageY - this._pointers[ 1 ].pageY;
-			this._touchZoomDistanceEnd = this._touchZoomDistanceStart = Math.sqrt( dx * dx + dy * dy );
+	default: // 2 or more
+		this.state = _STATE.TOUCH_ZOOM_PAN;
+		const dx = this._pointers[ 0 ].pageX - this._pointers[ 1 ].pageX;
+		const dy = this._pointers[ 0 ].pageY - this._pointers[ 1 ].pageY;
+		this._touchZoomDistanceEnd = this._touchZoomDistanceStart = Math.sqrt( dx * dx + dy * dy );
 
-			const x = ( this._pointers[ 0 ].pageX + this._pointers[ 1 ].pageX ) / 2;
-			const y = ( this._pointers[ 0 ].pageY + this._pointers[ 1 ].pageY ) / 2;
-			this._panStart.copy( this._getMouseOnScreen( x, y ) );
-			this._panEnd.copy( this._panStart );
-			break;
+		const x = ( this._pointers[ 0 ].pageX + this._pointers[ 1 ].pageX ) / 2;
+		const y = ( this._pointers[ 0 ].pageY + this._pointers[ 1 ].pageY ) / 2;
+		this._panStart.copy( this._getMouseOnScreen( x, y ) );
+		this._panEnd.copy( this._panStart );
+		break;
 
 	}
 
@@ -937,23 +937,23 @@ function onTouchMove( event ) {
 
 	switch ( this._pointers.length ) {
 
-		case 1:
-			this._movePrev.copy( this._moveCurr );
-			this._moveCurr.copy( this._getMouseOnCircle( event.pageX, event.pageY ) );
-			break;
+	case 1:
+		this._movePrev.copy( this._moveCurr );
+		this._moveCurr.copy( this._getMouseOnCircle( event.pageX, event.pageY ) );
+		break;
 
-		default: // 2 or more
+	default: // 2 or more
 
-			const position = this._getSecondPointerPosition( event );
+		const position = this._getSecondPointerPosition( event );
 
-			const dx = event.pageX - position.x;
-			const dy = event.pageY - position.y;
-			this._touchZoomDistanceEnd = Math.sqrt( dx * dx + dy * dy );
+		const dx = event.pageX - position.x;
+		const dy = event.pageY - position.y;
+		this._touchZoomDistanceEnd = Math.sqrt( dx * dx + dy * dy );
 
-			const x = ( event.pageX + position.x ) / 2;
-			const y = ( event.pageY + position.y ) / 2;
-			this._panEnd.copy( this._getMouseOnScreen( x, y ) );
-			break;
+		const x = ( event.pageX + position.x ) / 2;
+		const y = ( event.pageY + position.y ) / 2;
+		this._panEnd.copy( this._getMouseOnScreen( x, y ) );
+		break;
 
 	}
 
@@ -963,33 +963,33 @@ function onTouchEnd( event ) {
 
 	switch ( this._pointers.length ) {
 
-		case 0:
-			this.state = _STATE.NONE;
-			break;
+	case 0:
+		this.state = _STATE.NONE;
+		break;
 
-		case 1:
-			this.state = _STATE.TOUCH_ROTATE;
-			this._moveCurr.copy( this._getMouseOnCircle( event.pageX, event.pageY ) );
-			this._movePrev.copy( this._moveCurr );
-			break;
+	case 1:
+		this.state = _STATE.TOUCH_ROTATE;
+		this._moveCurr.copy( this._getMouseOnCircle( event.pageX, event.pageY ) );
+		this._movePrev.copy( this._moveCurr );
+		break;
 
-		case 2:
-			this.state = _STATE.TOUCH_ZOOM_PAN;
+	case 2:
+		this.state = _STATE.TOUCH_ZOOM_PAN;
 
-			for ( let i = 0; i < this._pointers.length; i ++ ) {
+		for ( let i = 0; i < this._pointers.length; i ++ ) {
 
-				if ( this._pointers[ i ].pointerId !== event.pointerId ) {
+			if ( this._pointers[ i ].pointerId !== event.pointerId ) {
 
-					const position = this._pointerPositions[ this._pointers[ i ].pointerId ];
-					this._moveCurr.copy( this._getMouseOnCircle( position.x, position.y ) );
-					this._movePrev.copy( this._moveCurr );
-					break;
-
-				}
+				const position = this._pointerPositions[ this._pointers[ i ].pointerId ];
+				this._moveCurr.copy( this._getMouseOnCircle( position.x, position.y ) );
+				this._movePrev.copy( this._moveCurr );
+				break;
 
 			}
 
-			break;
+		}
+
+		break;
 
 	}
 

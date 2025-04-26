@@ -96,16 +96,16 @@ function probeAsync( gl, sync, interval ) {
 
 			switch ( gl.clientWaitSync( sync, gl.SYNC_FLUSH_COMMANDS_BIT, 0 ) ) {
 
-				case gl.WAIT_FAILED:
-					reject();
-					break;
+			case gl.WAIT_FAILED:
+				reject();
+				break;
 
-				case gl.TIMEOUT_EXPIRED:
-					setTimeout( probe, interval );
-					break;
+			case gl.TIMEOUT_EXPIRED:
+				setTimeout( probe, interval );
+				break;
 
-				default:
-					resolve();
+			default:
+				resolve();
 
 			}
 

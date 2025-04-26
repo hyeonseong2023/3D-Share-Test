@@ -133,170 +133,170 @@ class IFFParser {
 
 		switch ( type ) {
 
-			// SKIPPED FORMS
-			// if skipForm( length ) is called, the entire form and any sub forms and chunks are skipped
+		// SKIPPED FORMS
+		// if skipForm( length ) is called, the entire form and any sub forms and chunks are skipped
 
-			case 'ISEQ': // Image sequence
-			case 'ANIM': // plug in animation
-			case 'STCC': // Color-cycling Still
-			case 'VPVL':
-			case 'VPRM':
-			case 'NROT':
-			case 'WRPW': // image wrap w ( for cylindrical and spherical projections)
-			case 'WRPH': // image wrap h
-			case 'FUNC':
-			case 'FALL':
-			case 'OPAC':
-			case 'GRAD': // gradient texture
-			case 'ENVS':
-			case 'VMOP':
-			case 'VMBG':
+		case 'ISEQ': // Image sequence
+		case 'ANIM': // plug in animation
+		case 'STCC': // Color-cycling Still
+		case 'VPVL':
+		case 'VPRM':
+		case 'NROT':
+		case 'WRPW': // image wrap w ( for cylindrical and spherical projections)
+		case 'WRPH': // image wrap h
+		case 'FUNC':
+		case 'FALL':
+		case 'OPAC':
+		case 'GRAD': // gradient texture
+		case 'ENVS':
+		case 'VMOP':
+		case 'VMBG':
 
 			// Car Material FORMS
-			case 'OMAX':
-			case 'STEX':
-			case 'CKBG':
-			case 'CKEY':
-			case 'VMLA':
-			case 'VMLB':
-				this.debugger.skipped = true;
-				this.skipForm( length ); // not currently supported
-				break;
+		case 'OMAX':
+		case 'STEX':
+		case 'CKBG':
+		case 'CKEY':
+		case 'VMLA':
+		case 'VMLB':
+			this.debugger.skipped = true;
+			this.skipForm( length ); // not currently supported
+			break;
 
 			// if break; is called directly, the position in the lwoTree is not created
 			// any sub chunks and forms are added to the parent form instead
-			case 'META':
-			case 'NNDS':
-			case 'NODS':
-			case 'NDTA':
-			case 'ADAT':
-			case 'AOVS':
-			case 'BLOK':
+		case 'META':
+		case 'NNDS':
+		case 'NODS':
+		case 'NDTA':
+		case 'ADAT':
+		case 'AOVS':
+		case 'BLOK':
 
 			// used by texture nodes
-			case 'IBGC': // imageBackgroundColor
-			case 'IOPC': // imageOpacity
-			case 'IIMG': // hold reference to image path
-			case 'TXTR':
-				// this.setupForm( type, length );
-				this.debugger.length = 4;
-				this.debugger.skipped = true;
-				break;
+		case 'IBGC': // imageBackgroundColor
+		case 'IOPC': // imageOpacity
+		case 'IIMG': // hold reference to image path
+		case 'TXTR':
+			// this.setupForm( type, length );
+			this.debugger.length = 4;
+			this.debugger.skipped = true;
+			break;
 
-			case 'IFAL': // imageFallof
-			case 'ISCL': // imageScale
-			case 'IPOS': // imagePosition
-			case 'IROT': // imageRotation
-			case 'IBMP':
-			case 'IUTD':
-			case 'IVTD':
-				this.parseTextureNodeAttribute( type );
-				break;
+		case 'IFAL': // imageFallof
+		case 'ISCL': // imageScale
+		case 'IPOS': // imagePosition
+		case 'IROT': // imageRotation
+		case 'IBMP':
+		case 'IUTD':
+		case 'IVTD':
+			this.parseTextureNodeAttribute( type );
+			break;
 
-			case 'ENVL':
-				this.parseEnvelope( length );
-				break;
+		case 'ENVL':
+			this.parseEnvelope( length );
+			break;
 
-				// CLIP FORM AND SUB FORMS
+			// CLIP FORM AND SUB FORMS
 
-			case 'CLIP':
-				if ( this.tree.format === 'LWO2' ) {
+		case 'CLIP':
+			if ( this.tree.format === 'LWO2' ) {
 
-					this.parseForm( length );
+				this.parseForm( length );
 
-				} else {
+			} else {
 
-					this.parseClip( length );
+				this.parseClip( length );
 
-				}
+			}
 
-				break;
+			break;
 
-			case 'STIL':
-				this.parseImage();
-				break;
+		case 'STIL':
+			this.parseImage();
+			break;
 
-			case 'XREF': // clone of another STIL
-				this.reader.skip( 8 ); // unknown
-				this.currentForm.referenceTexture = {
-					index: this.reader.getUint32(),
-					refName: this.reader.getString() // internal unique ref
-				};
-				break;
+		case 'XREF': // clone of another STIL
+			this.reader.skip( 8 ); // unknown
+			this.currentForm.referenceTexture = {
+				index: this.reader.getUint32(),
+				refName: this.reader.getString() // internal unique ref
+			};
+			break;
 
-				// Not in spec, used by texture nodes
+			// Not in spec, used by texture nodes
 
-			case 'IMST':
-				this.parseImageStateForm( length );
-				break;
+		case 'IMST':
+			this.parseImageStateForm( length );
+			break;
 
-				// SURF FORM AND SUB FORMS
+			// SURF FORM AND SUB FORMS
 
-			case 'SURF':
-				this.parseSurfaceForm( length );
-				break;
+		case 'SURF':
+			this.parseSurfaceForm( length );
+			break;
 
-			case 'VALU': // Not in spec
-				this.parseValueForm( length );
-				break;
+		case 'VALU': // Not in spec
+			this.parseValueForm( length );
+			break;
 
-			case 'NTAG':
-				this.parseSubNode( length );
-				break;
+		case 'NTAG':
+			this.parseSubNode( length );
+			break;
 
-			case 'ATTR': // BSDF Node Attributes
-			case 'SATR': // Standard Node Attributes
-				this.setupForm( 'attributes', length );
-				break;
+		case 'ATTR': // BSDF Node Attributes
+		case 'SATR': // Standard Node Attributes
+			this.setupForm( 'attributes', length );
+			break;
 
-			case 'NCON':
-				this.parseConnections( length );
-				break;
+		case 'NCON':
+			this.parseConnections( length );
+			break;
 
-			case 'SSHA':
-				this.parentForm = this.currentForm;
-				this.currentForm = this.currentSurface;
-				this.setupForm( 'surfaceShader', length );
-				break;
+		case 'SSHA':
+			this.parentForm = this.currentForm;
+			this.currentForm = this.currentSurface;
+			this.setupForm( 'surfaceShader', length );
+			break;
 
-			case 'SSHD':
-				this.setupForm( 'surfaceShaderData', length );
-				break;
+		case 'SSHD':
+			this.setupForm( 'surfaceShaderData', length );
+			break;
 
-			case 'ENTR': // Not in spec
-				this.parseEntryForm( length );
-				break;
+		case 'ENTR': // Not in spec
+			this.parseEntryForm( length );
+			break;
 
-				// Image Map Layer
+			// Image Map Layer
 
-			case 'IMAP':
-				this.parseImageMap( length );
-				break;
+		case 'IMAP':
+			this.parseImageMap( length );
+			break;
 
-			case 'TAMP':
-				this.parseXVAL( 'amplitude', length );
-				break;
+		case 'TAMP':
+			this.parseXVAL( 'amplitude', length );
+			break;
 
-				//Texture Mapping Form
+			//Texture Mapping Form
 
-			case 'TMAP':
-				this.setupForm( 'textureMap', length );
-				break;
+		case 'TMAP':
+			this.setupForm( 'textureMap', length );
+			break;
 
-			case 'CNTR':
-				this.parseXVAL3( 'center', length );
-				break;
+		case 'CNTR':
+			this.parseXVAL3( 'center', length );
+			break;
 
-			case 'SIZE':
-				this.parseXVAL3( 'scale', length );
-				break;
+		case 'SIZE':
+			this.parseXVAL3( 'scale', length );
+			break;
 
-			case 'ROTA':
-				this.parseXVAL3( 'rotation', length );
-				break;
+		case 'ROTA':
+			this.parseXVAL3( 'rotation', length );
+			break;
 
-			default:
-				this.parseUnknownForm( type, length );
+		default:
+			this.parseUnknownForm( type, length );
 
 		}
 
@@ -496,28 +496,28 @@ class IFFParser {
 
 		switch ( type ) {
 
-			case 'ISCL':
-				this.currentNode.scale = this.reader.getFloat32Array( 3 );
-				break;
-			case 'IPOS':
-				this.currentNode.position = this.reader.getFloat32Array( 3 );
-				break;
-			case 'IROT':
-				this.currentNode.rotation = this.reader.getFloat32Array( 3 );
-				break;
-			case 'IFAL':
-				this.currentNode.falloff = this.reader.getFloat32Array( 3 );
-				break;
+		case 'ISCL':
+			this.currentNode.scale = this.reader.getFloat32Array( 3 );
+			break;
+		case 'IPOS':
+			this.currentNode.position = this.reader.getFloat32Array( 3 );
+			break;
+		case 'IROT':
+			this.currentNode.rotation = this.reader.getFloat32Array( 3 );
+			break;
+		case 'IFAL':
+			this.currentNode.falloff = this.reader.getFloat32Array( 3 );
+			break;
 
-			case 'IBMP':
-				this.currentNode.amplitude = this.reader.getFloat32();
-				break;
-			case 'IUTD':
-				this.currentNode.uTiles = this.reader.getFloat32();
-				break;
-			case 'IVTD':
-				this.currentNode.vTiles = this.reader.getFloat32();
-				break;
+		case 'IBMP':
+			this.currentNode.amplitude = this.reader.getFloat32();
+			break;
+		case 'IUTD':
+			this.currentNode.uTiles = this.reader.getFloat32();
+			break;
+		case 'IVTD':
+			this.currentNode.vTiles = this.reader.getFloat32();
+			break;
 
 		}
 
@@ -722,26 +722,26 @@ class IFFParser {
 
 		switch ( type ) {
 
-			case 'TXUV':
-				this.parseUVMapping( name, finalOffset, discontinuous );
-				break;
-			case 'MORF':
-			case 'SPOT':
-				this.parseMorphTargets( name, finalOffset, type ); // can't be discontinuous
-				break;
+		case 'TXUV':
+			this.parseUVMapping( name, finalOffset, discontinuous );
+			break;
+		case 'MORF':
+		case 'SPOT':
+			this.parseMorphTargets( name, finalOffset, type ); // can't be discontinuous
+			break;
 			// unsupported VMAPs
-			case 'APSL':
-			case 'NORM':
-			case 'WGHT':
-			case 'MNVW':
-			case 'PICK':
-			case 'RGB ':
-			case 'RGBA':
-				this.reader.skip( remainingLength );
-				break;
-			default:
-				console.warn( 'LWOLoader: unknown vertex map type: ' + type );
-				this.reader.skip( remainingLength );
+		case 'APSL':
+		case 'NORM':
+		case 'WGHT':
+		case 'MNVW':
+		case 'PICK':
+		case 'RGB ':
+		case 'RGBA':
+			this.reader.skip( remainingLength );
+			break;
+		default:
+			console.warn( 'LWOLoader: unknown vertex map type: ' + type );
+			this.reader.skip( remainingLength );
 
 		}
 
@@ -1135,17 +1135,17 @@ class Debugger {
 
 		switch ( this.node ) {
 
-			case 0:
-				nodeType = 'FORM';
-				break;
+		case 0:
+			nodeType = 'FORM';
+			break;
 
-			case 1:
-				nodeType = 'CHK';
-				break;
+		case 1:
+			nodeType = 'CHK';
+			break;
 
-			case 2:
-				nodeType = 'S-CHK';
-				break;
+		case 2:
+			nodeType = 'S-CHK';
+			break;
 
 		}
 

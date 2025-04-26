@@ -536,37 +536,37 @@ function getTrackTypeForValueTypeName( typeName ) {
 
 	switch ( typeName.toLowerCase() ) {
 
-		case 'scalar':
-		case 'double':
-		case 'float':
-		case 'number':
-		case 'integer':
+	case 'scalar':
+	case 'double':
+	case 'float':
+	case 'number':
+	case 'integer':
 
-			return NumberKeyframeTrack;
+		return NumberKeyframeTrack;
 
-		case 'vector':
-		case 'vector2':
-		case 'vector3':
-		case 'vector4':
+	case 'vector':
+	case 'vector2':
+	case 'vector3':
+	case 'vector4':
 
-			return VectorKeyframeTrack;
+		return VectorKeyframeTrack;
 
-		case 'color':
+	case 'color':
 
-			return ColorKeyframeTrack;
+		return ColorKeyframeTrack;
 
-		case 'quaternion':
+	case 'quaternion':
 
-			return QuaternionKeyframeTrack;
+		return QuaternionKeyframeTrack;
 
-		case 'bool':
-		case 'boolean':
+	case 'bool':
+	case 'boolean':
 
-			return BooleanKeyframeTrack;
+		return BooleanKeyframeTrack;
 
-		case 'string':
+	case 'string':
 
-			return StringKeyframeTrack;
+		return StringKeyframeTrack;
 
 	}
 

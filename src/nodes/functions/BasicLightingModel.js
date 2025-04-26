@@ -72,21 +72,21 @@ class BasicLightingModel extends LightingModel {
 
 			switch ( material.combine ) {
 
-				case MultiplyOperation:
-					outgoingLight.rgb.assign( mix( outgoingLight.rgb, outgoingLight.rgb.mul( envNode.rgb ), materialSpecularStrength.mul( materialReflectivity ) ) );
-					break;
+			case MultiplyOperation:
+				outgoingLight.rgb.assign( mix( outgoingLight.rgb, outgoingLight.rgb.mul( envNode.rgb ), materialSpecularStrength.mul( materialReflectivity ) ) );
+				break;
 
-				case MixOperation:
-					outgoingLight.rgb.assign( mix( outgoingLight.rgb, envNode.rgb, materialSpecularStrength.mul( materialReflectivity ) ) );
-					break;
+			case MixOperation:
+				outgoingLight.rgb.assign( mix( outgoingLight.rgb, envNode.rgb, materialSpecularStrength.mul( materialReflectivity ) ) );
+				break;
 
-				case AddOperation:
-					outgoingLight.rgb.addAssign( envNode.rgb.mul( materialSpecularStrength.mul( materialReflectivity ) ) );
-					break;
+			case AddOperation:
+				outgoingLight.rgb.addAssign( envNode.rgb.mul( materialSpecularStrength.mul( materialReflectivity ) ) );
+				break;
 
-				default:
-					console.warn( 'THREE.BasicLightingModel: Unsupported .combine value:', material.combine );
-					break;
+			default:
+				console.warn( 'THREE.BasicLightingModel: Unsupported .combine value:', material.combine );
+				break;
 
 			}
 

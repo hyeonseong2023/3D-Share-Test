@@ -304,29 +304,29 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'source':
-						id = child.getAttribute( 'id' );
-						data.sources[ id ] = parseSource( child );
-						break;
+				case 'source':
+					id = child.getAttribute( 'id' );
+					data.sources[ id ] = parseSource( child );
+					break;
 
-					case 'sampler':
-						id = child.getAttribute( 'id' );
-						data.samplers[ id ] = parseAnimationSampler( child );
-						break;
+				case 'sampler':
+					id = child.getAttribute( 'id' );
+					data.samplers[ id ] = parseAnimationSampler( child );
+					break;
 
-					case 'channel':
-						id = child.getAttribute( 'target' );
-						data.channels[ id ] = parseAnimationChannel( child );
-						break;
+				case 'channel':
+					id = child.getAttribute( 'target' );
+					data.channels[ id ] = parseAnimationChannel( child );
+					break;
 
-					case 'animation':
-						// hierarchy of related animations
-						parseAnimation( child );
-						hasChildren = true;
-						break;
+				case 'animation':
+					// hierarchy of related animations
+					parseAnimation( child );
+					hasChildren = true;
+					break;
 
-					default:
-						console.log( child );
+				default:
+					console.log( child );
 
 				}
 
@@ -356,11 +356,11 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'input':
-						const id = parseId( child.getAttribute( 'source' ) );
-						const semantic = child.getAttribute( 'semantic' );
-						data.inputs[ semantic ] = id;
-						break;
+				case 'input':
+					const id = parseId( child.getAttribute( 'source' ) );
+					const semantic = child.getAttribute( 'semantic' );
+					data.inputs[ semantic ] = id;
+					break;
 
 				}
 
@@ -482,47 +482,47 @@ class ColladaLoader extends Loader {
 
 			switch ( transform ) {
 
-				case 'matrix':
+			case 'matrix':
 
-					for ( i = 0, il = inputSource.array.length; i < il; i ++ ) {
+				for ( i = 0, il = inputSource.array.length; i < il; i ++ ) {
 
-						time = inputSource.array[ i ];
-						stride = i * outputSource.stride;
+					time = inputSource.array[ i ];
+					stride = i * outputSource.stride;
 
-						if ( data[ time ] === undefined ) data[ time ] = {};
+					if ( data[ time ] === undefined ) data[ time ] = {};
 
-						if ( channel.arraySyntax === true ) {
+					if ( channel.arraySyntax === true ) {
 
-							const value = outputSource.array[ stride ];
-							const index = channel.indices[ 0 ] + 4 * channel.indices[ 1 ];
+						const value = outputSource.array[ stride ];
+						const index = channel.indices[ 0 ] + 4 * channel.indices[ 1 ];
 
-							data[ time ][ index ] = value;
+						data[ time ][ index ] = value;
 
-						} else {
+					} else {
 
-							for ( j = 0, jl = outputSource.stride; j < jl; j ++ ) {
+						for ( j = 0, jl = outputSource.stride; j < jl; j ++ ) {
 
-								data[ time ][ j ] = outputSource.array[ stride + j ];
-
-							}
+							data[ time ][ j ] = outputSource.array[ stride + j ];
 
 						}
 
 					}
 
-					break;
+				}
 
-				case 'translate':
-					console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
-					break;
+				break;
 
-				case 'rotate':
-					console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
-					break;
+			case 'translate':
+				console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
+				break;
 
-				case 'scale':
-					console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
-					break;
+			case 'rotate':
+				console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
+				break;
+
+			case 'scale':
+				console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
+				break;
 
 			}
 
@@ -758,9 +758,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'instance_animation':
-						data.animations.push( parseId( child.getAttribute( 'url' ) ) );
-						break;
+				case 'instance_animation':
+					data.animations.push( parseId( child.getAttribute( 'url' ) ) );
+					break;
 
 				}
 
@@ -814,16 +814,16 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'skin':
-						// there is exactly one skin per controller
-						data.id = parseId( child.getAttribute( 'source' ) );
-						data.skin = parseSkin( child );
-						break;
+				case 'skin':
+					// there is exactly one skin per controller
+					data.id = parseId( child.getAttribute( 'source' ) );
+					data.skin = parseSkin( child );
+					break;
 
-					case 'morph':
-						data.id = parseId( child.getAttribute( 'source' ) );
-						console.warn( 'THREE.ColladaLoader: Morph target animation not supported yet.' );
-						break;
+				case 'morph':
+					data.id = parseId( child.getAttribute( 'source' ) );
+					console.warn( 'THREE.ColladaLoader: Morph target animation not supported yet.' );
+					break;
 
 				}
 
@@ -847,22 +847,22 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'bind_shape_matrix':
-						data.bindShapeMatrix = parseFloats( child.textContent );
-						break;
+				case 'bind_shape_matrix':
+					data.bindShapeMatrix = parseFloats( child.textContent );
+					break;
 
-					case 'source':
-						const id = child.getAttribute( 'id' );
-						data.sources[ id ] = parseSource( child );
-						break;
+				case 'source':
+					const id = child.getAttribute( 'id' );
+					data.sources[ id ] = parseSource( child );
+					break;
 
-					case 'joints':
-						data.joints = parseJoints( child );
-						break;
+				case 'joints':
+					data.joints = parseJoints( child );
+					break;
 
-					case 'vertex_weights':
-						data.vertexWeights = parseVertexWeights( child );
-						break;
+				case 'vertex_weights':
+					data.vertexWeights = parseVertexWeights( child );
+					break;
 
 				}
 
@@ -886,11 +886,11 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'input':
-						const semantic = child.getAttribute( 'semantic' );
-						const id = parseId( child.getAttribute( 'source' ) );
-						data.inputs[ semantic ] = id;
-						break;
+				case 'input':
+					const semantic = child.getAttribute( 'semantic' );
+					const id = parseId( child.getAttribute( 'source' ) );
+					data.inputs[ semantic ] = id;
+					break;
 
 				}
 
@@ -914,20 +914,20 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'input':
-						const semantic = child.getAttribute( 'semantic' );
-						const id = parseId( child.getAttribute( 'source' ) );
-						const offset = parseInt( child.getAttribute( 'offset' ) );
-						data.inputs[ semantic ] = { id: id, offset: offset };
-						break;
+				case 'input':
+					const semantic = child.getAttribute( 'semantic' );
+					const id = parseId( child.getAttribute( 'source' ) );
+					const offset = parseInt( child.getAttribute( 'offset' ) );
+					data.inputs[ semantic ] = { id: id, offset: offset };
+					break;
 
-					case 'vcount':
-						data.vcount = parseInts( child.textContent );
-						break;
+				case 'vcount':
+					data.vcount = parseInts( child.textContent );
+					break;
 
-					case 'v':
-						data.v = parseInts( child.textContent );
-						break;
+				case 'v':
+					data.v = parseInts( child.textContent );
+					break;
 
 				}
 
@@ -1130,9 +1130,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'profile_COMMON':
-						data.profile = parseEffectProfileCOMMON( child );
-						break;
+				case 'profile_COMMON':
+					data.profile = parseEffectProfileCOMMON( child );
+					break;
 
 				}
 
@@ -1157,17 +1157,17 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'newparam':
-						parseEffectNewparam( child, data );
-						break;
+				case 'newparam':
+					parseEffectNewparam( child, data );
+					break;
 
-					case 'technique':
-						data.technique = parseEffectTechnique( child );
-						break;
+				case 'technique':
+					data.technique = parseEffectTechnique( child );
+					break;
 
-					case 'extra':
-						data.extra = parseEffectExtra( child );
-						break;
+				case 'extra':
+					data.extra = parseEffectExtra( child );
+					break;
 
 				}
 
@@ -1189,13 +1189,13 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'surface':
-						data.surfaces[ sid ] = parseEffectSurface( child );
-						break;
+				case 'surface':
+					data.surfaces[ sid ] = parseEffectSurface( child );
+					break;
 
-					case 'sampler2D':
-						data.samplers[ sid ] = parseEffectSampler( child );
-						break;
+				case 'sampler2D':
+					data.samplers[ sid ] = parseEffectSampler( child );
+					break;
 
 				}
 
@@ -1215,9 +1215,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'init_from':
-						data.init_from = child.textContent;
-						break;
+				case 'init_from':
+					data.init_from = child.textContent;
+					break;
 
 				}
 
@@ -1239,9 +1239,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'source':
-						data.source = child.textContent;
-						break;
+				case 'source':
+					data.source = child.textContent;
+					break;
 
 				}
 
@@ -1263,17 +1263,17 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'constant':
-					case 'lambert':
-					case 'blinn':
-					case 'phong':
-						data.type = child.nodeName;
-						data.parameters = parseEffectParameters( child );
-						break;
+				case 'constant':
+				case 'lambert':
+				case 'blinn':
+				case 'phong':
+					data.type = child.nodeName;
+					data.parameters = parseEffectParameters( child );
+					break;
 
-					case 'extra':
-						data.extra = parseEffectExtra( child );
-						break;
+				case 'extra':
+					data.extra = parseEffectExtra( child );
+					break;
 
 				}
 
@@ -1295,21 +1295,21 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'emission':
-					case 'diffuse':
-					case 'specular':
-					case 'bump':
-					case 'ambient':
-					case 'shininess':
-					case 'transparency':
-						data[ child.nodeName ] = parseEffectParameter( child );
-						break;
-					case 'transparent':
-						data[ child.nodeName ] = {
-							opaque: child.hasAttribute( 'opaque' ) ? child.getAttribute( 'opaque' ) : 'A_ONE',
-							data: parseEffectParameter( child )
-						};
-						break;
+				case 'emission':
+				case 'diffuse':
+				case 'specular':
+				case 'bump':
+				case 'ambient':
+				case 'shininess':
+				case 'transparency':
+					data[ child.nodeName ] = parseEffectParameter( child );
+					break;
+				case 'transparent':
+					data[ child.nodeName ] = {
+						opaque: child.hasAttribute( 'opaque' ) ? child.getAttribute( 'opaque' ) : 'A_ONE',
+						data: parseEffectParameter( child )
+					};
+					break;
 
 				}
 
@@ -1331,17 +1331,17 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'color':
-						data[ child.nodeName ] = parseFloats( child.textContent );
-						break;
+				case 'color':
+					data[ child.nodeName ] = parseFloats( child.textContent );
+					break;
 
-					case 'float':
-						data[ child.nodeName ] = parseFloat( child.textContent );
-						break;
+				case 'float':
+					data[ child.nodeName ] = parseFloat( child.textContent );
+					break;
 
-					case 'texture':
-						data[ child.nodeName ] = { id: child.getAttribute( 'texture' ), extra: parseEffectParameterTexture( child ) };
-						break;
+				case 'texture':
+					data[ child.nodeName ] = { id: child.getAttribute( 'texture' ), extra: parseEffectParameterTexture( child ) };
+					break;
 
 				}
 
@@ -1365,9 +1365,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'extra':
-						parseEffectParameterTextureExtra( child, data );
-						break;
+				case 'extra':
+					parseEffectParameterTextureExtra( child, data );
+					break;
 
 				}
 
@@ -1387,9 +1387,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'technique':
-						parseEffectParameterTextureExtraTechnique( child, data );
-						break;
+				case 'technique':
+					parseEffectParameterTextureExtraTechnique( child, data );
+					break;
 
 				}
 
@@ -1407,37 +1407,37 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'repeatU':
-					case 'repeatV':
-					case 'offsetU':
-					case 'offsetV':
-						data.technique[ child.nodeName ] = parseFloat( child.textContent );
-						break;
+				case 'repeatU':
+				case 'repeatV':
+				case 'offsetU':
+				case 'offsetV':
+					data.technique[ child.nodeName ] = parseFloat( child.textContent );
+					break;
 
-					case 'wrapU':
-					case 'wrapV':
+				case 'wrapU':
+				case 'wrapV':
 
-						// some files have values for wrapU/wrapV which become NaN via parseInt
+					// some files have values for wrapU/wrapV which become NaN via parseInt
 
-						if ( child.textContent.toUpperCase() === 'TRUE' ) {
+					if ( child.textContent.toUpperCase() === 'TRUE' ) {
 
-							data.technique[ child.nodeName ] = 1;
+						data.technique[ child.nodeName ] = 1;
 
-						} else if ( child.textContent.toUpperCase() === 'FALSE' ) {
+					} else if ( child.textContent.toUpperCase() === 'FALSE' ) {
 
-							data.technique[ child.nodeName ] = 0;
+						data.technique[ child.nodeName ] = 0;
 
-						} else {
+					} else {
 
-							data.technique[ child.nodeName ] = parseInt( child.textContent );
+						data.technique[ child.nodeName ] = parseInt( child.textContent );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'bump':
-						data[ child.nodeName ] = parseEffectExtraTechniqueBump( child );
-						break;
+				case 'bump':
+					data[ child.nodeName ] = parseEffectExtraTechniqueBump( child );
+					break;
 
 				}
 
@@ -1457,9 +1457,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'technique':
-						data.technique = parseEffectExtraTechnique( child );
-						break;
+				case 'technique':
+					data.technique = parseEffectExtraTechnique( child );
+					break;
 
 				}
 
@@ -1481,13 +1481,13 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'double_sided':
-						data[ child.nodeName ] = parseInt( child.textContent );
-						break;
+				case 'double_sided':
+					data[ child.nodeName ] = parseInt( child.textContent );
+					break;
 
-					case 'bump':
-						data[ child.nodeName ] = parseEffectExtraTechniqueBump( child );
-						break;
+				case 'bump':
+					data[ child.nodeName ] = parseEffectExtraTechniqueBump( child );
+					break;
 
 				}
 
@@ -1509,9 +1509,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'texture':
-						data[ child.nodeName ] = { id: child.getAttribute( 'texture' ), texcoord: child.getAttribute( 'texcoord' ), extra: parseEffectParameterTexture( child ) };
-						break;
+				case 'texture':
+					data[ child.nodeName ] = { id: child.getAttribute( 'texture' ), texcoord: child.getAttribute( 'texcoord' ), extra: parseEffectParameterTexture( child ) };
+					break;
 
 				}
 
@@ -1549,9 +1549,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'instance_effect':
-						data.url = parseId( child.getAttribute( 'url' ) );
-						break;
+				case 'instance_effect':
+					data.url = parseId( child.getAttribute( 'url' ) );
+					break;
 
 				}
 
@@ -1570,12 +1570,12 @@ class ColladaLoader extends Loader {
 
 			switch ( extension ) {
 
-				case 'tga':
-					loader = tgaLoader;
-					break;
+			case 'tga':
+				loader = tgaLoader;
+				break;
 
-				default:
-					loader = textureLoader;
+			default:
+				loader = textureLoader;
 
 			}
 
@@ -1592,18 +1592,18 @@ class ColladaLoader extends Loader {
 
 			switch ( technique.type ) {
 
-				case 'phong':
-				case 'blinn':
-					material = new MeshPhongMaterial();
-					break;
+			case 'phong':
+			case 'blinn':
+				material = new MeshPhongMaterial();
+				break;
 
-				case 'lambert':
-					material = new MeshLambertMaterial();
-					break;
+			case 'lambert':
+				material = new MeshLambertMaterial();
+				break;
 
-				default:
-					material = new MeshBasicMaterial();
-					break;
+			default:
+				material = new MeshBasicMaterial();
+				break;
 
 			}
 
@@ -1691,27 +1691,27 @@ class ColladaLoader extends Loader {
 
 				switch ( key ) {
 
-					case 'diffuse':
-						if ( parameter.color ) material.color.fromArray( parameter.color );
-						if ( parameter.texture ) material.map = getTexture( parameter.texture, SRGBColorSpace );
-						break;
-					case 'specular':
-						if ( parameter.color && material.specular ) material.specular.fromArray( parameter.color );
-						if ( parameter.texture ) material.specularMap = getTexture( parameter.texture );
-						break;
-					case 'bump':
-						if ( parameter.texture ) material.normalMap = getTexture( parameter.texture );
-						break;
-					case 'ambient':
-						if ( parameter.texture ) material.lightMap = getTexture( parameter.texture, SRGBColorSpace );
-						break;
-					case 'shininess':
-						if ( parameter.float && material.shininess ) material.shininess = parameter.float;
-						break;
-					case 'emission':
-						if ( parameter.color && material.emissive ) material.emissive.fromArray( parameter.color );
-						if ( parameter.texture ) material.emissiveMap = getTexture( parameter.texture, SRGBColorSpace );
-						break;
+				case 'diffuse':
+					if ( parameter.color ) material.color.fromArray( parameter.color );
+					if ( parameter.texture ) material.map = getTexture( parameter.texture, SRGBColorSpace );
+					break;
+				case 'specular':
+					if ( parameter.color && material.specular ) material.specular.fromArray( parameter.color );
+					if ( parameter.texture ) material.specularMap = getTexture( parameter.texture );
+					break;
+				case 'bump':
+					if ( parameter.texture ) material.normalMap = getTexture( parameter.texture );
+					break;
+				case 'ambient':
+					if ( parameter.texture ) material.lightMap = getTexture( parameter.texture, SRGBColorSpace );
+					break;
+				case 'shininess':
+					if ( parameter.float && material.shininess ) material.shininess = parameter.float;
+					break;
+				case 'emission':
+					if ( parameter.color && material.emissive ) material.emissive.fromArray( parameter.color );
+					if ( parameter.texture ) material.emissiveMap = getTexture( parameter.texture, SRGBColorSpace );
+					break;
 
 				}
 
@@ -1764,20 +1764,20 @@ class ColladaLoader extends Loader {
 
 					switch ( transparent.opaque ) {
 
-						case 'A_ONE':
-							material.opacity = color[ 3 ] * transparency.float;
-							break;
-						case 'RGB_ZERO':
-							material.opacity = 1 - ( color[ 0 ] * transparency.float );
-							break;
-						case 'A_ZERO':
-							material.opacity = 1 - ( color[ 3 ] * transparency.float );
-							break;
-						case 'RGB_ONE':
-							material.opacity = color[ 0 ] * transparency.float;
-							break;
-						default:
-							console.warn( 'THREE.ColladaLoader: Invalid opaque type "%s" of transparent tag.', transparent.opaque );
+					case 'A_ONE':
+						material.opacity = color[ 3 ] * transparency.float;
+						break;
+					case 'RGB_ZERO':
+						material.opacity = 1 - ( color[ 0 ] * transparency.float );
+						break;
+					case 'A_ZERO':
+						material.opacity = 1 - ( color[ 3 ] * transparency.float );
+						break;
+					case 'RGB_ONE':
+						material.opacity = color[ 0 ] * transparency.float;
+						break;
+					default:
+						console.warn( 'THREE.ColladaLoader: Invalid opaque type "%s" of transparent tag.', transparent.opaque );
 
 					}
 
@@ -1800,14 +1800,14 @@ class ColladaLoader extends Loader {
 
 					switch ( k ) {
 
-						case 'double_sided':
-							material.side = ( v === 1 ? DoubleSide : FrontSide );
-							break;
+					case 'double_sided':
+						material.side = ( v === 1 ? DoubleSide : FrontSide );
+						break;
 
-						case 'bump':
-							material.normalMap = getTexture( v.texture );
-							material.normalScale = new Vector2( 1, 1 );
-							break;
+					case 'bump':
+						material.normalMap = getTexture( v.texture );
+						material.normalScale = new Vector2( 1, 1 );
+						break;
 
 					}
 
@@ -1841,9 +1841,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'optics':
-						data.optics = parseCameraOptics( child );
-						break;
+				case 'optics':
+					data.optics = parseCameraOptics( child );
+					break;
 
 				}
 
@@ -1861,8 +1861,8 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'technique_common':
-						return parseCameraTechnique( child );
+				case 'technique_common':
+					return parseCameraTechnique( child );
 
 				}
 
@@ -1882,13 +1882,13 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'perspective':
-					case 'orthographic':
+				case 'perspective':
+				case 'orthographic':
 
-						data.technique = child.nodeName;
-						data.parameters = parseCameraParameters( child );
+					data.technique = child.nodeName;
+					data.parameters = parseCameraParameters( child );
 
-						break;
+					break;
 
 				}
 
@@ -1908,15 +1908,15 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'xfov':
-					case 'yfov':
-					case 'xmag':
-					case 'ymag':
-					case 'znear':
-					case 'zfar':
-					case 'aspect_ratio':
-						data[ child.nodeName ] = parseFloat( child.textContent );
-						break;
+				case 'xfov':
+				case 'yfov':
+				case 'xmag':
+				case 'ymag':
+				case 'znear':
+				case 'zfar':
+				case 'aspect_ratio':
+					data[ child.nodeName ] = parseFloat( child.textContent );
+					break;
 
 				}
 
@@ -1932,36 +1932,36 @@ class ColladaLoader extends Loader {
 
 			switch ( data.optics.technique ) {
 
-				case 'perspective':
-					camera = new PerspectiveCamera(
-						data.optics.parameters.yfov,
-						data.optics.parameters.aspect_ratio,
-						data.optics.parameters.znear,
-						data.optics.parameters.zfar
-					);
-					break;
+			case 'perspective':
+				camera = new PerspectiveCamera(
+					data.optics.parameters.yfov,
+					data.optics.parameters.aspect_ratio,
+					data.optics.parameters.znear,
+					data.optics.parameters.zfar
+				);
+				break;
 
-				case 'orthographic':
-					let ymag = data.optics.parameters.ymag;
-					let xmag = data.optics.parameters.xmag;
-					const aspectRatio = data.optics.parameters.aspect_ratio;
+			case 'orthographic':
+				let ymag = data.optics.parameters.ymag;
+				let xmag = data.optics.parameters.xmag;
+				const aspectRatio = data.optics.parameters.aspect_ratio;
 
-					xmag = ( xmag === undefined ) ? ( ymag * aspectRatio ) : xmag;
-					ymag = ( ymag === undefined ) ? ( xmag / aspectRatio ) : ymag;
+				xmag = ( xmag === undefined ) ? ( ymag * aspectRatio ) : xmag;
+				ymag = ( ymag === undefined ) ? ( xmag / aspectRatio ) : ymag;
 
-					xmag *= 0.5;
-					ymag *= 0.5;
+				xmag *= 0.5;
+				ymag *= 0.5;
 
-					camera = new OrthographicCamera(
-						- xmag, xmag, ymag, - ymag, // left, right, top, bottom
-						data.optics.parameters.znear,
-						data.optics.parameters.zfar
-					);
-					break;
+				camera = new OrthographicCamera(
+					- xmag, xmag, ymag, - ymag, // left, right, top, bottom
+					data.optics.parameters.znear,
+					data.optics.parameters.zfar
+				);
+				break;
 
-				default:
-					camera = new PerspectiveCamera();
-					break;
+			default:
+				camera = new PerspectiveCamera();
+				break;
 
 			}
 
@@ -2001,9 +2001,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'technique_common':
-						data = parseLightTechnique( child );
-						break;
+				case 'technique_common':
+					data = parseLightTechnique( child );
+					break;
 
 				}
 
@@ -2025,13 +2025,13 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'directional':
-					case 'point':
-					case 'spot':
-					case 'ambient':
+				case 'directional':
+				case 'point':
+				case 'spot':
+				case 'ambient':
 
-						data.technique = child.nodeName;
-						data.parameters = parseLightParameters( child );
+					data.technique = child.nodeName;
+					data.parameters = parseLightParameters( child );
 
 				}
 
@@ -2053,20 +2053,20 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'color':
-						const array = parseFloats( child.textContent );
-						data.color = new Color().fromArray( array );
-						ColorManagement.toWorkingColorSpace( data.color, SRGBColorSpace );
-						break;
+				case 'color':
+					const array = parseFloats( child.textContent );
+					data.color = new Color().fromArray( array );
+					ColorManagement.toWorkingColorSpace( data.color, SRGBColorSpace );
+					break;
 
-					case 'falloff_angle':
-						data.falloffAngle = parseFloat( child.textContent );
-						break;
+				case 'falloff_angle':
+					data.falloffAngle = parseFloat( child.textContent );
+					break;
 
-					case 'quadratic_attenuation':
-						const f = parseFloat( child.textContent );
-						data.distance = f ? Math.sqrt( 1 / f ) : 0;
-						break;
+				case 'quadratic_attenuation':
+					const f = parseFloat( child.textContent );
+					data.distance = f ? Math.sqrt( 1 / f ) : 0;
+					break;
 
 				}
 
@@ -2082,21 +2082,21 @@ class ColladaLoader extends Loader {
 
 			switch ( data.technique ) {
 
-				case 'directional':
-					light = new DirectionalLight();
-					break;
+			case 'directional':
+				light = new DirectionalLight();
+				break;
 
-				case 'point':
-					light = new PointLight();
-					break;
+			case 'point':
+				light = new PointLight();
+				break;
 
-				case 'spot':
-					light = new SpotLight();
-					break;
+			case 'spot':
+				light = new SpotLight();
+				break;
 
-				case 'ambient':
-					light = new AmbientLight();
-					break;
+			case 'ambient':
+				light = new AmbientLight();
+				break;
 
 			}
 
@@ -2149,28 +2149,28 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'source':
-						data.sources[ id ] = parseSource( child );
-						break;
+				case 'source':
+					data.sources[ id ] = parseSource( child );
+					break;
 
-					case 'vertices':
-						// data.sources[ id ] = data.sources[ parseId( getElementsByTagName( child, 'input' )[ 0 ].getAttribute( 'source' ) ) ];
-						data.vertices = parseGeometryVertices( child );
-						break;
+				case 'vertices':
+					// data.sources[ id ] = data.sources[ parseId( getElementsByTagName( child, 'input' )[ 0 ].getAttribute( 'source' ) ) ];
+					data.vertices = parseGeometryVertices( child );
+					break;
 
-					case 'polygons':
-						console.warn( 'THREE.ColladaLoader: Unsupported primitive type: ', child.nodeName );
-						break;
+				case 'polygons':
+					console.warn( 'THREE.ColladaLoader: Unsupported primitive type: ', child.nodeName );
+					break;
 
-					case 'lines':
-					case 'linestrips':
-					case 'polylist':
-					case 'triangles':
-						data.primitives.push( parseGeometryPrimitive( child ) );
-						break;
+				case 'lines':
+				case 'linestrips':
+				case 'polylist':
+				case 'triangles':
+					data.primitives.push( parseGeometryPrimitive( child ) );
+					break;
 
-					default:
-						console.log( child );
+				default:
+					console.log( child );
 
 				}
 
@@ -2195,24 +2195,24 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'float_array':
-						data.array = parseFloats( child.textContent );
-						break;
+				case 'float_array':
+					data.array = parseFloats( child.textContent );
+					break;
 
-					case 'Name_array':
-						data.array = parseStrings( child.textContent );
-						break;
+				case 'Name_array':
+					data.array = parseStrings( child.textContent );
+					break;
 
-					case 'technique_common':
-						const accessor = getElementsByTagName( child, 'accessor' )[ 0 ];
+				case 'technique_common':
+					const accessor = getElementsByTagName( child, 'accessor' )[ 0 ];
 
-						if ( accessor !== undefined ) {
+					if ( accessor !== undefined ) {
 
-							data.stride = parseInt( accessor.getAttribute( 'stride' ) );
+						data.stride = parseInt( accessor.getAttribute( 'stride' ) );
 
-						}
+					}
 
-						break;
+					break;
 
 				}
 
@@ -2259,24 +2259,24 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'input':
-						const id = parseId( child.getAttribute( 'source' ) );
-						const semantic = child.getAttribute( 'semantic' );
-						const offset = parseInt( child.getAttribute( 'offset' ) );
-						const set = parseInt( child.getAttribute( 'set' ) );
-						const inputname = ( set > 0 ? semantic + set : semantic );
-						primitive.inputs[ inputname ] = { id: id, offset: offset };
-						primitive.stride = Math.max( primitive.stride, offset + 1 );
-						if ( semantic === 'TEXCOORD' ) primitive.hasUV = true;
-						break;
+				case 'input':
+					const id = parseId( child.getAttribute( 'source' ) );
+					const semantic = child.getAttribute( 'semantic' );
+					const offset = parseInt( child.getAttribute( 'offset' ) );
+					const set = parseInt( child.getAttribute( 'set' ) );
+					const inputname = ( set > 0 ? semantic + set : semantic );
+					primitive.inputs[ inputname ] = { id: id, offset: offset };
+					primitive.stride = Math.max( primitive.stride, offset + 1 );
+					if ( semantic === 'TEXCOORD' ) primitive.hasUV = true;
+					break;
 
-					case 'vcount':
-						primitive.vcount = parseInts( child.textContent );
-						break;
+				case 'vcount':
+					primitive.vcount = parseInts( child.textContent );
+					break;
 
-					case 'p':
-						primitive.p = parseInts( child.textContent );
-						break;
+				case 'p':
+					primitive.p = parseInts( child.textContent );
+					break;
 
 				}
 
@@ -2391,43 +2391,43 @@ class ColladaLoader extends Loader {
 
 				switch ( primitive.type ) {
 
-					case 'lines':
-					case 'linestrips':
-						count = primitive.count * 2;
-						break;
+				case 'lines':
+				case 'linestrips':
+					count = primitive.count * 2;
+					break;
 
-					case 'triangles':
-						count = primitive.count * 3;
-						break;
+				case 'triangles':
+					count = primitive.count * 3;
+					break;
 
-					case 'polylist':
+				case 'polylist':
 
-						for ( let g = 0; g < primitive.count; g ++ ) {
+					for ( let g = 0; g < primitive.count; g ++ ) {
 
-							const vc = primitive.vcount[ g ];
+						const vc = primitive.vcount[ g ];
 
-							switch ( vc ) {
+						switch ( vc ) {
 
-								case 3:
-									count += 3; // single triangle
-									break;
+						case 3:
+							count += 3; // single triangle
+							break;
 
-								case 4:
-									count += 6; // quad, subdivided into two triangles
-									break;
+						case 4:
+							count += 6; // quad, subdivided into two triangles
+							break;
 
-								default:
-									count += ( vc - 2 ) * 3; // polylist with more than four vertices
-									break;
-
-							}
+						default:
+							count += ( vc - 2 ) * 3; // polylist with more than four vertices
+							break;
 
 						}
 
-						break;
+					}
 
-					default:
-						console.warn( 'THREE.ColladaLoader: Unknown primitive type:', primitive.type );
+					break;
+
+				default:
+					console.warn( 'THREE.ColladaLoader: Unknown primitive type:', primitive.type );
 
 				}
 
@@ -2450,91 +2450,91 @@ class ColladaLoader extends Loader {
 
 					switch ( name )	{
 
-						case 'VERTEX':
-							for ( const key in vertices ) {
+					case 'VERTEX':
+						for ( const key in vertices ) {
 
-								const id = vertices[ key ];
+							const id = vertices[ key ];
 
-								switch ( key ) {
+							switch ( key ) {
 
-									case 'POSITION':
-										const prevLength = position.array.length;
-										buildGeometryData( primitive, sources[ id ], input.offset, position.array );
-										position.stride = sources[ id ].stride;
+							case 'POSITION':
+								const prevLength = position.array.length;
+								buildGeometryData( primitive, sources[ id ], input.offset, position.array );
+								position.stride = sources[ id ].stride;
 
-										if ( sources.skinWeights && sources.skinIndices ) {
+								if ( sources.skinWeights && sources.skinIndices ) {
 
-											buildGeometryData( primitive, sources.skinIndices, input.offset, skinIndex.array );
-											buildGeometryData( primitive, sources.skinWeights, input.offset, skinWeight.array );
-
-										}
-
-										// see #3803
-
-										if ( primitive.hasUV === false && primitives.uvsNeedsFix === true ) {
-
-											const count = ( position.array.length - prevLength ) / position.stride;
-
-											for ( let i = 0; i < count; i ++ ) {
-
-												// fill missing uv coordinates
-
-												uv.array.push( 0, 0 );
-
-											}
-
-										}
-
-										break;
-
-									case 'NORMAL':
-										buildGeometryData( primitive, sources[ id ], input.offset, normal.array );
-										normal.stride = sources[ id ].stride;
-										break;
-
-									case 'COLOR':
-										buildGeometryData( primitive, sources[ id ], input.offset, color.array );
-										color.stride = sources[ id ].stride;
-										break;
-
-									case 'TEXCOORD':
-										buildGeometryData( primitive, sources[ id ], input.offset, uv.array );
-										uv.stride = sources[ id ].stride;
-										break;
-
-									case 'TEXCOORD1':
-										buildGeometryData( primitive, sources[ id ], input.offset, uv1.array );
-										uv.stride = sources[ id ].stride;
-										break;
-
-									default:
-										console.warn( 'THREE.ColladaLoader: Semantic "%s" not handled in geometry build process.', key );
+									buildGeometryData( primitive, sources.skinIndices, input.offset, skinIndex.array );
+									buildGeometryData( primitive, sources.skinWeights, input.offset, skinWeight.array );
 
 								}
 
+								// see #3803
+
+								if ( primitive.hasUV === false && primitives.uvsNeedsFix === true ) {
+
+									const count = ( position.array.length - prevLength ) / position.stride;
+
+									for ( let i = 0; i < count; i ++ ) {
+
+										// fill missing uv coordinates
+
+										uv.array.push( 0, 0 );
+
+									}
+
+								}
+
+								break;
+
+							case 'NORMAL':
+								buildGeometryData( primitive, sources[ id ], input.offset, normal.array );
+								normal.stride = sources[ id ].stride;
+								break;
+
+							case 'COLOR':
+								buildGeometryData( primitive, sources[ id ], input.offset, color.array );
+								color.stride = sources[ id ].stride;
+								break;
+
+							case 'TEXCOORD':
+								buildGeometryData( primitive, sources[ id ], input.offset, uv.array );
+								uv.stride = sources[ id ].stride;
+								break;
+
+							case 'TEXCOORD1':
+								buildGeometryData( primitive, sources[ id ], input.offset, uv1.array );
+								uv.stride = sources[ id ].stride;
+								break;
+
+							default:
+								console.warn( 'THREE.ColladaLoader: Semantic "%s" not handled in geometry build process.', key );
+
 							}
 
-							break;
+						}
 
-						case 'NORMAL':
-							buildGeometryData( primitive, sources[ input.id ], input.offset, normal.array );
-							normal.stride = sources[ input.id ].stride;
-							break;
+						break;
 
-						case 'COLOR':
-							buildGeometryData( primitive, sources[ input.id ], input.offset, color.array, true );
-							color.stride = sources[ input.id ].stride;
-							break;
+					case 'NORMAL':
+						buildGeometryData( primitive, sources[ input.id ], input.offset, normal.array );
+						normal.stride = sources[ input.id ].stride;
+						break;
 
-						case 'TEXCOORD':
-							buildGeometryData( primitive, sources[ input.id ], input.offset, uv.array );
-							uv.stride = sources[ input.id ].stride;
-							break;
+					case 'COLOR':
+						buildGeometryData( primitive, sources[ input.id ], input.offset, color.array, true );
+						color.stride = sources[ input.id ].stride;
+						break;
 
-						case 'TEXCOORD1':
-							buildGeometryData( primitive, sources[ input.id ], input.offset, uv1.array );
-							uv1.stride = sources[ input.id ].stride;
-							break;
+					case 'TEXCOORD':
+						buildGeometryData( primitive, sources[ input.id ], input.offset, uv.array );
+						uv.stride = sources[ input.id ].stride;
+						break;
+
+					case 'TEXCOORD1':
+						buildGeometryData( primitive, sources[ input.id ], input.offset, uv1.array );
+						uv1.stride = sources[ input.id ].stride;
+						break;
 
 					}
 
@@ -2680,9 +2680,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'technique_common':
-						parseKinematicsTechniqueCommon( child, data );
-						break;
+				case 'technique_common':
+					parseKinematicsTechniqueCommon( child, data );
+					break;
 
 				}
 
@@ -2716,13 +2716,13 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'joint':
-						data.joints[ child.getAttribute( 'sid' ) ] = parseKinematicsJoint( child );
-						break;
+				case 'joint':
+					data.joints[ child.getAttribute( 'sid' ) ] = parseKinematicsJoint( child );
+					break;
 
-					case 'link':
-						data.links.push( parseKinematicsLink( child ) );
-						break;
+				case 'link':
+					data.links.push( parseKinematicsLink( child ) );
+					break;
 
 				}
 
@@ -2742,10 +2742,10 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'prismatic':
-					case 'revolute':
-						data = parseKinematicsJointParameter( child );
-						break;
+				case 'prismatic':
+				case 'revolute':
+					data = parseKinematicsJointParameter( child );
+					break;
 
 				}
 
@@ -2779,17 +2779,17 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'axis':
-						const array = parseFloats( child.textContent );
-						data.axis.fromArray( array );
-						break;
-					case 'limits':
-						const max = child.getElementsByTagName( 'max' )[ 0 ];
-						const min = child.getElementsByTagName( 'min' )[ 0 ];
+				case 'axis':
+					const array = parseFloats( child.textContent );
+					data.axis.fromArray( array );
+					break;
+				case 'limits':
+					const max = child.getElementsByTagName( 'max' )[ 0 ];
+					const min = child.getElementsByTagName( 'min' )[ 0 ];
 
-						data.limits.max = parseFloat( max.textContent );
-						data.limits.min = parseFloat( min.textContent );
-						break;
+					data.limits.max = parseFloat( max.textContent );
+					data.limits.min = parseFloat( min.textContent );
+					break;
 
 				}
 
@@ -2828,15 +2828,15 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'attachment_full':
-						data.attachments.push( parseKinematicsAttachment( child ) );
-						break;
+				case 'attachment_full':
+					data.attachments.push( parseKinematicsAttachment( child ) );
+					break;
 
-					case 'matrix':
-					case 'translate':
-					case 'rotate':
-						data.transforms.push( parseKinematicsTransform( child ) );
-						break;
+				case 'matrix':
+				case 'translate':
+				case 'rotate':
+					data.transforms.push( parseKinematicsTransform( child ) );
+					break;
 
 				}
 
@@ -2862,15 +2862,15 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'link':
-						data.links.push( parseKinematicsLink( child ) );
-						break;
+				case 'link':
+					data.links.push( parseKinematicsLink( child ) );
+					break;
 
-					case 'matrix':
-					case 'translate':
-					case 'rotate':
-						data.transforms.push( parseKinematicsTransform( child ) );
-						break;
+				case 'matrix':
+				case 'translate':
+				case 'rotate':
+					data.transforms.push( parseKinematicsTransform( child ) );
+					break;
 
 				}
 
@@ -2890,21 +2890,21 @@ class ColladaLoader extends Loader {
 
 			switch ( data.type ) {
 
-				case 'matrix':
-					data.obj = new Matrix4();
-					data.obj.fromArray( array ).transpose();
-					break;
+			case 'matrix':
+				data.obj = new Matrix4();
+				data.obj.fromArray( array ).transpose();
+				break;
 
-				case 'translate':
-					data.obj = new Vector3();
-					data.obj.fromArray( array );
-					break;
+			case 'translate':
+				data.obj = new Vector3();
+				data.obj.fromArray( array );
+				break;
 
-				case 'rotate':
-					data.obj = new Vector3();
-					data.obj.fromArray( array );
-					data.angle = MathUtils.degToRad( array[ 3 ] );
-					break;
+			case 'rotate':
+				data.obj = new Vector3();
+				data.obj.fromArray( array );
+				data.angle = MathUtils.degToRad( array[ 3 ] );
+				break;
 
 			}
 
@@ -2929,10 +2929,10 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'rigid_body':
-						data.rigidBodies[ child.getAttribute( 'name' ) ] = {};
-						parsePhysicsRigidBody( child, data.rigidBodies[ child.getAttribute( 'name' ) ] );
-						break;
+				case 'rigid_body':
+					data.rigidBodies[ child.getAttribute( 'name' ) ] = {};
+					parsePhysicsRigidBody( child, data.rigidBodies[ child.getAttribute( 'name' ) ] );
+					break;
 
 				}
 
@@ -2952,9 +2952,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'technique_common':
-						parsePhysicsTechniqueCommon( child, data );
-						break;
+				case 'technique_common':
+					parsePhysicsTechniqueCommon( child, data );
+					break;
 
 				}
 
@@ -2972,13 +2972,13 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'inertia':
-						data.inertia = parseFloats( child.textContent );
-						break;
+				case 'inertia':
+					data.inertia = parseFloats( child.textContent );
+					break;
 
-					case 'mass':
-						data.mass = parseFloats( child.textContent )[ 0 ];
-						break;
+				case 'mass':
+					data.mass = parseFloats( child.textContent )[ 0 ];
+					break;
 
 				}
 
@@ -3002,9 +3002,9 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'bind_joint_axis':
-						data.bindJointAxis.push( parseKinematicsBindJointAxis( child ) );
-						break;
+				case 'bind_joint_axis':
+					data.bindJointAxis.push( parseKinematicsBindJointAxis( child ) );
+					break;
 
 				}
 
@@ -3028,12 +3028,12 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'axis':
-						const param = child.getElementsByTagName( 'param' )[ 0 ];
-						data.axis = param.textContent;
-						const tmpJointIndex = data.axis.split( 'inst_' ).pop().split( 'axis' )[ 0 ];
-						data.jointIndex = tmpJointIndex.substring( 0, tmpJointIndex.length - 1 );
-						break;
+				case 'axis':
+					const param = child.getElementsByTagName( 'param' )[ 0 ];
+					data.axis = param.textContent;
+					const tmpJointIndex = data.axis.split( 'inst_' ).pop().split( 'axis' )[ 0 ];
+					data.jointIndex = tmpJointIndex.substring( 0, tmpJointIndex.length - 1 );
+					break;
 
 				}
 
@@ -3174,17 +3174,17 @@ class ColladaLoader extends Loader {
 
 									switch ( joint.type ) {
 
-										case 'revolute':
-											matrix.multiply( m0.makeRotationAxis( axis, MathUtils.degToRad( value ) ) );
-											break;
+									case 'revolute':
+										matrix.multiply( m0.makeRotationAxis( axis, MathUtils.degToRad( value ) ) );
+										break;
 
-										case 'prismatic':
-											matrix.multiply( m0.makeTranslation( axis.x * value, axis.y * value, axis.z * value ) );
-											break;
+									case 'prismatic':
+										matrix.multiply( m0.makeTranslation( axis.x * value, axis.y * value, axis.z * value ) );
+										break;
 
-										default:
-											console.warn( 'THREE.ColladaLoader: Unknown joint type: ' + joint.type );
-											break;
+									default:
+										console.warn( 'THREE.ColladaLoader: Unknown joint type: ' + joint.type );
+										break;
 
 									}
 
@@ -3192,21 +3192,21 @@ class ColladaLoader extends Loader {
 
 									switch ( transform.type ) {
 
-										case 'matrix':
-											matrix.multiply( transform.obj );
-											break;
+									case 'matrix':
+										matrix.multiply( transform.obj );
+										break;
 
-										case 'translate':
-											matrix.multiply( m0.makeTranslation( transform.obj.x, transform.obj.y, transform.obj.z ) );
-											break;
+									case 'translate':
+										matrix.multiply( m0.makeTranslation( transform.obj.x, transform.obj.y, transform.obj.z ) );
+										break;
 
-										case 'scale':
-											matrix.scale( transform.obj );
-											break;
+									case 'scale':
+										matrix.scale( transform.obj );
+										break;
 
-										case 'rotate':
-											matrix.multiply( m0.makeRotationAxis( transform.obj, transform.angle ) );
-											break;
+									case 'rotate':
+										matrix.multiply( m0.makeRotationAxis( transform.obj, transform.angle ) );
+										break;
 
 									}
 
@@ -3249,38 +3249,38 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'matrix':
-						array = parseFloats( child.textContent );
-						const matrix = new Matrix4().fromArray( array ).transpose();
-						transforms.push( {
-							sid: child.getAttribute( 'sid' ),
-							type: child.nodeName,
-							obj: matrix
-						} );
-						break;
+				case 'matrix':
+					array = parseFloats( child.textContent );
+					const matrix = new Matrix4().fromArray( array ).transpose();
+					transforms.push( {
+						sid: child.getAttribute( 'sid' ),
+						type: child.nodeName,
+						obj: matrix
+					} );
+					break;
 
-					case 'translate':
-					case 'scale':
-						array = parseFloats( child.textContent );
-						vector = new Vector3().fromArray( array );
-						transforms.push( {
-							sid: child.getAttribute( 'sid' ),
-							type: child.nodeName,
-							obj: vector
-						} );
-						break;
+				case 'translate':
+				case 'scale':
+					array = parseFloats( child.textContent );
+					vector = new Vector3().fromArray( array );
+					transforms.push( {
+						sid: child.getAttribute( 'sid' ),
+						type: child.nodeName,
+						obj: vector
+					} );
+					break;
 
-					case 'rotate':
-						array = parseFloats( child.textContent );
-						vector = new Vector3().fromArray( array );
-						const angle = MathUtils.degToRad( array[ 3 ] );
-						transforms.push( {
-							sid: child.getAttribute( 'sid' ),
-							type: child.nodeName,
-							obj: vector,
-							angle: angle
-						} );
-						break;
+				case 'rotate':
+					array = parseFloats( child.textContent );
+					vector = new Vector3().fromArray( array );
+					const angle = MathUtils.degToRad( array[ 3 ] );
+					transforms.push( {
+						sid: child.getAttribute( 'sid' ),
+						type: child.nodeName,
+						obj: vector,
+						angle: angle
+					} );
+					break;
 
 				}
 
@@ -3342,62 +3342,62 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'node':
-						data.nodes.push( child.getAttribute( 'id' ) );
-						parseNode( child );
-						break;
+				case 'node':
+					data.nodes.push( child.getAttribute( 'id' ) );
+					parseNode( child );
+					break;
 
-					case 'instance_camera':
-						data.instanceCameras.push( parseId( child.getAttribute( 'url' ) ) );
-						break;
+				case 'instance_camera':
+					data.instanceCameras.push( parseId( child.getAttribute( 'url' ) ) );
+					break;
 
-					case 'instance_controller':
-						data.instanceControllers.push( parseNodeInstance( child ) );
-						break;
+				case 'instance_controller':
+					data.instanceControllers.push( parseNodeInstance( child ) );
+					break;
 
-					case 'instance_light':
-						data.instanceLights.push( parseId( child.getAttribute( 'url' ) ) );
-						break;
+				case 'instance_light':
+					data.instanceLights.push( parseId( child.getAttribute( 'url' ) ) );
+					break;
 
-					case 'instance_geometry':
-						data.instanceGeometries.push( parseNodeInstance( child ) );
-						break;
+				case 'instance_geometry':
+					data.instanceGeometries.push( parseNodeInstance( child ) );
+					break;
 
-					case 'instance_node':
-						data.instanceNodes.push( parseId( child.getAttribute( 'url' ) ) );
-						break;
+				case 'instance_node':
+					data.instanceNodes.push( parseId( child.getAttribute( 'url' ) ) );
+					break;
 
-					case 'matrix':
-						array = parseFloats( child.textContent );
-						data.matrix.multiply( matrix.fromArray( array ).transpose() );
-						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
-						break;
+				case 'matrix':
+					array = parseFloats( child.textContent );
+					data.matrix.multiply( matrix.fromArray( array ).transpose() );
+					data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+					break;
 
-					case 'translate':
-						array = parseFloats( child.textContent );
-						vector.fromArray( array );
-						data.matrix.multiply( matrix.makeTranslation( vector.x, vector.y, vector.z ) );
-						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
-						break;
+				case 'translate':
+					array = parseFloats( child.textContent );
+					vector.fromArray( array );
+					data.matrix.multiply( matrix.makeTranslation( vector.x, vector.y, vector.z ) );
+					data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+					break;
 
-					case 'rotate':
-						array = parseFloats( child.textContent );
-						const angle = MathUtils.degToRad( array[ 3 ] );
-						data.matrix.multiply( matrix.makeRotationAxis( vector.fromArray( array ), angle ) );
-						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
-						break;
+				case 'rotate':
+					array = parseFloats( child.textContent );
+					const angle = MathUtils.degToRad( array[ 3 ] );
+					data.matrix.multiply( matrix.makeRotationAxis( vector.fromArray( array ), angle ) );
+					data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+					break;
 
-					case 'scale':
-						array = parseFloats( child.textContent );
-						data.matrix.scale( vector.fromArray( array ) );
-						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
-						break;
+				case 'scale':
+					array = parseFloats( child.textContent );
+					data.matrix.scale( vector.fromArray( array ) );
+					data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+					break;
 
-					case 'extra':
-						break;
+				case 'extra':
+					break;
 
-					default:
-						console.log( child );
+				default:
+					console.log( child );
 
 				}
 
@@ -3431,27 +3431,27 @@ class ColladaLoader extends Loader {
 
 				switch ( child.nodeName ) {
 
-					case 'bind_material':
-						const instances = child.getElementsByTagName( 'instance_material' );
+				case 'bind_material':
+					const instances = child.getElementsByTagName( 'instance_material' );
 
-						for ( let j = 0; j < instances.length; j ++ ) {
+					for ( let j = 0; j < instances.length; j ++ ) {
 
-							const instance = instances[ j ];
-							const symbol = instance.getAttribute( 'symbol' );
-							const target = instance.getAttribute( 'target' );
+						const instance = instances[ j ];
+						const symbol = instance.getAttribute( 'symbol' );
+						const target = instance.getAttribute( 'target' );
 
-							data.materials[ symbol ] = parseId( target );
+						data.materials[ symbol ] = parseId( target );
 
-						}
+					}
 
-						break;
+					break;
 
-					case 'skeleton':
-						data.skeletons.push( parseId( child.textContent ) );
-						break;
+				case 'skeleton':
+					data.skeletons.push( parseId( child.textContent ) );
+					break;
 
-					default:
-						break;
+				default:
+					break;
 
 				}
 
@@ -3840,27 +3840,27 @@ class ColladaLoader extends Loader {
 
 				switch ( type ) {
 
-					case 'lines':
-						object = new LineSegments( geometry.data, material );
-						break;
+				case 'lines':
+					object = new LineSegments( geometry.data, material );
+					break;
 
-					case 'linestrips':
-						object = new Line( geometry.data, material );
-						break;
+				case 'linestrips':
+					object = new Line( geometry.data, material );
+					break;
 
-					case 'triangles':
-					case 'polylist':
-						if ( skinning ) {
+				case 'triangles':
+				case 'polylist':
+					if ( skinning ) {
 
-							object = new SkinnedMesh( geometry.data, material );
+						object = new SkinnedMesh( geometry.data, material );
 
-						} else {
+					} else {
 
-							object = new Mesh( geometry.data, material );
+						object = new Mesh( geometry.data, material );
 
-						}
+					}
 
-						break;
+					break;
 
 				}
 

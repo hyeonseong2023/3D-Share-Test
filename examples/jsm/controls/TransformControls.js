@@ -921,10 +921,10 @@ function onPointerHover( event ) {
 
 	switch ( event.pointerType ) {
 
-		case 'mouse':
-		case 'pen':
-			this.pointerHover( this._getPointer( event ) );
-			break;
+	case 'mouse':
+	case 'pen':
+		this.pointerHover( this._getPointer( event ) );
+		break;
 
 	}
 
@@ -1807,44 +1807,44 @@ class TransformControlsPlane extends Mesh {
 
 		switch ( this.mode ) {
 
-			case 'translate':
-			case 'scale':
-				switch ( this.axis ) {
+		case 'translate':
+		case 'scale':
+			switch ( this.axis ) {
 
-					case 'X':
-						_alignVector.copy( this.eye ).cross( _v1 );
-						_dirVector.copy( _v1 ).cross( _alignVector );
-						break;
-					case 'Y':
-						_alignVector.copy( this.eye ).cross( _v2 );
-						_dirVector.copy( _v2 ).cross( _alignVector );
-						break;
-					case 'Z':
-						_alignVector.copy( this.eye ).cross( _v3 );
-						_dirVector.copy( _v3 ).cross( _alignVector );
-						break;
-					case 'XY':
-						_dirVector.copy( _v3 );
-						break;
-					case 'YZ':
-						_dirVector.copy( _v1 );
-						break;
-					case 'XZ':
-						_alignVector.copy( _v3 );
-						_dirVector.copy( _v2 );
-						break;
-					case 'XYZ':
-					case 'E':
-						_dirVector.set( 0, 0, 0 );
-						break;
-
-				}
-
+			case 'X':
+				_alignVector.copy( this.eye ).cross( _v1 );
+				_dirVector.copy( _v1 ).cross( _alignVector );
 				break;
-			case 'rotate':
-			default:
-				// special case for rotate
+			case 'Y':
+				_alignVector.copy( this.eye ).cross( _v2 );
+				_dirVector.copy( _v2 ).cross( _alignVector );
+				break;
+			case 'Z':
+				_alignVector.copy( this.eye ).cross( _v3 );
+				_dirVector.copy( _v3 ).cross( _alignVector );
+				break;
+			case 'XY':
+				_dirVector.copy( _v3 );
+				break;
+			case 'YZ':
+				_dirVector.copy( _v1 );
+				break;
+			case 'XZ':
+				_alignVector.copy( _v3 );
+				_dirVector.copy( _v2 );
+				break;
+			case 'XYZ':
+			case 'E':
 				_dirVector.set( 0, 0, 0 );
+				break;
+
+			}
+
+			break;
+		case 'rotate':
+		default:
+			// special case for rotate
+			_dirVector.set( 0, 0, 0 );
 
 		}
 

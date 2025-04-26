@@ -983,13 +983,13 @@ ${ flowData.code }
 
 			switch ( name ) {
 
-				case 'float32Filterable':
-					extensionName = 'OES_texture_float_linear';
-					break;
+			case 'float32Filterable':
+				extensionName = 'OES_texture_float_linear';
+				break;
 
-				case 'clipDistance':
-					extensionName = 'WEBGL_clip_cull_distance';
-					break;
+			case 'clipDistance':
+				extensionName = 'WEBGL_clip_cull_distance';
+				break;
 
 			}
 

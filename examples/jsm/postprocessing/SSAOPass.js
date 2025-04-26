@@ -301,46 +301,46 @@ class SSAOPass extends Pass {
 
 		switch ( this.output ) {
 
-			case SSAOPass.OUTPUT.SSAO:
+		case SSAOPass.OUTPUT.SSAO:
 
-				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssaoRenderTarget.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
+			this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssaoRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
 
-				break;
+			break;
 
-			case SSAOPass.OUTPUT.Blur:
+		case SSAOPass.OUTPUT.Blur:
 
-				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
+			this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
 
-				break;
+			break;
 
-			case SSAOPass.OUTPUT.Depth:
+		case SSAOPass.OUTPUT.Depth:
 
-				this._renderPass( renderer, this.depthRenderMaterial, this.renderToScreen ? null : readBuffer );
+			this._renderPass( renderer, this.depthRenderMaterial, this.renderToScreen ? null : readBuffer );
 
-				break;
+			break;
 
-			case SSAOPass.OUTPUT.Normal:
+		case SSAOPass.OUTPUT.Normal:
 
-				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.normalRenderTarget.texture;
-				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
+			this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.normalRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
 
-				break;
+			break;
 
-			case SSAOPass.OUTPUT.Default:
+		case SSAOPass.OUTPUT.Default:
 
-				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget.texture;
-				this.copyMaterial.blending = CustomBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
+			this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget.texture;
+			this.copyMaterial.blending = CustomBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : readBuffer );
 
-				break;
+			break;
 
-			default:
-				console.warn( 'THREE.SSAOPass: Unknown output type.' );
+		default:
+			console.warn( 'THREE.SSAOPass: Unknown output type.' );
 
 		}
 

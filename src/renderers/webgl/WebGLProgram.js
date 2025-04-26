@@ -40,15 +40,15 @@ function getEncodingComponents( colorSpace ) {
 
 	switch ( ColorManagement.getTransfer( colorSpace ) ) {
 
-		case LinearTransfer:
-			return [ encodingMatrix, 'LinearTransferOETF' ];
+	case LinearTransfer:
+		return [ encodingMatrix, 'LinearTransferOETF' ];
 
-		case SRGBTransfer:
-			return [ encodingMatrix, 'sRGBTransferOETF' ];
+	case SRGBTransfer:
+		return [ encodingMatrix, 'sRGBTransferOETF' ];
 
-		default:
-			console.warn( 'THREE.WebGLProgram: Unsupported color space: ', colorSpace );
-			return [ encodingMatrix, 'LinearTransferOETF' ];
+	default:
+		console.warn( 'THREE.WebGLProgram: Unsupported color space: ', colorSpace );
+		return [ encodingMatrix, 'LinearTransferOETF' ];
 
 	}
 
@@ -100,37 +100,37 @@ function getToneMappingFunction( functionName, toneMapping ) {
 
 	switch ( toneMapping ) {
 
-		case LinearToneMapping:
-			toneMappingName = 'Linear';
-			break;
+	case LinearToneMapping:
+		toneMappingName = 'Linear';
+		break;
 
-		case ReinhardToneMapping:
-			toneMappingName = 'Reinhard';
-			break;
+	case ReinhardToneMapping:
+		toneMappingName = 'Reinhard';
+		break;
 
-		case CineonToneMapping:
-			toneMappingName = 'Cineon';
-			break;
+	case CineonToneMapping:
+		toneMappingName = 'Cineon';
+		break;
 
-		case ACESFilmicToneMapping:
-			toneMappingName = 'ACESFilmic';
-			break;
+	case ACESFilmicToneMapping:
+		toneMappingName = 'ACESFilmic';
+		break;
 
-		case AgXToneMapping:
-			toneMappingName = 'AgX';
-			break;
+	case AgXToneMapping:
+		toneMappingName = 'AgX';
+		break;
 
-		case NeutralToneMapping:
-			toneMappingName = 'Neutral';
-			break;
+	case NeutralToneMapping:
+		toneMappingName = 'Neutral';
+		break;
 
-		case CustomToneMapping:
-			toneMappingName = 'Custom';
-			break;
+	case CustomToneMapping:
+		toneMappingName = 'Custom';
+		break;
 
-		default:
-			console.warn( 'THREE.WebGLProgram: Unsupported toneMapping:', toneMapping );
-			toneMappingName = 'Linear';
+	default:
+		console.warn( 'THREE.WebGLProgram: Unsupported toneMapping:', toneMapping );
+		toneMappingName = 'Linear';
 
 	}
 
@@ -388,14 +388,14 @@ function generateEnvMapTypeDefine( parameters ) {
 
 		switch ( parameters.envMapMode ) {
 
-			case CubeReflectionMapping:
-			case CubeRefractionMapping:
-				envMapTypeDefine = 'ENVMAP_TYPE_CUBE';
-				break;
+		case CubeReflectionMapping:
+		case CubeRefractionMapping:
+			envMapTypeDefine = 'ENVMAP_TYPE_CUBE';
+			break;
 
-			case CubeUVReflectionMapping:
-				envMapTypeDefine = 'ENVMAP_TYPE_CUBE_UV';
-				break;
+		case CubeUVReflectionMapping:
+			envMapTypeDefine = 'ENVMAP_TYPE_CUBE_UV';
+			break;
 
 		}
 
@@ -413,10 +413,10 @@ function generateEnvMapModeDefine( parameters ) {
 
 		switch ( parameters.envMapMode ) {
 
-			case CubeRefractionMapping:
+		case CubeRefractionMapping:
 
-				envMapModeDefine = 'ENVMAP_MODE_REFRACTION';
-				break;
+			envMapModeDefine = 'ENVMAP_MODE_REFRACTION';
+			break;
 
 		}
 
@@ -434,17 +434,17 @@ function generateEnvMapBlendingDefine( parameters ) {
 
 		switch ( parameters.combine ) {
 
-			case MultiplyOperation:
-				envMapBlendingDefine = 'ENVMAP_BLENDING_MULTIPLY';
-				break;
+		case MultiplyOperation:
+			envMapBlendingDefine = 'ENVMAP_BLENDING_MULTIPLY';
+			break;
 
-			case MixOperation:
-				envMapBlendingDefine = 'ENVMAP_BLENDING_MIX';
-				break;
+		case MixOperation:
+			envMapBlendingDefine = 'ENVMAP_BLENDING_MIX';
+			break;
 
-			case AddOperation:
-				envMapBlendingDefine = 'ENVMAP_BLENDING_ADD';
-				break;
+		case AddOperation:
+			envMapBlendingDefine = 'ENVMAP_BLENDING_ADD';
+			break;
 
 		}
 

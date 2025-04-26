@@ -217,44 +217,44 @@ class FileLoader extends Loader {
 
 				switch ( responseType ) {
 
-					case 'arraybuffer':
+				case 'arraybuffer':
 
-						return response.arrayBuffer();
+					return response.arrayBuffer();
 
-					case 'blob':
+				case 'blob':
 
-						return response.blob();
+					return response.blob();
 
-					case 'document':
+				case 'document':
 
-						return response.text()
-							.then( text => {
+					return response.text()
+						.then( text => {
 
-								const parser = new DOMParser();
-								return parser.parseFromString( text, mimeType );
+							const parser = new DOMParser();
+							return parser.parseFromString( text, mimeType );
 
-							} );
+						} );
 
-					case 'json':
+				case 'json':
 
-						return response.json();
+					return response.json();
 
-					default:
+				default:
 
-						if ( mimeType === '' ) {
+					if ( mimeType === '' ) {
 
-							return response.text();
+						return response.text();
 
-						} else {
+					} else {
 
-							// sniff encoding
-							const re = /charset="?([^;"\s]*)"?/i;
-							const exec = re.exec( mimeType );
-							const label = exec && exec[ 1 ] ? exec[ 1 ].toLowerCase() : undefined;
-							const decoder = new TextDecoder( label );
-							return response.arrayBuffer().then( ab => decoder.decode( ab ) );
+						// sniff encoding
+						const re = /charset="?([^;"\s]*)"?/i;
+						const exec = re.exec( mimeType );
+						const label = exec && exec[ 1 ] ? exec[ 1 ].toLowerCase() : undefined;
+						const decoder = new TextDecoder( label );
+						return response.arrayBuffer().then( ab => decoder.decode( ab ) );
 
-						}
+					}
 
 				}
 

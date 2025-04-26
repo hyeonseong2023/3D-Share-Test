@@ -163,11 +163,11 @@ class AsciiEffect {
 
 			switch ( iScale ) {
 
-				case 1 : fLetterSpacing = - 1; break;
-				case 2 :
-				case 3 : fLetterSpacing = - 2.1; break;
-				case 4 : fLetterSpacing = - 3.1; break;
-				case 5 : fLetterSpacing = - 4.15; break;
+			case 1 : fLetterSpacing = - 1; break;
+			case 2 :
+			case 3 : fLetterSpacing = - 2.1; break;
+			case 4 : fLetterSpacing = - 3.1; break;
+			case 5 : fLetterSpacing = - 4.15; break;
 
 			}
 
@@ -177,11 +177,11 @@ class AsciiEffect {
 
 			switch ( iScale ) {
 
-				case 1 : fLetterSpacing = 0; break;
-				case 2 : fLetterSpacing = - 1; break;
-				case 3 : fLetterSpacing = - 1.04; break;
-				case 4 :
-				case 5 : fLetterSpacing = - 2.1; break;
+			case 1 : fLetterSpacing = 0; break;
+			case 2 : fLetterSpacing = - 1; break;
+			case 3 : fLetterSpacing = - 1.04; break;
+			case 4 :
+			case 5 : fLetterSpacing = - 2.1; break;
 
 			}
 
@@ -191,11 +191,11 @@ class AsciiEffect {
 
 			switch ( iScale ) {
 
-				case 1 :
-				case 2 : fLetterSpacing = 0; break;
-				case 3 :
-				case 4 :
-				case 5 : fLetterSpacing = - 1; break;
+			case 1 :
+			case 2 : fLetterSpacing = 0; break;
+			case 3 :
+			case 4 :
+			case 5 : fLetterSpacing = - 1; break;
 
 			}
 

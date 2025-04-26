@@ -84,17 +84,17 @@ class LightProbeGenerator {
 
 				switch ( faceIndex ) {
 
-					case 0: coord.set( - 1, row, - col ); break;
+				case 0: coord.set( - 1, row, - col ); break;
 
-					case 1: coord.set( 1, row, col ); break;
+				case 1: coord.set( 1, row, col ); break;
 
-					case 2: coord.set( - col, 1, - row ); break;
+				case 2: coord.set( - col, 1, - row ); break;
 
-					case 3: coord.set( - col, - 1, row ); break;
+				case 3: coord.set( - col, - 1, row ); break;
 
-					case 4: coord.set( - col, row, 1 ); break;
+				case 4: coord.set( - col, row, 1 ); break;
 
-					case 5: coord.set( col, row, - 1 ); break;
+				case 5: coord.set( col, row, - 1 ); break;
 
 				}
 
@@ -239,17 +239,17 @@ class LightProbeGenerator {
 
 				switch ( faceIndex ) {
 
-					case 0: coord.set( - 1 * flip, row, col * flip ); break;
+				case 0: coord.set( - 1 * flip, row, col * flip ); break;
 
-					case 1: coord.set( 1 * flip, row, - col * flip ); break;
+				case 1: coord.set( 1 * flip, row, - col * flip ); break;
 
-					case 2: coord.set( col, 1, - row ); break;
+				case 2: coord.set( col, 1, - row ); break;
 
-					case 3: coord.set( col, - 1, row ); break;
+				case 3: coord.set( col, - 1, row ); break;
 
-					case 4: coord.set( col, row, 1 ); break;
+				case 4: coord.set( col, row, 1 ); break;
 
-					case 5: coord.set( - col, row, - 1 ); break;
+				case 5: coord.set( - col, row, - 1 ); break;
 
 				}
 
@@ -301,20 +301,20 @@ function convertColorToLinear( color, colorSpace ) {
 
 	switch ( colorSpace ) {
 
-		case SRGBColorSpace:
+	case SRGBColorSpace:
 
-			color.convertSRGBToLinear();
-			break;
+		color.convertSRGBToLinear();
+		break;
 
-		case LinearSRGBColorSpace:
-		case NoColorSpace:
+	case LinearSRGBColorSpace:
+	case NoColorSpace:
 
-			break;
+		break;
 
-		default:
+	default:
 
-			console.warn( 'WARNING: LightProbeGenerator convertColorToLinear() encountered an unsupported color space.' );
-			break;
+		console.warn( 'WARNING: LightProbeGenerator convertColorToLinear() encountered an unsupported color space.' );
+		break;
 
 	}
 

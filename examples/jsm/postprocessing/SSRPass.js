@@ -551,99 +551,99 @@ class SSRPass extends Pass {
 
 		switch ( this.output ) {
 
-			case SSRPass.OUTPUT.Default:
+		case SSRPass.OUTPUT.Default:
 
-				if ( this.bouncing ) {
+			if ( this.bouncing ) {
 
-					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.beautyRenderTarget.texture;
-					this.copyMaterial.blending = NoBlending;
-					this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
-
-					if ( this.blur )
-						this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget2.texture;
-					else
-						this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssrRenderTarget.texture;
-					this.copyMaterial.blending = NormalBlending;
-					this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
-
-					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.prevRenderTarget.texture;
-					this.copyMaterial.blending = NoBlending;
-					this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
-
-				} else {
-
-					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.beautyRenderTarget.texture;
-					this.copyMaterial.blending = NoBlending;
-					this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
-
-					if ( this.blur )
-						this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget2.texture;
-					else
-						this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssrRenderTarget.texture;
-					this.copyMaterial.blending = NormalBlending;
-					this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
-
-				}
-
-				break;
-			case SSRPass.OUTPUT.SSR:
+				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.beautyRenderTarget.texture;
+				this.copyMaterial.blending = NoBlending;
+				this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
 
 				if ( this.blur )
 					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget2.texture;
 				else
 					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssrRenderTarget.texture;
+				this.copyMaterial.blending = NormalBlending;
+				this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
+
+				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.prevRenderTarget.texture;
 				this.copyMaterial.blending = NoBlending;
 				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				if ( this.bouncing ) {
-
-					if ( this.blur )
-						this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget2.texture;
-					else
-						this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.beautyRenderTarget.texture;
-					this.copyMaterial.blending = NoBlending;
-					this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
-
-					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssrRenderTarget.texture;
-					this.copyMaterial.blending = NormalBlending;
-					this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
-
-				}
-
-				break;
-
-			case SSRPass.OUTPUT.Beauty:
+			} else {
 
 				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.beautyRenderTarget.texture;
 				this.copyMaterial.blending = NoBlending;
 				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
-
-			case SSRPass.OUTPUT.Depth:
-
-				this._renderPass( renderer, this.depthRenderMaterial, this.renderToScreen ? null : writeBuffer );
-
-				break;
-
-			case SSRPass.OUTPUT.Normal:
-
-				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.normalRenderTarget.texture;
-				this.copyMaterial.blending = NoBlending;
+				if ( this.blur )
+					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget2.texture;
+				else
+					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssrRenderTarget.texture;
+				this.copyMaterial.blending = NormalBlending;
 				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
 
-				break;
+			}
 
-			case SSRPass.OUTPUT.Metalness:
+			break;
+		case SSRPass.OUTPUT.SSR:
 
-				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.metalnessRenderTarget.texture;
+			if ( this.blur )
+				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget2.texture;
+			else
+				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssrRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+
+			if ( this.bouncing ) {
+
+				if ( this.blur )
+					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.blurRenderTarget2.texture;
+				else
+					this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.beautyRenderTarget.texture;
 				this.copyMaterial.blending = NoBlending;
-				this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+				this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
 
-				break;
+				this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.ssrRenderTarget.texture;
+				this.copyMaterial.blending = NormalBlending;
+				this._renderPass( renderer, this.copyMaterial, this.prevRenderTarget );
 
-			default:
-				console.warn( 'THREE.SSRPass: Unknown output type.' );
+			}
+
+			break;
+
+		case SSRPass.OUTPUT.Beauty:
+
+			this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.beautyRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+
+			break;
+
+		case SSRPass.OUTPUT.Depth:
+
+			this._renderPass( renderer, this.depthRenderMaterial, this.renderToScreen ? null : writeBuffer );
+
+			break;
+
+		case SSRPass.OUTPUT.Normal:
+
+			this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.normalRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+
+			break;
+
+		case SSRPass.OUTPUT.Metalness:
+
+			this.copyMaterial.uniforms[ 'tDiffuse' ].value = this.metalnessRenderTarget.texture;
+			this.copyMaterial.blending = NoBlending;
+			this._renderPass( renderer, this.copyMaterial, this.renderToScreen ? null : writeBuffer );
+
+			break;
+
+		default:
+			console.warn( 'THREE.SSRPass: Unknown output type.' );
 
 		}
 

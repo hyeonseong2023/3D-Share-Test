@@ -71,21 +71,21 @@ class HDRCubeTextureLoader extends Loader {
 
 		switch ( texture.type ) {
 
-			case FloatType:
+		case FloatType:
 
-				texture.colorSpace = LinearSRGBColorSpace;
-				texture.minFilter = LinearFilter;
-				texture.magFilter = LinearFilter;
-				texture.generateMipmaps = false;
-				break;
+			texture.colorSpace = LinearSRGBColorSpace;
+			texture.minFilter = LinearFilter;
+			texture.magFilter = LinearFilter;
+			texture.generateMipmaps = false;
+			break;
 
-			case HalfFloatType:
+		case HalfFloatType:
 
-				texture.colorSpace = LinearSRGBColorSpace;
-				texture.minFilter = LinearFilter;
-				texture.magFilter = LinearFilter;
-				texture.generateMipmaps = false;
-				break;
+			texture.colorSpace = LinearSRGBColorSpace;
+			texture.minFilter = LinearFilter;
+			texture.magFilter = LinearFilter;
+			texture.generateMipmaps = false;
+			break;
 
 		}
 

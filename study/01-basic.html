@@ -6,11 +6,23 @@
     <link rel="stylesheet" href="01-basic.css">
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
         integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.159.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.159.0/examples/jsm/"
+        }
+    }
+    </script>
     <script type="module" src="01-basic.js" defer></script>
+    <script type="module" src="supabase-data.js" defer></script>
     <title>Document</title>
 </head>
 <body>
     <div id="webgl-container"></div>
+    <div id="data-container"></div>
     <div class="control-panel">
         <button id="save-screenshot" class="control-button">스크린샷 저장🗒️</button>
         <button id="copy-clipboard" class="control-button">클립보드 복사🖨️</button>

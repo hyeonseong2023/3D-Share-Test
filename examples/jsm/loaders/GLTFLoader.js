@@ -498,29 +498,29 @@ class GLTFLoader extends Loader {
 
 				switch ( extensionName ) {
 
-					case EXTENSIONS.KHR_MATERIALS_UNLIT:
-						extensions[ extensionName ] = new GLTFMaterialsUnlitExtension();
-						break;
+				case EXTENSIONS.KHR_MATERIALS_UNLIT:
+					extensions[ extensionName ] = new GLTFMaterialsUnlitExtension();
+					break;
 
-					case EXTENSIONS.KHR_DRACO_MESH_COMPRESSION:
-						extensions[ extensionName ] = new GLTFDracoMeshCompressionExtension( json, this.dracoLoader );
-						break;
+				case EXTENSIONS.KHR_DRACO_MESH_COMPRESSION:
+					extensions[ extensionName ] = new GLTFDracoMeshCompressionExtension( json, this.dracoLoader );
+					break;
 
-					case EXTENSIONS.KHR_TEXTURE_TRANSFORM:
-						extensions[ extensionName ] = new GLTFTextureTransformExtension();
-						break;
+				case EXTENSIONS.KHR_TEXTURE_TRANSFORM:
+					extensions[ extensionName ] = new GLTFTextureTransformExtension();
+					break;
 
-					case EXTENSIONS.KHR_MESH_QUANTIZATION:
-						extensions[ extensionName ] = new GLTFMeshQuantizationExtension();
-						break;
+				case EXTENSIONS.KHR_MESH_QUANTIZATION:
+					extensions[ extensionName ] = new GLTFMeshQuantizationExtension();
+					break;
 
-					default:
+				default:
 
-						if ( extensionsRequired.indexOf( extensionName ) >= 0 && plugins[ extensionName ] === undefined ) {
+					if ( extensionsRequired.indexOf( extensionName ) >= 0 && plugins[ extensionName ] === undefined ) {
 
-							console.warn( 'THREE.GLTFLoader: Unknown extension "' + extensionName + '".' );
+						console.warn( 'THREE.GLTFLoader: Unknown extension "' + extensionName + '".' );
 
-						}
+					}
 
 				}
 
@@ -683,32 +683,32 @@ class GLTFLightsExtension {
 
 		switch ( lightDef.type ) {
 
-			case 'directional':
-				lightNode = new DirectionalLight( color );
-				lightNode.target.position.set( 0, 0, - 1 );
-				lightNode.add( lightNode.target );
-				break;
+		case 'directional':
+			lightNode = new DirectionalLight( color );
+			lightNode.target.position.set( 0, 0, - 1 );
+			lightNode.add( lightNode.target );
+			break;
 
-			case 'point':
-				lightNode = new PointLight( color );
-				lightNode.distance = range;
-				break;
+		case 'point':
+			lightNode = new PointLight( color );
+			lightNode.distance = range;
+			break;
 
-			case 'spot':
-				lightNode = new SpotLight( color );
-				lightNode.distance = range;
-				// Handle spotlight properties.
-				lightDef.spot = lightDef.spot || {};
-				lightDef.spot.innerConeAngle = lightDef.spot.innerConeAngle !== undefined ? lightDef.spot.innerConeAngle : 0;
-				lightDef.spot.outerConeAngle = lightDef.spot.outerConeAngle !== undefined ? lightDef.spot.outerConeAngle : Math.PI / 4.0;
-				lightNode.angle = lightDef.spot.outerConeAngle;
-				lightNode.penumbra = 1.0 - lightDef.spot.innerConeAngle / lightDef.spot.outerConeAngle;
-				lightNode.target.position.set( 0, 0, - 1 );
-				lightNode.add( lightNode.target );
-				break;
+		case 'spot':
+			lightNode = new SpotLight( color );
+			lightNode.distance = range;
+			// Handle spotlight properties.
+			lightDef.spot = lightDef.spot || {};
+			lightDef.spot.innerConeAngle = lightDef.spot.innerConeAngle !== undefined ? lightDef.spot.innerConeAngle : 0;
+			lightDef.spot.outerConeAngle = lightDef.spot.outerConeAngle !== undefined ? lightDef.spot.outerConeAngle : Math.PI / 4.0;
+			lightNode.angle = lightDef.spot.outerConeAngle;
+			lightNode.penumbra = 1.0 - lightDef.spot.innerConeAngle / lightDef.spot.outerConeAngle;
+			lightNode.target.position.set( 0, 0, - 1 );
+			lightNode.add( lightNode.target );
+			break;
 
-			default:
-				throw new Error( 'THREE.GLTFLoader: Unexpected light type: ' + lightDef.type );
+		default:
+			throw new Error( 'THREE.GLTFLoader: Unexpected light type: ' + lightDef.type );
 
 		}
 
@@ -2664,20 +2664,20 @@ function getNormalizedComponentScale( constructor ) {
 
 	switch ( constructor ) {
 
-		case Int8Array:
-			return 1 / 127;
+	case Int8Array:
+		return 1 / 127;
 
-		case Uint8Array:
-			return 1 / 255;
+	case Uint8Array:
+		return 1 / 255;
 
-		case Int16Array:
-			return 1 / 32767;
+	case Int16Array:
+		return 1 / 32767;
 
-		case Uint16Array:
-			return 1 / 65535;
+	case Uint16Array:
+		return 1 / 65535;
 
-		default:
-			throw new Error( 'THREE.GLTFLoader: Unsupported normalized accessor component type.' );
+	default:
+		throw new Error( 'THREE.GLTFLoader: Unsupported normalized accessor component type.' );
 
 	}
 
@@ -3031,88 +3031,88 @@ class GLTFParser {
 
 			switch ( type ) {
 
-				case 'scene':
-					dependency = this.loadScene( index );
-					break;
+			case 'scene':
+				dependency = this.loadScene( index );
+				break;
 
-				case 'node':
-					dependency = this._invokeOne( function ( ext ) {
+			case 'node':
+				dependency = this._invokeOne( function ( ext ) {
 
-						return ext.loadNode && ext.loadNode( index );
+					return ext.loadNode && ext.loadNode( index );
 
-					} );
-					break;
+				} );
+				break;
 
-				case 'mesh':
-					dependency = this._invokeOne( function ( ext ) {
+			case 'mesh':
+				dependency = this._invokeOne( function ( ext ) {
 
-						return ext.loadMesh && ext.loadMesh( index );
+					return ext.loadMesh && ext.loadMesh( index );
 
-					} );
-					break;
+				} );
+				break;
 
-				case 'accessor':
-					dependency = this.loadAccessor( index );
-					break;
+			case 'accessor':
+				dependency = this.loadAccessor( index );
+				break;
 
-				case 'bufferView':
-					dependency = this._invokeOne( function ( ext ) {
+			case 'bufferView':
+				dependency = this._invokeOne( function ( ext ) {
 
-						return ext.loadBufferView && ext.loadBufferView( index );
+					return ext.loadBufferView && ext.loadBufferView( index );
 
-					} );
-					break;
+				} );
+				break;
 
-				case 'buffer':
-					dependency = this.loadBuffer( index );
-					break;
+			case 'buffer':
+				dependency = this.loadBuffer( index );
+				break;
 
-				case 'material':
-					dependency = this._invokeOne( function ( ext ) {
+			case 'material':
+				dependency = this._invokeOne( function ( ext ) {
 
-						return ext.loadMaterial && ext.loadMaterial( index );
+					return ext.loadMaterial && ext.loadMaterial( index );
 
-					} );
-					break;
+				} );
+				break;
 
-				case 'texture':
-					dependency = this._invokeOne( function ( ext ) {
+			case 'texture':
+				dependency = this._invokeOne( function ( ext ) {
 
-						return ext.loadTexture && ext.loadTexture( index );
+					return ext.loadTexture && ext.loadTexture( index );
 
-					} );
-					break;
+				} );
+				break;
 
-				case 'skin':
-					dependency = this.loadSkin( index );
-					break;
+			case 'skin':
+				dependency = this.loadSkin( index );
+				break;
 
-				case 'animation':
-					dependency = this._invokeOne( function ( ext ) {
+			case 'animation':
+				dependency = this._invokeOne( function ( ext ) {
 
-						return ext.loadAnimation && ext.loadAnimation( index );
+					return ext.loadAnimation && ext.loadAnimation( index );
 
-					} );
-					break;
+				} );
+				break;
 
-				case 'camera':
-					dependency = this.loadCamera( index );
-					break;
+			case 'camera':
+				dependency = this.loadCamera( index );
+				break;
 
-				default:
-					dependency = this._invokeOne( function ( ext ) {
+			default:
+				dependency = this._invokeOne( function ( ext ) {
 
-						return ext != this && ext.getDependency && ext.getDependency( type, index );
+					return ext != this && ext.getDependency && ext.getDependency( type, index );
 
-					} );
+				} );
 
-					if ( ! dependency ) {
+				if ( ! dependency ) {
 
-						throw new Error( 'Unknown type: ' + type );
+					throw new Error( 'Unknown type: ' + type );
 
-					}
+				}
 
-					break;
+				break;
 
 			}
 
@@ -4649,38 +4649,38 @@ class GLTFParser {
 
 		switch ( PATH_PROPERTIES[ target.path ] ) {
 
-			case PATH_PROPERTIES.weights:
+		case PATH_PROPERTIES.weights:
 
+			TypedKeyframeTrack = NumberKeyframeTrack;
+			break;
+
+		case PATH_PROPERTIES.rotation:
+
+			TypedKeyframeTrack = QuaternionKeyframeTrack;
+			break;
+
+		case PATH_PROPERTIES.translation:
+		case PATH_PROPERTIES.scale:
+
+			TypedKeyframeTrack = VectorKeyframeTrack;
+			break;
+
+		default:
+
+			switch ( outputAccessor.itemSize ) {
+
+			case 1:
 				TypedKeyframeTrack = NumberKeyframeTrack;
 				break;
-
-			case PATH_PROPERTIES.rotation:
-
-				TypedKeyframeTrack = QuaternionKeyframeTrack;
-				break;
-
-			case PATH_PROPERTIES.translation:
-			case PATH_PROPERTIES.scale:
-
+			case 2:
+			case 3:
+			default:
 				TypedKeyframeTrack = VectorKeyframeTrack;
 				break;
 
-			default:
+			}
 
-				switch ( outputAccessor.itemSize ) {
-
-					case 1:
-						TypedKeyframeTrack = NumberKeyframeTrack;
-						break;
-					case 2:
-					case 3:
-					default:
-						TypedKeyframeTrack = VectorKeyframeTrack;
-						break;
-
-				}
-
-				break;
+			break;
 
 		}
 

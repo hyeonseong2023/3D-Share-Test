@@ -296,14 +296,14 @@ function compressData( inBuffer, info ) {
 
 	switch ( info.compression ) {
 
-		case 0:
-			compress = compressNONE;
-			break;
+	case 0:
+		compress = compressNONE;
+		break;
 
-		case 2:
-		case 3:
-			compress = compressZIP;
-			break;
+	case 2:
+	case 3:
+		compress = compressZIP;
+		break;
 
 	}
 

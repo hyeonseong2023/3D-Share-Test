@@ -295,19 +295,19 @@ export class CSM {
 
 		switch ( this.mode ) {
 
-			case 'uniform':
-				uniformSplit( this.cascades, camera.near, far, this.breaks );
-				break;
-			case 'logarithmic':
-				logarithmicSplit( this.cascades, camera.near, far, this.breaks );
-				break;
-			case 'practical':
-				practicalSplit( this.cascades, camera.near, far, 0.5, this.breaks );
-				break;
-			case 'custom':
-				if ( this.customSplitsCallback === undefined ) console.error( 'CSM: Custom split scheme callback not defined.' );
-				this.customSplitsCallback( this.cascades, camera.near, far, this.breaks );
-				break;
+		case 'uniform':
+			uniformSplit( this.cascades, camera.near, far, this.breaks );
+			break;
+		case 'logarithmic':
+			logarithmicSplit( this.cascades, camera.near, far, this.breaks );
+			break;
+		case 'practical':
+			practicalSplit( this.cascades, camera.near, far, 0.5, this.breaks );
+			break;
+		case 'custom':
+			if ( this.customSplitsCallback === undefined ) console.error( 'CSM: Custom split scheme callback not defined.' );
+			this.customSplitsCallback( this.cascades, camera.near, far, this.breaks );
+			break;
 
 		}
 

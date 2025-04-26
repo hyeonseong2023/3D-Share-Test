@@ -31,13 +31,13 @@ class SessionLightProbe {
 			// Ensure that we have any extensions needed to use the preferred cube map format.
 			switch ( session.preferredReflectionFormat ) {
 
-				case 'srgba8':
-					gl.getExtension( 'EXT_sRGB' );
-					break;
+			case 'srgba8':
+				gl.getExtension( 'EXT_sRGB' );
+				break;
 
-				case 'rgba16f':
-					gl.getExtension( 'OES_texture_half_float' );
-					break;
+			case 'rgba16f':
+				gl.getExtension( 'OES_texture_half_float' );
+				break;
 
 			}
 
